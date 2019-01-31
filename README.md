@@ -1,1 +1,1 @@
-# casper
+# Casper: The Friendly Programming Language
