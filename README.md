@@ -73,7 +73,7 @@ already done?
 
 ## ternary
 
-ternaries are not friendly.
+`do A if B else C`
 
 ## conditional
 
