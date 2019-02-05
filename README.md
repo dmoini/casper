@@ -1,31 +1,29 @@
 # Casper: The Friendly Programming Language
 
-# casper
-
 [logo here]
 
-## introduction
+## Introduction
 
-casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
+Casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
 
-## features
+## Features
 
-- scripting language
-- statically typed
-- partial type inference
-- optional parameters
+- Scripting language
+- Statically typed
+- Partial type inference
+- Optional parameters
 
-## type
+## Type
 
-### primitive types
+### Primitive types
 
-- string
-- boolean
-- number
-- list
-- add more?
+- String
+- Boolean/Boo
+- Num
+- List
+- Tuple
 
-### variable declaration
+### Variable Declaration
 
 `num x is 5`
 
@@ -35,7 +33,7 @@ casper is a friendly scripting language designed to make high level programming 
 
 `list a is [3, "donovan", false]`
 
-### function declaration
+### Function Declaration
 
 ```casper
 fn foobar() =>
@@ -46,7 +44,7 @@ fn barfoo(#x) =>
 		scream("help")
 ```
 
-## operators
+## Operators
 
 - add `+`
 - subtract `-`
