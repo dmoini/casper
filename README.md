@@ -1,4 +1,4 @@
-# casper: the Friendly Programming Language
+# casper: the friendly programming language
 
 [logo here]
 
