@@ -27,7 +27,7 @@ Casper is a friendly scripting language designed to make high level programming 
 
 `num x is 5`
 
-`string y is "ian sucks"`
+`string y is "ianlizards@icould.com"`
 
 `boo z is true`
 
@@ -37,11 +37,11 @@ Casper is a friendly scripting language designed to make high level programming 
 
 ```casper
 fn foobar() =>
-	scream("hello world!")
+	write("hello world!")
 
 fn barfoo(#x) =>
-	for 0 to x:
-		scream("help")
+	from 0 to x:
+		write("help")
 ```
 
 ## operators
@@ -67,23 +67,23 @@ fn barfoo(#x) =>
 
 already done?
 
- ## function declaration
+## function declaration
 
 already done?
 
 ## ternary
 
-`do A if B else C`
+`do a if b else c`
 
 ## conditional
 
 ```casper
-if blah:
-	scream("maddie")
-else if basketball:
-	scream("leave me alone")
+if (p = "british"):
+	write("Young 21st the Savage")
+else if (p = "american"):
+	write("21 Savage")
 else:
-	scream("")
+	write("Issa knife")
 ```
 
 ## loop
@@ -101,8 +101,6 @@ for 0 to x:
 ~~ this is a
 multiline comment ~~
 ```
-
-
 
 ## examples
 
