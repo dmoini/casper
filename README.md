@@ -1,6 +1,6 @@
 # casper: the friendly programming language
 
-[logo here]
+![Casper Logo](/images/casper01.png)
 
 ## introduction
 
@@ -8,20 +8,20 @@ Casper is a friendly scripting language designed to make high level programming 
 
 ## features
 
-- Scripting language
-- Statically typed
-- Partial type inference
-- Optional parameters
+- scripting language
+- statically typed
+- partial type inference
+- optional parameters
 
 ## type
 
 ### primitive types
 
-- String
-- Boolean/Boo
-- Num
-- List
-- Tuple
+- string
+- boolean/boo
+- num
+- list
+- tuple
 
 ### variable Declaration
 
