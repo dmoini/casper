@@ -78,19 +78,24 @@ already done?
 ## conditional
 
 ```casper
-if (p = "british"):
-	write("Young 21st the Savage")
-else if (p = "american"):
-	write("21 Savage")
+if (big = true):
+    write("big if true")
+else if (big = false):
+    write("bigly")
 else:
-	write("Issa knife")
+    write("covfefe")
 ```
 
 ## loop
 
 ```casper
-for 0 to x:
-	scream("help")
+from 0 to x:
+	write(x)
+```
+
+```casper
+while (true):
+    write("big chungus")
 ```
 
 ## comments
@@ -104,9 +109,21 @@ multiline comment ~~
 
 ## examples
 
+### fibonacci program
+
 ```casper
-fn fibonacci(#x) =>
+fn fibonacci(num x) =>
 	if (x <= 1):
 		return 1
 	return fibonacci(x - 1) + fibonacci(x - 2)
+```
+
+### greatest common divisor
+
+```casper
+fn computeGCD(num x, num y):
+   while(y):
+       x = y
+       y = x % y
+   return x
 ```
