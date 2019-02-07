@@ -82,7 +82,7 @@ if (big = true)->
     write("big if true")
 else if (big = false)->
     write("bigly")
-else:
+else->
     write("covfefe")
 ```
 
