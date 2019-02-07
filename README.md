@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Welcome to casper: a friendly scripting language designed to make high level programming a light and comfortable experience!
+Welcome to casper, a friendly scripting language designed to make high level programming a light and comfortable experience. This language incorporates a speech-like, easy-to-use syntax that eliminates unnecessary verboseness from the programming experience. casper is reminiscent of Python with nuanced features and syntax designed to make its meaning as transparent as possible and make programming an entirely pleasant affair. 
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
@@ -32,7 +32,7 @@ casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini
 
 `num x is 5`
 
-`string y is "ianlizards@icould.com"`
+`string y is "ianlizards@icloud.com"`
 
 `boo z is true`
 
