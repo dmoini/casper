@@ -58,7 +58,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  (id "=")? Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "float" | "boolean" | "bool" | "list" | "tuple" | "set" | "dictionary")
+  Type        =  ("num" | "string" | "float" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary")
   
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
