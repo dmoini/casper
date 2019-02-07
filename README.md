@@ -90,7 +90,7 @@ else:
 
 ```casper
 from 0 to x:
-	write(x)
+    write(x)
 ```
 
 ```casper
