@@ -80,12 +80,12 @@ fn barfoo(num x) ->
 ## Conditional
 
 ```casper
-if (big is true)->
+if (big equals true)->
     write("big if true")
-else if (big is false)->
+else if (big equals false)->
     write("bigly")
 else->
-    write("covfefe")
+    write("covfefe")    
 ```
 
 ## Loop
