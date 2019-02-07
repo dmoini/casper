@@ -10,7 +10,7 @@ Casper {
               |  "fn" id "(" Params ")" "->" Block  -- function
   SingleStmt  =  Type Ids "is" Exps                 -- vardecl
               |  VarExps "is" Exps                  -- assign
-              |  "write" "(" id ")"                 -- print
+              |  "write" Exps                       -- print
               |  Call                               -- call
               |  "stop"                             -- break
               |  "return" Exp?                      -- return
