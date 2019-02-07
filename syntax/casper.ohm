@@ -1,13 +1,13 @@
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SingleStmt newline                 -- simple
-              |  "while" Exp "->" Block             -- while
-              |  "if" Exp "->" Block
-                 ("else if" Exp "->" Block)*
-                 ("else" "->" Block)?               -- if
-              |  "from" id "to" id ("by" id)? "->"  -- loop
-              |  "do" Exp "if" Exp "else" Exp "->"  -- ternary
-              |  "fn" id "(" Params ")" "->" Block  -- function
+  Stmt        =  SingleStmt newline                 -- single
+              |  "while" Exp Block             -- while
+              |  "if" Exp Block
+                 ("else if" Exp Block)*
+                 ("else" Block)?               		-- if
+              |  "from" id "to" id ("by" id)?   	-- loop
+              |  "do" Exp "if" Exp "else" Exp   	-- ternary
+              |  "fn" id "(" Params ")" Block       -- function
   SingleStmt  =  Type Ids "is" Exps                 -- vardecl
               |  VarExps "is" Exps                  -- assign
               |  "write" Exps                       -- print
@@ -15,8 +15,8 @@ Casper {
               |  "stop"                             -- break
               |  "return" Exp?                      -- return
               |  Exp
-  Block       =  SingleStmt newline                 -- small
-              |  newline indent Stmt+ dedent        -- large
+  Block       =  "->" SingleStmt newline            -- small
+              |  "->" newline indent Stmt+ dedent   -- large
   Exp         =  Exp "or" Exp1                      -- or
               |  Exp "and" Exp1                     -- and
               |  Exp1
@@ -48,7 +48,7 @@ Casper {
   KeyValue    =  Key ":" Exp
   Key         =  VarExp     
 
-  Call        =  id "(" Args ")"
+  Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   Ids         =  NonemptyListOf<id, ",">
   VarExp      =  VarExp "[" Exp "]"                 -- subscripted
@@ -56,7 +56,7 @@ Casper {
   VarExps     =  NonemptyListOf<VarExp, ",">
   Param       =  Type id
   Params      =  ListOf<Param, ",">
-  Arg         =  (id "=")? Exp
+  Arg         =  Exp
   Args        =  ListOf<Arg, ",">
   Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary")
   
@@ -81,3 +81,4 @@ Casper {
   space      :=  " " | "\t" | comment
   comment     =  "~" (~"\n" any)* "\n" | "~~" (any)* "~~" 
 }
+
