@@ -7,7 +7,6 @@ fn five()->
 ⇨fn six()->
 ⇨stop
 ⇦stop
-
 ⇦stop
 ⇦fn seven()->
 ⇨stop
@@ -15,7 +14,6 @@ if (true)->
 ⇨if (true)->
 ⇨if (true)->
 ⇨stop
-
 ⇦⇦⇦⇦⇦while false->
 ⇨stop
 ⇦⇦

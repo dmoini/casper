@@ -6,5 +6,5 @@ fn f() ->
 ⇨x is 3
 write (x)
 ⇦else ->
-⇨f()
+⇨write "z"
 ⇦⇦f()

@@ -8,11 +8,11 @@ fn one()->
                                 stop
                             stop
                 stop
-            fn seven() ->
+            fn seven()->
                                 stop
-                                if (true) ->
+                                if (true)->
                                     if (true)->
-                                                if true()->
+                                                if (true)->
                                                     stop
-        while false ->
+        while false->
             stop
