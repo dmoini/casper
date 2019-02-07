@@ -1,4 +1,4 @@
 write(1)
-if x->
+if x:
         write(1)
     write(1)
