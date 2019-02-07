@@ -4,9 +4,9 @@ Casper {
               |  "while" Exp "->" Block             -- while
               |  "if" Exp "->" Block
                  ("else if" Exp "->" Block)*
-                 ("else" "->" Block)?              -- if
+                 ("else" "->" Block)?               -- if
               |  "from" id "to" id ("by" id)? "->"  -- loop
-              |  "do" Exp "if" Exp "else" Exp "->"  -- ternery
+              |  "do" Exp "if" Exp "else" Exp "->"  -- ternary
               |  "fn" id "(" Params ")" "->" Block  -- function
   SingleStmt  =  Type Ids "is" Exps                 -- vardecl
               |  VarExps "is" Exps                  -- assign
@@ -54,11 +54,11 @@ Casper {
   VarExp      =  VarExp "[" Exp "]"                 -- subscripted
               |  id                                 -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
-  Param       =  id (Exp)?
+  Param       =  Type id
   Params      =  ListOf<Param, ",">
   Arg         =  (id "=")? Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary") ~idrest
+  Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary")
   
   keyword     =  ("while" | "if" | "else" | "return" |  "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
