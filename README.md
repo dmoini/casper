@@ -1,4 +1,5 @@
 # casper
+
 ![Casper Logo](/images/casper-logo.png)
 
 ## Introduction
@@ -102,9 +103,9 @@ while (true):
 ```casper
 ~ this is a comment!
 
-~~ 
+~~
 this is a
-multiline comment 
+multiline comment
 ~~
 ```
 
@@ -114,7 +115,7 @@ multiline comment
 
 ```casper
 fn fibonacci(num x) ->
-	if (x <= 1):
+	if (x <= 1) ->
 		return 1
 	return fibonacci(x - 1) + fibonacci(x - 2)
 ```
@@ -123,10 +124,20 @@ fn fibonacci(num x) ->
 
 ```casper
 fn computeGCD(num x, num y) ->
-   while(y):
-       x = y
-       y = x % y
+   while(y) ->
+       x is y
+       y is x % y
    return x
+```
+
+### First Factorial
+
+```casper
+fn FirstFactorial(num) ->
+  if (num is 0 or num is 1) ->
+    return 1
+  else ->
+    return num * FirstFactorial(num - 1)
 ```
 
 ### Greatest Common Divisor
@@ -134,18 +145,8 @@ fn computeGCD(num x, num y) ->
 ```casper
 fn computeGCD(num x, num y) ->
    while(y):
-       x = y
-       y = x % y
-   return x
-```
-
-### Greatest Common Divisor
-
-```casper
-fn computeGCD(num x, num y) ->
-   while(y):
-       x = y
-       y = x % y
+       x is y
+       y is x % y
    return x
 ```
 
