@@ -1,0 +1,71 @@
+Casper {
+  Program     =  newline* Stmt+ newline*
+  Stmt        =  SimpleStmt newline                 -- simple
+              |  "while" Exp Block                  -- while
+              |  "if" Exp Block
+                 ("else if" Exp Block)*
+                 ("else" Block)?                    -- if
+              | "from" id "to" id ("by" id)?    -- loop
+              | "do" Exp "if" Exp "else" Exp   -- ternery
+              | "fn" id "(" Params ")" "->" Block   -- function
+              | "print" "(" id ")"                 -- print
+  SimpleStmt  =  Type Ids "is" Exps                  -- vardecl
+              |  VarExps "is" Exps                   -- assign
+              |  Call                               -- call
+              |  "stop"                             -- break
+              |  "return" Exp?                      -- return
+  Block       =  "->" SimpleStmt newline            -- small
+              |  "->" newline indent Stmt+ dedent   -- large
+  Exp         =  Exp "or" Exp1                      -- or
+              |  Exp "and" Exp1                     -- and
+              |  Exp1
+  Exp1        =  Exp2 relop Exp2                    -- binary
+              |  Exp2
+  Exp2        =  Exp2 addop Exp3                    -- binary
+              |  Exp3
+  Exp3        =  Exp3 mulop Exp4                    -- binary
+              |  Exp4
+  Exp4        =  prefixop Exp5                      -- unary
+              |  Exp5
+  Exp5        =  Exp6 postfixop                   --unary
+              |  Exp6 
+  Exp6        =  boollit
+              |  numlit
+              |  strlit
+              |  "[" ListOf<Exp, ","> "]"           -- list
+              |  Call
+              |  VarExp
+              |  "(" Exp ")"                        -- parens
+
+  Call        =  id "(" Args ")"
+  Exps        =  NonemptyListOf<Exp, ",">
+  Ids         =  NonemptyListOf<id, ",">
+  VarExp      =  VarExp "[" Exp "]"                 -- subscripted
+              |  id                                 -- simple
+  VarExps     =  NonemptyListOf<VarExp, ",">
+  Param       =  id ("=" Exp)?
+  Params      =  ListOf<Param, ",">
+  Arg         =  (id "=")? Exp
+  Args        =  ListOf<Arg, ",">
+  Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple") ~idrest
+  keyword     =  ("while" | "if" | "else" | "return" |  "stop" | "and" | "write"
+              |  "or" | "not" | "true" | "false" | "from" | "to" | "by") ~idrest
+  id          =  ~keyword ("_" | letter) idrest*
+  idrest      =  "_" | alnum
+  numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
+  boollit     =  "true" | "false"
+  strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
+  escape      =  "\\" ("\\" | "\"" | "n")          -- simple
+              |  "\\u{" hexDigit+ "}"              -- codepoint
+  addop       =  "+" | "-"
+  relop       =  "<=" | "<" | "=" | "!=" | ">=" | ">"
+  mulop       =  "*" | "/" | "//" | "%"
+  prefixop    =  "-" | "!"
+  postfixop   =  "!"
+  indent      =  "⇨"
+  dedent      =  "⇦"
+
+  newline     =  "\n"+
+  space      :=  " " | "\t" | comment
+  comment     =  "~" (~"\n" any)* "\n" | "~~" (any)* "~~" 
+}

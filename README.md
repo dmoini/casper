@@ -1,21 +1,21 @@
-# casper: the friendly programming language
+# casper
+![Casper Logo](/images/casper-logo.png)
 
-![Casper Logo](/images/casper01.png)
+## Introduction
 
-## introduction
-
+Welcome to the repository for Casper: The Friendly Programming Language.
 Casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
 
-## features
+## Features
 
 - scripting language
-- statically typed
-- partial type inference
-- optional parameters
+- Statically typed
+- Partial type inference
+- Optional parameters
 
-## type
+## Type
 
-### primitive types
+### Primitive types
 
 - string
 - boolean/boo
@@ -23,7 +23,7 @@ Casper is a friendly scripting language designed to make high level programming 
 - list
 - tuple
 
-### variable Declaration
+### Variable Declaration
 
 `num x is 5`
 
@@ -33,18 +33,18 @@ Casper is a friendly scripting language designed to make high level programming 
 
 `list a is [3, "donovan", false]`
 
-### function Declaration
+### Function Declaration
 
 ```casper
-fn foobar() =>
-	write("hello world!")
+fn foobar() ->
+    write("hello world!")
 
-fn barfoo(#x) =>
-	from 0 to x:
-		write("help")
+fn barfoo(num x) ->
+    from 0 to x:
+        write("help")
 ```
 
-## operators
+## Operators
 
 - add `+`
 - subtract `-`
@@ -61,21 +61,20 @@ fn barfoo(#x) =>
 - logical AND `and`
 - logical OR `or`
 - logical NOT `!`
-- logical XOR? `xor`
 
-## declaration and assignment
-
-already done?
-
-## function declaration
+## Declaration and assignment
 
 already done?
 
-## ternary
+## Function declaration
+
+already done?
+
+## Ternary
 
 `do a if b else c`
 
-## conditional
+## Conditional
 
 ```casper
 if (big = true):
@@ -86,7 +85,7 @@ else:
     write("covfefe")
 ```
 
-## loop
+## Loop
 
 ```casper
 from 0 to x:
@@ -98,30 +97,92 @@ while (true):
     write("big chungus")
 ```
 
-## comments
+## Comments
 
 ```casper
 ~ this is a comment!
 
-~~ this is a
-multiline comment ~~
+~~ 
+this is a
+multiline comment 
+~~
 ```
 
-## examples
+## Examples
 
-### fibonacci program
+### Fibonacci Program
 
 ```casper
-fn fibonacci(num x) =>
+fn fibonacci(num x) ->
 	if (x <= 1):
 		return 1
 	return fibonacci(x - 1) + fibonacci(x - 2)
 ```
 
-### greatest common divisor
+### Greatest Common Divisor
 
 ```casper
-fn computeGCD(num x, num y):
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
+   while(y):
+       x = y
+       y = x % y
+   return x
+```
+
+### Greatest Common Divisor
+
+```casper
+fn computeGCD(num x, num y) ->
    while(y):
        x = y
        y = x % y
