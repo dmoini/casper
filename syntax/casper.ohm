@@ -60,7 +60,7 @@ Casper {
   Args        =  ListOf<Arg, ",">
   Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary")
   
-  keyword     =  ("while" | "if" | "else" | "return" |  "stop" | "and" | "write" | "not equals"
+  keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
   idrest      =  "_" | alnum
