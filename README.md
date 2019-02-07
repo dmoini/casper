@@ -1,15 +1,17 @@
 # casper
 
-![Casper Logo](/images/casper-logo.png)
+![casper logo](/images/casper-logo.png)
 
 ## Introduction
 
-Welcome to the repository for Casper: The Friendly Programming Language.
-Casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
+Welcome to the repository for casper: the friendly programming language.
+casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
+
+casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
 ## Features
 
-- scripting language
+- Scripting language
 - Statically typed
 - Partial type inference
 - Optional parameters
@@ -24,7 +26,7 @@ Casper is a friendly scripting language designed to make high level programming 
 - list
 - tuple
 
-### Variable Declaration
+### Variable Declaration and Assignment
 
 `num x is 5`
 
@@ -33,6 +35,12 @@ Casper is a friendly scripting language designed to make high level programming 
 `boo z is true`
 
 `list a is [3, "donovan", false]`
+
+`x is 6`
+
+`y is "ianlizarda@icloud.com"`
+
+`z is false`
 
 ### Function Declaration
 
@@ -62,14 +70,6 @@ fn barfoo(num x) ->
 - logical AND `and`
 - logical OR `or`
 - logical NOT `!`
-
-## Declaration and assignment
-
-already done?
-
-## Function declaration
-
-already done?
 
 ## Ternary
 

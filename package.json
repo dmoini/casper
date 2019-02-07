@@ -15,7 +15,7 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint **/*.js;exit 0",
-    "test": "jest test/preparser/preparser-test.js"
+    "test": "jest test/**/*test.js"
   },
   "jest": {
     "transform": {}
