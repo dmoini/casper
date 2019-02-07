@@ -115,49 +115,92 @@ multiline comment
 
 ```casper
 fn fibonacci(num x) ->
-	if (x <= 1) ->
-		return 1
+    if (x <= 1) ->
+	    return 1
 	return fibonacci(x - 1) + fibonacci(x - 2)
+```
+```Javascript
+function fibonacci(x) {
+    if (x <= 1) {
+        return 1
+    }
+    return fibonacci(x - 1) + fibonacci(x - 2)
+}
 ```
 
 ### Greatest Common Divisor
 
 ```casper
-fn computeGCD(num x, num y) ->
+fn gcd(num x, num y) ->
    while(y) ->
        x is y
        y is x % y
    return x
 ```
+```Javascript
+function gcd(x, y) {
+    while(y) {
+        x = y
+        y = x % y
+    }
+    return x
+}
+```
 
 ### First Factorial
 
 ```casper
-fn FirstFactorial(num) ->
-  if (num is 0 or num is 1) ->
-    return 1
-  else ->
-    return num * FirstFactorial(num - 1)
+fn firstFactorial(num) -> 
+    if (num equals 0 or num equals 1) ->
+        return 1
+    else ->
+        return num * firstFactorial(num - 1)
+```
+```JavaScript
+function firstFactorial(num) { 
+    if (num === 0 || num === 1) {
+        return 1;
+    }
+    else {
+        return num * firstFactorial(num - 1); 
+    }      
+}
 ```
 
-### Greatest Common Divisor
+
+### Even or Odd
 
 ```casper
-fn computeGCD(num x, num y) ->
-   while(y):
-       x is y
-       y is x % y
-   return x
+fn evenOrOdd(num n) ->
+    if (n % 2 == 0) ->
+        return true
+    else ->
+        return false
+```
+```JavaScript
+function evenOrOdd(n) {
+    if (n % 2 === 0) {
+        return true
+    } else {
+        return false
+    }
+}
 ```
 
-### Greatest Common Divisor
+### Area of a Circle
 
 ```casper
-fn computeGCD(num x, num y) ->
-   while(y):
-       x = y
-       y = x % y
-   return x
+fn areaOfCircle(num r) ->
+   num pi = 3.14159265
+   num area = pi * r * r
+   return area
+```
+```JavaScript
+function areaOfCircle(r) {
+    pi = 3.14159265
+    area = pi * r * r
+    return area
+}
 ```
 
 ### Greatest Common Divisor

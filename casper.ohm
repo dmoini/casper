@@ -1,22 +1,22 @@
 Casper {
   Program     =  newline* Stmt+ newline*
   Stmt        =  SingleStmt newline                 -- simple
-              |  "while" Exp "->" Block                  -- while
+              |  "while" Exp "->" Block             -- while
               |  "if" Exp "->" Block
                  ("else if" Exp "->" Block)*
-                 ("else"  "->" Block)?                    -- if
-              |  "from" id "to" id ("by" id)? "->"   -- loop
+                 ("else" "->" Block)?              -- if
+              |  "from" id "to" id ("by" id)? "->"  -- loop
               |  "do" Exp "if" Exp "else" Exp "->"  -- ternery
-              |  "fn" id "(" Params ")" "->" Block   -- function
-  SingleStmt  =  Type Ids "is" Exps                  -- vardecl
+              |  "fn" id "(" Params ")" "->" Block  -- function
+  SingleStmt  =  Type Ids "is" Exps                 -- vardecl
+              |  VarExps "is" Exps                  -- assign
               |  "write" "(" id ")"                 -- print
-              |  VarExps "is" Exps                   -- assign
               |  Call                               -- call
               |  "stop"                             -- break
               |  "return" Exp?                      -- return
               |  Exp
-  Block       =  SingleStmt newline            -- small
-              |  newline indent Stmt+ dedent   -- large
+  Block       =  SingleStmt newline                 -- small
+              |  newline indent Stmt+ dedent        -- large
   Exp         =  Exp "or" Exp1                      -- or
               |  Exp "and" Exp1                     -- and
               |  Exp1
@@ -33,11 +33,20 @@ Casper {
   Exp6        =  boollit
               |  numlit
               |  strlit
-              |  "[" ListOf<Exp, ","> "]"           -- list
-              |  "{" ListOf<Exp, ","> "}"           -- dict
+              |  List
+              |  Tuple
+              |  Set
+              |  Dictionary
               |  Call
               |  VarExp
               |  "(" Exp ")"                        -- parens
+
+  List        =  "[" ListOf<Exp4, ","> "]"
+  Tuple       =  "<" NonemptyListOf<Exp4, ","> ">"
+  Set         =  "(" ListOf<Exp4, ","> ")" 
+  Dictionary  =  "{" ListOf<KeyValue, ","> "}"
+  KeyValue    =  Key ":" Exp
+  Key         =  VarExp     
 
   Call        =  id "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
@@ -49,7 +58,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  (id "=")? Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "dictionary" | "set") ~idrest
+  Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary") ~idrest
   
   keyword     =  ("while" | "if" | "else" | "return" |  "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
