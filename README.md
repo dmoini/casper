@@ -4,8 +4,7 @@
 
 ## Introduction
 
-Welcome to the repository for casper: the friendly programming language.
-casper is a friendly scripting language designed to make high level programming a light and comfortable experience!
+Welcome to casper: a friendly scripting language designed to make high level programming a light and comfortable experience!
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
@@ -14,6 +13,7 @@ casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini
 - Scripting language
 - Statically typed
 - Partial type inference
+- Higher order functions
 - Optional parameters
 
 ## Type
@@ -49,7 +49,7 @@ fn foobar() ->
     write("hello world!")
 
 fn barfoo(num x) ->
-    from 0 to x:
+    from 0 to x->
         write("help")
 ```
 
@@ -78,9 +78,9 @@ fn barfoo(num x) ->
 ## Conditional
 
 ```casper
-if (big = true):
+if (big = true)->
     write("big if true")
-else if (big = false):
+else if (big = false)->
     write("bigly")
 else:
     write("covfefe")
@@ -89,13 +89,28 @@ else:
 ## Loop
 
 ```casper
-from 0 to x:
+from 0 to x->
     write(x)
 ```
 
 ```casper
-while (true):
+while (true)->
     write("big chungus")
+```
+
+## Higher Order Functions
+
+```casper
+fn doTwice(f,x)->
+    return f(f(x))
+```
+
+## Optional Parameters
+
+```casper
+fn multiples(num x, num y is 2)->
+    from 0 to y->
+        x is x * x
 ```
 
 ## Comments

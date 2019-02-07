@@ -1,13 +1,14 @@
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SingleStmt newline                 -- single
-              |  "while" Exp Block             -- while
-              |  "if" Exp Block
-                 ("else if" Exp Block)*
-                 ("else" Block)?               		-- if
-              |  "from" id "to" id ("by" id)?   	-- loop
-              |  "do" Exp "if" Exp "else" Exp   	-- ternary
-              |  "fn" id "(" Params ")" Block       -- function
+  Stmt        =  SingleStmt newline                 -- simple
+              |  "while" Exp "->" Block             -- while
+              |  "if" Exp "->" Block
+                 ("else if" Exp "->" Block)*
+                 ("else" "->" Block)?               -- if
+              |  "from" Exp "to" Exp ("by" id)? "->"
+              	 Block                              -- loop
+              |  "do" Exp "if" Exp "else" Exp "->"  -- ternary
+              |  "fn" id "(" Params ")" "->" Block  -- function
   SingleStmt  =  Type Ids "is" Exps                 -- vardecl
               |  VarExps "is" Exps                  -- assign
               |  "write" Exps                       -- print
@@ -15,8 +16,8 @@ Casper {
               |  "stop"                             -- break
               |  "return" Exp?                      -- return
               |  Exp
-  Block       =  "->" SingleStmt newline            -- small
-              |  "->" newline indent Stmt+ dedent   -- large
+  Block       =  SingleStmt newline                 -- small
+              |  newline indent Stmt+ dedent        -- large
   Exp         =  Exp "or" Exp1                      -- or
               |  Exp "and" Exp1                     -- and
               |  Exp1
@@ -54,9 +55,9 @@ Casper {
   VarExp      =  VarExp "[" Exp "]"                 -- subscripted
               |  id                                 -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
-  Param       =  Type id
+  Param       =  (Type)? id ("is" Exp)?
   Params      =  ListOf<Param, ",">
-  Arg         =  Exp
+  Arg         =  (id "=")? Exp
   Args        =  ListOf<Arg, ",">
   Type        =  ("num" | "string" | "float" | "boo" | "boolean" | "list" | "tuple" | "set" | "dictionary")
   
@@ -81,4 +82,3 @@ Casper {
   space      :=  " " | "\t" | comment
   comment     =  "~" (~"\n" any)* "\n" | "~~" (any)* "~~" 
 }
-
