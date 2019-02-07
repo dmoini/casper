@@ -42,8 +42,8 @@ Casper {
               |  "(" Exp ")"                          -- parens
 
   List        =  "[" ListOf<Exp4, ","> "]"
-  Tuple       =  "<" NonemptyListOf<Exp4, ","> ">"
-  Set         =  "(" ListOf<Exp4, ","> ")" 
+  Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
+  Set         =  "set" "(" ListOf<Exp4, ","> ")" 
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
   KeyValue    =  Key ":" Exp
   Key         =  VarExp     
@@ -58,7 +58,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  (FnType | "num" | "string" | "float" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" )
+  Type        =  (FnType | "num" | "string" | "float" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" | "void")
   FnType      =  ":" "(" Params ")" 
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest

@@ -1,6 +1,6 @@
 # casper
 
-![casper logo](/images/casper-logo.png)
+<p style="text-align:center;"><img src="images/casper-logo.png" alt="casper logo" width="200"/></p>
 
 ## Introduction
 
@@ -47,11 +47,11 @@ casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini
 ### Function Declaration
 
 ```casper
-fn foobar() ->
+void foobar():
     write("hello world!")
 
-fn barfoo(num x) ->
-    from 0 to x->
+void barfoo(num x):
+    from 0 to x:
         write("help")
 ```
 
@@ -80,38 +80,38 @@ fn barfoo(num x) ->
 ## Conditional
 
 ```casper
-if (big equals true)->
+if (big equals true):
     write("big if true")
-else if (big equals false)->
+else if (big equals false):
     write("bigly")
-else->
-    write("covfefe")    
+else:
+    write("covfefe")
 ```
 
 ## Loop
 
 ```casper
-from 0 to x ->
+from 0 to x:
     write(x)
 ```
 
 ```casper
-while (true) ->
+while (true):
     write("I love casper")
 ```
 
 ## Higher Order Functions
 
 ```casper
-fn doTwice(f,x) ->
+num doTwice(num f:(num z),num x):
     return f(f(x))
 ```
 
 ## Optional Parameters
 
 ```casper
-fn multiples(num x, num y is 2) ->
-    from 0 to y->
+num multiples(num x, num y is 2):
+    from 0 to y:
         x is x * x
 ```
 
@@ -131,8 +131,8 @@ multi-line comment
 ### Fibonacci Program
 
 ```casper
-fn fibonacci(num x) ->
-    if (x <is 1) ->
+num fibonacci(num x):
+    if (x <= 1):
 	    return 1
 	return fibonacci(x - 1) + fibonacci(x - 2)
 ```
@@ -148,8 +148,8 @@ function fibonacci(x) {
 ### Greatest Common Divisor
 
 ```casper
-fn gcd(num x, num y) ->
-   while(y) ->
+num gcd(num x, num y):
+   while(y):
        x is y
        y is x % y
    return x
@@ -167,10 +167,10 @@ function gcd(x, y) {
 ### First Factorial
 
 ```casper
-fn firstFactorial(num x) -> 
-    if (x equals 0 or x equals 1) ->
+num firstFactorial(num x):
+    if (x equals 0 or x equals 1):
         return 1
-    else ->
+    else:
         return x * firstFactorial(x - 1)
 ```
 ```JavaScript
@@ -187,10 +187,10 @@ function firstFactorial(x) {
 ### Even or Odd
 
 ```casper
-fn evenOrOdd(num x) ->
-    if (x % 2 equals 0) ->
+boo evenOrOdd(num x):
+    if (x % 2 equals 0):
         return true
-    else ->
+    else:
         return false    
 ```
 ```JavaScript
@@ -206,7 +206,7 @@ function evenOrOdd(x) {
 ### Area of a Circle
 
 ```casper
-fn areaOfCircle(num r) ->
+num areaOfCircle(num r):
    num pi is 3.14159265
    num area is pi * r * r
    return area
@@ -222,12 +222,12 @@ function areaOfCircle(r) {
 ### Largest Number of Three
 
 ```casper
-fn largestNum(num x, num y, num z) ->
-    if (x >= y and x >= z) ->
+num largestNum(num x, num y, num z):
+    if (x >= y and x >= z):
         return x
-    else if (y >= x and y >= z) ->
+    else if (y >= x and y >= z):
         return y
-    else ->
+    else:
         return z
 ```
 ```JavaScript
