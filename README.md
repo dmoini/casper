@@ -1,6 +1,6 @@
 # casper
 
-<p style="text-align:center;"><img src="images/casper-logo.png" alt="casper logo" width="200"/></p>
+<p align="center"><img src="images/casper-logo.png" alt="casper logo" width="200"/></p>
 
 ## Introduction
 
