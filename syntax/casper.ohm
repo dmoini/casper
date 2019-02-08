@@ -1,6 +1,6 @@
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SingleStmt newline                        -- simple
+  Stmt        =  SingleStmt newline                        -- single
               |  "while" Exp  Block                        -- while
               |  "if" Exp  Block
                  ("else if" Exp Block)*
