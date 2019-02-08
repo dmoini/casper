@@ -1,34 +1,34 @@
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SingleStmt newline                   -- simple
-              |  "while" Exp  Block                   -- while
+  Stmt        =  SingleStmt newline                        -- simple
+              |  "while" Exp  Block                        -- while
               |  "if" Exp  Block
                  ("else if" Exp Block)*
-                 ("else" Block)?                      -- if
-              |  "from" Exp "to" Exp ("by" id)? Block -- loop   
-              |  "do" Exp "if" Exp "else" Exp         -- ternary
-              |  Type id "(" Params ")" Block         -- function
-  SingleStmt  =  Type Ids "is" Exps                   -- vardecl
-              |  VarExps "is" Exps                    -- assign
-              |  "write" Exps                         -- print
-              |  Call                                 -- call
-              |  "stop"                               -- break
-              |  "return" Exp?                        -- return
+                 ("else" Block)?                           -- if
+              |  "from" Exp "to" Exp ("by" id)? Block      -- loop   
+              |  "do" Exp "if" Exp "else" Exp              -- ternary
+              |  Type id "(" Params ")" Block              -- function
+  SingleStmt  =  Type Ids "is" Exps                        -- vardecl
+              |  VarExps "is" Exps                         -- assign
+              |  "write" Exps                              -- print
+              |  Call                                      -- call
+              |  "stop"                                    -- break
+              |  "return" Exp?                             -- return
               |  Exp
-  Block       =  ":" SingleStmt newline               -- small
-              |  ":" newline indent Stmt+ dedent      -- large
-  Exp         =  Exp "or" Exp1                        -- or
-              |  Exp "and" Exp1                       -- and
+  Block       =  ":" SingleStmt newline                    -- small
+              |  ":" newline indent Stmt+ dedent           -- large
+  Exp         =  Exp "or" Exp1                             -- or
+              |  Exp "and" Exp1                            -- and
               |  Exp1
-  Exp1        =  Exp2 relop Exp2                      -- binary
+  Exp1        =  Exp2 relop Exp2                           -- binary
               |  Exp2
-  Exp2        =  Exp2 addop Exp3                      -- binary
+  Exp2        =  Exp2 addop Exp3                           -- binary
               |  Exp3
-  Exp3        =  Exp3 mulop Exp4                      -- binary
+  Exp3        =  Exp3 mulop Exp4                           -- binary
               |  Exp4
-  Exp4        =  prefixop Exp5                        -- unary
+  Exp4        =  prefixop Exp5                             -- unary
               |  Exp5
-  Exp5        =  Exp6 postfixop                       -- unary
+  Exp5        =  Exp6 postfixop                            -- unary
               |  Exp6 
   Exp6        =  boollit
               |  numlit
@@ -39,7 +39,7 @@ Casper {
               |  Dictionary
               |  Call
               |  VarExp
-              |  "(" Exp ")"                          -- parens
+              |  "(" Exp ")"                               -- parens
 
   List        =  "[" ListOf<Exp4, ","> "]"
   Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
@@ -51,8 +51,8 @@ Casper {
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   Ids         =  NonemptyListOf<id, ",">
-  VarExp      =  VarExp "[" Exp "]"                   -- subscripted
-              |  id                                   -- simple
+  VarExp      =  VarExp "[" Exp "]"                        -- subscripted
+              |  id                                        -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
   Param       =  Type id (FnType)? ("is" Exp)? 
   Params      =  ListOf<Param, ",">
@@ -67,8 +67,8 @@ Casper {
   numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
   boollit     =  "true" | "false"
   strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
-  escape      =  "\\" ("\\" | "\"" | "n")            -- simple
-              |  "\\u{" hexDigit+ "}"                -- codepoint
+  escape      =  "\\" ("\\" | "\"" | "n")                  -- simple
+              |  "\\u{" hexDigit+ "}"                      -- codepoint
   addop       =  "+" | "-"
   relop       =  "<=" | "<" | "equals" | "not equals" | ">=" | ">"
   mulop       =  "*" | "/" | "//" | "%"
