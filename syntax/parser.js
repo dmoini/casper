@@ -10,33 +10,33 @@
  *       rules. If there are any errors, this function will throw an error.
  */
 
-/* const fs = require('fs');
-const ohm = require('ohm-js');
-const withIndentsAndDedents = require('./preparser');
+const fs = require("fs");
+const ohm = require("ohm-js");
+const withIndentsAndDedents = require("./preparser");
 
-const Program = require('../ast/program');
-const VariableDeclaration = require('../ast/variable-declaration');
-const AssignmentStatement = require('../ast/assignment-statement');
-const BreakStatement = require('../ast/break-statement');
-const ReturnStatement = require('../ast/return-statement');
-const IfStatement = require('../ast/if-statement');
-const Case = require('../ast/case');
-const WhileStatement = require('../ast/while-statement');
-const CallStatement = require('../ast/call-statement');
-const FunctionDeclaration = require('../ast/function-declaration');
-const ListExpression = require('../ast/list-expression');
-const BinaryExpression = require('../ast/binary-expression');
-const UnaryExpression = require('../ast/unary-expression');
-const IdentifierExpression = require('../ast/identifier-expression');
-const SubscriptedExpression = require('../ast/subscripted-expression');
-const Call = require('../ast/call');
-const Parameter = require('../ast/parameter');
-const Argument = require('../ast/argument');
-const BooleanLiteral = require('../ast/boolean-literal');
-const NumericLiteral = require('../ast/numeric-literal');
-const StringLiteral = require('../ast/string-literal');
+// const Program = require('../ast/program');
+// const VariableDeclaration = require('../ast/variable-declaration');
+// const AssignmentStatement = require('../ast/assignment-statement');
+// const BreakStatement = require('../ast/break-statement');
+// const ReturnStatement = require('../ast/return-statement');
+// const IfStatement = require('../ast/if-statement');
+// const Case = require('../ast/case');
+// const WhileStatement = require('../ast/while-statement');
+// const CallStatement = require('../ast/call-statement');
+// const FunctionDeclaration = require('../ast/function-declaration');
+// const ListExpression = require('../ast/list-expression');
+// const BinaryExpression = require('../ast/binary-expression');
+// const UnaryExpression = require('../ast/unary-expression');
+// const IdentifierExpression = require('../ast/identifier-expression');
+// const SubscriptedExpression = require('../ast/subscripted-expression');
+// const Call = require('../ast/call');
+// const Parameter = require('../ast/parameter');
+// const Argument = require('../ast/argument');
+// const BooleanLiteral = require('../ast/boolean-literal');
+// const NumericLiteral = require('../ast/numeric-literal');
+// const StringLiteral = require('../ast/string-literal');
 
-const grammar = ohm.grammar(fs.readFileSync('./syntax/plainscript.ohm')); */
+const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
 /* function unpack(a) {
@@ -87,7 +87,7 @@ const grammar = ohm.grammar(fs.readFileSync('./syntax/plainscript.ohm')); */
 }); */
 /* eslint-enable no-unused-vars */
 
-module.exports = (text) => {
+module.exports = text => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
