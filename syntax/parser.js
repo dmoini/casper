@@ -12,7 +12,7 @@
 
 const fs = require("fs");
 const ohm = require("ohm-js");
-const withIndentsAndDedents = require("./preparser");
+const withIndentsAndDedents = require("./preparser.js");
 
 // const Program = require('../ast/program');
 // const VariableDeclaration = require('../ast/variable-declaration');
