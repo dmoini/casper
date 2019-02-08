@@ -18,6 +18,10 @@
     "test": "jest test/**/*test.js"
   },
   "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/test/parser/"
+    ],
     "transform": {}
   },
   "repository": {
