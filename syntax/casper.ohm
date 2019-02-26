@@ -8,9 +8,9 @@ Casper {
               |  "from" Exp "to" Exp ("by" id)? Block -- loop   
               |  "do" Exp "if" Exp "else" Exp         -- ternary
               |  Type id "(" Params ")" Block         -- function
-  SingleStmt  =  Ids "=" Exps                   -- vardecl
-              |  VarExps "=" Exps                    -- assign
-              |  "write" Exps                         -- print
+  SingleStmt  =  Declaration                          -- vardecl
+              |  Assignment                           -- assign
+              |  Print                                -- print
               |  Call                                 -- call
               |  "stop"                               -- break
               |  "return" Exp?                        -- return
@@ -49,9 +49,12 @@ Casper {
   Key         =  VarExp     
 
   Call        =  VarExp "(" Args ")"
+  Print       =  "write" Exps
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
   Ids         =  NonemptyListOf<DeclId, ",">
+  Declaration =  Ids "=" Exps
+  Assignment  =  VarExps "=" Exps
   VarExp      =  VarExp "[" Exp "]"                   -- subscripted
               |  id                                   -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
@@ -71,7 +74,7 @@ Casper {
   escape      =  "\\" ("\\" | "\"" | "n")            -- simple
               |  "\\u{" hexDigit+ "}"                -- codepoint
   addop       =  "+" | "-"
-  relop       =  "<=" | "<" | "==" | "equals" | "not equals" | "!=" | ">=" | ">"
+  relop       =  "<=" | "<" | "==" | "equals" | "!=" | "not equals" | ">=" | ">"
   mulop       =  "*" | "/" | "//" | "%"
   prefixop    =  "-" | "not"
   postfixop   =  "!"
