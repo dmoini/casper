@@ -138,9 +138,10 @@ multi-line comment
 ```casper
 num fibonacci(num x):
     if (x <= 1):
-	    return 1
-	return fibonacci(x - 1) + fibonacci(x - 2)
+        return 1
+    return fibonacci(x - 1) + fibonacci(x - 2)
 ```
+
 ```Javascript
 function fibonacci(x) {
     if (x <= 1) {
@@ -159,6 +160,7 @@ num gcd(num x, num y):
        y = x % y
    return x
 ```
+
 ```Javascript
 function gcd(x, y) {
     while(y) {
@@ -178,14 +180,15 @@ num firstFactorial(num x):
     else:
         return x * firstFactorial(x - 1)
 ```
+
 ```JavaScript
-function firstFactorial(x) { 
+function firstFactorial(x) {
     if (x === 0 || x === 1) {
         return 1
     }
     else {
         return x * firstFactorial(x - 1)
-    }      
+    }
 }
 ```
 
@@ -196,8 +199,9 @@ boo evenOrOdd(num x):
     if (x % 2 equals 0):
         return true
     else:
-        return false    
+        return false
 ```
+
 ```JavaScript
 function evenOrOdd(x) {
     if (x % 2 === 0) {
@@ -216,6 +220,7 @@ num areaOfCircle(num r):
    num area = pi * r * r
    return area
 ```
+
 ```JavaScript
 function areaOfCircle(r) {
     pi = 3.14159265
@@ -235,6 +240,7 @@ num largestNum(num x, num y, num z):
     else:
         return z
 ```
+
 ```JavaScript
 function largestNum(x, y, z) {
     if (x >= y && x >= z) {
