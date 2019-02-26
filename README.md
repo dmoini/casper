@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Welcome to casper, a friendly scripting language designed to make high level programming a light and comfortable experience. This language incorporates a speech-like, easy-to-use syntax that eliminates unnecessary verboseness from the programming experience. casper is reminiscent of Python with nuanced features and syntax designed to make its meaning as transparent as possible and make programming an entirely pleasant affair. 
+Welcome to casper, a friendly scripting language designed to make high level programming a light and comfortable experience. This language incorporates a speech-like, easy-to-use syntax that eliminates unnecessary verboseness from the programming experience. casper is reminiscent of Python with nuanced features and syntax designed to make its meaning as transparent as possible and make programming an entirely pleasant affair.
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
@@ -13,6 +13,7 @@ casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini
 - Scripting language
 - Statically typed
 - Partial type inference
+- Parallel declaration and assignment
 - Higher order functions
 - Optional parameters
 
@@ -30,19 +31,23 @@ casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini
 
 ### Variable Declaration and Assignment
 
-`num x is 5`
+`num x = 5`
 
-`string y is "ianlizards@icloud.com"`
+`string y = "ianlizards@icloud.com"`
 
-`boo z is true`
+`boo z = true`
 
-`list a is [3, "donovan", false]`
+`list a = [3, "donovan", false]`
 
-`x is 6`
+`x = 6`
 
-`y is "ianlizarda@icloud.com"`
+`y = "ianlizarda@icloud.com"`
 
-`z is false`
+`z = false`
+
+`num m, num n = 1, 2`
+
+`m, n = 3, 4`
 
 ### Function Declaration
 
@@ -63,7 +68,7 @@ void barfoo(num x):
 - divide `/`
 - integer division `//`
 - modulus `%`
-- equal `=`
+- equal `==`
 - not equal `!=`
 - less than `<`
 - greater than `>`
@@ -110,9 +115,9 @@ num doTwice(num f:(num z),num x):
 ## Optional Parameters
 
 ```casper
-num multiples(num x, num y is 2):
+num multiples(num x, num y = 2):
     from 0 to y:
-        x is x * x
+        x = x * x
 ```
 
 ## Comments
@@ -150,8 +155,8 @@ function fibonacci(x) {
 ```casper
 num gcd(num x, num y):
    while(y):
-       x is y
-       y is x % y
+       x = y
+       y = x % y
    return x
 ```
 ```Javascript
@@ -207,8 +212,8 @@ function evenOrOdd(x) {
 
 ```casper
 num areaOfCircle(num r):
-   num pi is 3.14159265
-   num area is pi * r * r
+   num pi = 3.14159265
+   num area = pi * r * r
    return area
 ```
 ```JavaScript
