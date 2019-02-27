@@ -1,4 +1,4 @@
-const BooleanLiteral = require("./boolean-literal");
+const BooleanLiteral = require('./boolean-literal');
 
 module.exports = class FromStatement {
   constructor(tests, increments, block) {

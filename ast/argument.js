@@ -1,5 +1,5 @@
 module.exports = class Argument {
-    constructor(expression) {
-        Object.assign(this, { expression });
-    }
-};
+  constructor(expression) {
+    Object.assign(this, { expression });
+  }
+}

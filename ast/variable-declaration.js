@@ -1,4 +1,4 @@
-const Variable = require("./variable");
+const Variable = require('./variable');
 
 module.exports = class VariableDeclaration {
   constructor(ids, initializers) {
