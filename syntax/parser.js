@@ -42,10 +42,10 @@ const StringLiteral = require("../ast/string-literal");
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
-/* function unpack(a) {
+function unpack(a) {
   return a.length === 0 ? null : a[0];
 }
-*/
+
 /* eslint-disable no-unused-vars */
 const astGenerator = grammar.createSemantics().addOperation("ast", {
   Program(_1, body, _2) {
@@ -74,7 +74,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Stmt_function(_1, id, _2, params, _3, block) {
     return new FunctionDeclaration(id.ast(), params.ast(), block.ast());
   },
-  SingleStmt_vardecl(_1, v, _2, e) {
+  SingleStmt_vardecl(v, _, e) {
     return new VariableDeclaration(v.ast(), e.ast());
   },
   SingleStmt_assign(v, _, e) {
@@ -116,13 +116,10 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp5_unary(operand, op) {
     return new UnaryExpression(op.ast(), operand.ast());
   },
-  Exp6_list(_1, expressions, _2) {
-    return new ListExpression(expressions.ast());
-  },
   Exp6_parens(_1, expression, _2) {
     return expression.ast();
   },
-  FunctionType(_1, args, _2) {
+  FnType(_1, _2, args, _3) {
     return FunctionType(args.ast());
   },
   Call(callee, _1, args, _2) {
@@ -134,11 +131,11 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   VarExp_simple(id) {
     return new IdentifierExpression(id.ast());
   },
-  Param(id, _, exp) {
-    return new Parameter(id.ast(), unpack(exp.ast()));
+  Param(type, id, fntype, _, exp) {
+    return new Parameter(type.ast(), id.ast(), fntype.ast(), unpack(exp.ast()));
   },
-  Arg(id, _, exp) {
-    return new Argument(unpack(id.ast()), exp.ast());
+  Arg(exp) {
+    return new Argument(exp.ast());
   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];

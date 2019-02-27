@@ -8,8 +8,8 @@ Casper {
               |  "from" Exp "to" Exp ("by" id)? Block -- loop   
               |  "do" Exp "if" Exp "else" Exp         -- ternary
               |  Type id "(" Params ")" Block         -- function
-  SingleStmt  =  Declaration                          -- vardecl
-              |  Assignment                           -- assign
+  SingleStmt  =  Ids "=" Exps                         -- vardecl
+              |  VarExps "=" Exps                     -- assign
               |  Call                                 -- call
               |  "stop"                               -- break
               |  "return" Exp?                        -- return
@@ -40,7 +40,7 @@ Casper {
               |  VarExp
               |  "(" Exp ")"                          -- parens
 
-  List        =  "[" ListOf<Exp4, ","> "]"
+  List        =  "[" ListOf<Exp4, ","> "]"            -- list
   Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
   Set         =  "set" "(" ListOf<Exp4, ","> ")" 
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
@@ -50,8 +50,6 @@ Casper {
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
   Ids         =  NonemptyListOf<DeclId, ",">
-  Declaration =  Ids "=" Exps
-  Assignment  =  VarExps "=" Exps
   VarExp      =  VarExp "[" Exp "]"                   -- subscripted
               |  id                                   -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
@@ -61,7 +59,7 @@ Casper {
   Args        =  ListOf<Arg, ",">
   Type        =  ("num" | "string" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" | "void")
   FnType      =  ":" "(" Params ")" 
-  keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "write" | "not equals"
+  keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
   idrest      =  "_" | alnum
