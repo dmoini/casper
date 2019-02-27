@@ -10,7 +10,6 @@ Casper {
               |  Type id "(" Params ")" Block         -- function
   SingleStmt  =  Declaration                          -- vardecl
               |  Assignment                           -- assign
-              |  Print                                -- print
               |  Call                                 -- call
               |  "stop"                               -- break
               |  "return" Exp?                        -- return
@@ -46,10 +45,8 @@ Casper {
   Set         =  "set" "(" ListOf<Exp4, ","> ")" 
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
   KeyValue    =  Key ":" Exp
-  Key         =  VarExp     
-
+  Key         =  VarExp
   Call        =  VarExp "(" Args ")"
-  Print       =  "write" Exps
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
   Ids         =  NonemptyListOf<DeclId, ",">
@@ -62,7 +59,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  (FnType | "num" | "string" | "float" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" | "void")
+  Type        =  ("num" | "string" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" | "void")
   FnType      =  ":" "(" Params ")" 
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "write" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest

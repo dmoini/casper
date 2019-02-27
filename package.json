@@ -19,8 +19,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/test/parser/"
+      "/node_modules/"
     ],
     "transform": {}
   },
