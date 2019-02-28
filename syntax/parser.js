@@ -166,5 +166,6 @@ module.exports = text => {
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
   }
+  console.log(JSON.stringify(astGenerator(match).ast()));
   return astGenerator(match).ast();
 };

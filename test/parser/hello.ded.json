@@ -1,0 +1,10 @@
+{
+  "statements": [
+    {
+      "call": {
+        "callee": { "id": "write" },
+        "args": [{ "expression": { "value": "\"hello\"" } }]
+      }
+    }
+  ]
+}

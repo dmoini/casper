@@ -5,7 +5,9 @@ Casper {
               |  "if" Exp  Block
                  ("else if" Exp Block)*
                  ("else" Block)?                      -- if
-              |  "from" Exp "to" Exp ("by" id)? Block -- loop   
+              |  "from" Exp 
+                 "to" Exp 
+                 ("by" (id | numlit))? Block          -- loop   
               |  "do" Exp "if" Exp "else" Exp         -- ternary
               |  Type id "(" Params ")" Block         -- function
   SingleStmt  =  Ids "=" Exps                         -- vardecl
@@ -43,8 +45,8 @@ Casper {
   List        =  "[" ListOf<Exp4, ","> "]"            -- list
   Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
   Set         =  "set" "(" ListOf<Exp4, ","> ")" 
+  KeyValue    =  (id | numlit) ":" Exp
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
-  KeyValue    =  Key ":" Exp
   Key         =  VarExp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
