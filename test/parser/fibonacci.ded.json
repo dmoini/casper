@@ -3,9 +3,10 @@
     {
       "id": "fibonacci",
       "function": {
-        "type": "fibonacci",
-        "id": [{ "id": "num", "defaultExpression": "x" }],
-        "params": [
+        "type": "num",
+        "id": "fibonacci",
+        "params": [{ "id": "num", "defaultExpression": "x" }],
+        "body": [
           {
             "cases": [
               {

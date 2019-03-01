@@ -71,8 +71,13 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     const tests = [firstTest.ast(), secondTest.ast(), thirdTest.ast()];
     return new TernaryExpression(tests);
   },
-  Stmt_function(_1, id, _2, params, _3, block) {
-    return new FunctionDeclaration(id.ast(), params.ast(), block.ast());
+  Stmt_function(type, id, _1, params, _2, block) {
+    return new FunctionDeclaration(
+      type.ast(),
+      id.ast(),
+      params.ast(),
+      block.ast()
+    );
   },
   SingleStmt_vardecl(v, _, e) {
     return new VariableDeclaration(v.ast(), e.ast());
