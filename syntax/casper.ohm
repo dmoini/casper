@@ -1,4 +1,4 @@
-Casper {
+helloCasper {
   Program     =  newline* Stmt+ newline*
   Stmt        =  SingleStmt newline                   -- simple
               |  "while" Exp  Block                   -- while
@@ -34,10 +34,10 @@ Casper {
   Exp6        =  boollit
               |  numlit
               |  strlit
-              |  List
-              |  Tuple
-              |  Set
-              |  Dictionary
+              |  List                                 -- list
+              |  Tuple                                -- tuple
+              |  Set                                  -- set
+              |  Dictionary                           -- dict
               |  Call
               |  VarExp
               |  "(" Exp ")"                          -- parens
@@ -45,9 +45,9 @@ Casper {
   List        =  "[" ListOf<Exp4, ","> "]"            -- list
   Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
   Set         =  "set" "(" ListOf<Exp4, ","> ")" 
-  KeyValue    =  (id | numlit) ":" Exp
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
-  Key         =  VarExp
+  KeyValue    =  (id | numlit) ":" Exp
+//   Key         =  VarExp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
@@ -79,6 +79,7 @@ Casper {
   dedent      =  "⇦"
 
   newline     =  "\n"+
-  space      :=  " " | "\t" | comment
-  comment     =  "~" (~"\n" any)* "\n" | "~~" (any)* "~~" 
+  space      :=  " " | "\t" | comment | multiline
+  comment     =  "~" (~"\n" any)* 
+  multiline   =  "~~" (any)* "~~"                   
 }

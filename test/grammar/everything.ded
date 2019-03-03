@@ -24,7 +24,7 @@ void actions(num a, boo b, tuple c):
                 if x: print([x, y, z])
 
 
-                stop    ~ Comment
+                stop ~Comment
         else if x > 3:
                         print("hello")
         num g = 20

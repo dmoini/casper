@@ -19,7 +19,6 @@ describe("The parser", () => {
             `${__dirname}/${name}.json`,
             "utf-8",
             (_err, expected) => {
-              console.log(ast);
               assert.deepEqual(ast, JSON.parse(expected));
               done();
             }
