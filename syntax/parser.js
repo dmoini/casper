@@ -15,23 +15,23 @@ const ohm = require('ohm-js');
 const withIndentsAndDedents = require('./preparser.js');
 
 const Program = require('../ast/program');
-const VariableDeclaration = require('../ast/variable-declaration');
-const AssignmentStatement = require('../ast/assignment-statement');
-const BreakStatement = require('../ast/break-statement');
-const ReturnStatement = require('../ast/return-statement');
+const WhileStatement = require('../ast/while-statement');
+const Case = require('../ast/case');
 const IfStatement = require('../ast/if-statement');
 const FromStatement = require('../ast/from-statement');
-const Case = require('../ast/case');
-const WhileStatement = require('../ast/while-statement');
-const CallStatement = require('../ast/call-statement');
+const BreakStatement = require('../ast/break-statement');
+const ReturnStatement = require('../ast/return-statement');
 const FunctionDeclaration = require('../ast/function-declaration');
-const ListExpression = require('../ast/list-expression');
+const VariableDeclaration = require('../ast/variable-declaration');
+const AssignmentStatement = require('../ast/assignment-statement');
+const CallStatement = require('../ast/call-statement');
 const BinaryExpression = require('../ast/binary-expression');
 const UnaryExpression = require('../ast/unary-expression');
 const TernaryExpression = require('../ast/ternary-expression');
-const IdentifierExpression = require('../ast/identifier-expression');
-const SubscriptedExpression = require('../ast/subscripted-expression');
+const ListExpression = require('../ast/list-expression');
 const FunctionType = require('../ast/function-type');
+const SubscriptedExpression = require('../ast/subscripted-expression');
+const IdentifierExpression = require('../ast/identifier-expression');
 const Call = require('../ast/call');
 const Parameter = require('../ast/parameter');
 const Argument = require('../ast/argument');
@@ -39,7 +39,8 @@ const BooleanLiteral = require('../ast/boolean-literal');
 const NumericLiteral = require('../ast/numeric-literal');
 const StringLiteral = require('../ast/string-literal');
 
-// TODO: Add DeclId, ListExpression, SetExpression, DictExpression, TupleExpression
+// TODO: Add DeclId, ListExpression
+// TODO: possible add SetExpression, DictExpression, TupleExpression
 
 const grammar = ohm.grammar(fs.readFileSync('./syntax/casper.ohm'));
 
@@ -59,15 +60,15 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   Stmt_while(_, test, block) {
     return new WhileStatement(test.ast(), block.ast());
   },
-  Stmt_loop(_1, firstTest, _2, secondTest, _3, increments, Block) {
-    const tests = [firstTest.ast(), secondTest.ast()];
-    return new FromStatement(tests, increments, Block.ast());
-  },
   Stmt_if(_1, firstTest, firstBlock, _2, moreTests, moreBlocks, _3, lastBlock) {
     const tests = [firstTest.ast(), ...moreTests.ast()];
     const bodies = [firstBlock.ast(), ...moreBlocks.ast()];
     const cases = tests.map((test, index) => new Case(test, bodies[index]));
     return new IfStatement(cases, unpack(lastBlock.ast()));
+  },
+  Stmt_loop(_1, firstTest, _2, secondTest, _3, increments, Block) {
+    const tests = [firstTest.ast(), secondTest.ast()];
+    return new FromStatement(tests, increments, Block.ast());
   },
   Stmt_ternary(_1, firstTest, _2, secondTest, _3, thirdTest) {
     const tests = [firstTest.ast(), secondTest.ast(), thirdTest.ast()];
@@ -87,14 +88,14 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   SingleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
   },
+  SingleStmt_call(c) {
+    return new CallStatement(c.ast());
+  },
   SingleStmt_break(_) {
     return new BreakStatement();
   },
   SingleStmt_return(_, e) {
     return new ReturnStatement(unpack(e.ast()));
-  },
-  SingleStmt_call(c) {
-    return new CallStatement(c.ast());
   },
   Block_small(_1, statement, _2) {
     return [statement.ast()];
@@ -123,26 +124,32 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   Exp5_unary(operand, op) {
     return new UnaryExpression(op.ast(), operand.ast());
   },
+  // TODO: Exp6_list, Exp6_tuple, Exp6_set, Exp6_dict, Exp6_call, Exp6_varexp
   Exp6_parens(_1, expression, _2) {
     return expression.ast();
   },
-  FnType(_1, _2, args, _3) {
-    return FunctionType(args.ast());
-  },
+  // TODO: define files for List, Tuple, Set, Dictionary, KeyValue
   Call(callee, _1, args, _2) {
     return new Call(callee.ast(), args.ast());
   },
+  // TODO: Exps, DeclId, Ids
   VarExp_subscripted(v, _1, e, _2) {
     return new SubscriptedExpression(v.ast(), e.ast());
   },
   VarExp_simple(id) {
     return new IdentifierExpression(id.ast());
   },
+  // TODO: VarExps?
   Param(type, id, fntype, _, exp) {
     return new Parameter(type.ast(), id.ast(), fntype.ast(), unpack(exp.ast()));
   },
+  // TODO: Params?
   Arg(exp) {
     return new Argument(exp.ast());
+  },
+  // TODO: Args?, Type
+  FnType(_1, _2, args, _3) {
+    return FunctionType(args.ast());
   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];

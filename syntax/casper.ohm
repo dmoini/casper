@@ -1,13 +1,13 @@
 helloCasper {
   Program     =  newline* Stmt+ newline*
   Stmt        =  SingleStmt newline                   -- simple
-              |  "while" Exp  Block                   -- while
-              |  "if" Exp  Block
+              |  "while" Exp Block                    -- while
+              |  "if" Exp Block
                  ("else if" Exp Block)*
                  ("else" Block)?                      -- if
               |  "from" Exp 
                  "to" Exp 
-                 ("by" (id | numlit))? Block          -- loop   
+                 ("by" (id | numlit))? Block          -- loop 
               |  "do" Exp "if" Exp "else" Exp         -- ternary
               |  Type id "(" Params ")" Block         -- function
   SingleStmt  =  Ids "=" Exps                         -- vardecl
@@ -38,11 +38,10 @@ helloCasper {
               |  Tuple                                -- tuple
               |  Set                                  -- set
               |  Dictionary                           -- dict
-              |  Call
-              |  VarExp
+              |  Call                                 -- call
+              |  VarExp                               -- varexp
               |  "(" Exp ")"                          -- parens
-
-  List        =  "[" ListOf<Exp4, ","> "]"            -- list
+  List        =  "[" ListOf<Exp4, ","> "]"
   Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
   Set         =  "set" "(" ListOf<Exp4, ","> ")" 
   Dictionary  =  "{" ListOf<KeyValue, ","> "}"
@@ -68,8 +67,8 @@ helloCasper {
   numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
   boollit     =  "true" | "false"
   strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
-  escape      =  "\\" ("\\" | "\"" | "n")            -- simple
-              |  "\\u{" hexDigit+ "}"                -- codepoint
+  escape      =  "\\" ("\\" | "\"" | "n")             -- simple
+              |  "\\u{" hexDigit+ "}"                 -- codepoint
   addop       =  "+" | "-"
   relop       =  "<=" | "<" | "==" | "equals" | "!=" | "not equals" | ">=" | ">"
   mulop       =  "*" | "/" | "//" | "%"
@@ -79,7 +78,7 @@ helloCasper {
   dedent      =  "⇦"
 
   newline     =  "\n"+
-  space      :=  " " | "\t" | comment | multiline
-  comment     =  "~" (~"\n" any)* 
-  multiline   =  "~~" (any)* "~~"                   
+  space      :=  " " | "\t" | comment
+  comment     =  "~" (~"\n" any)*                     -- singleline
+              |  "~~" (any)* "~~"                     -- multiline
 }
