@@ -34,6 +34,7 @@ const ListExpression = require("../ast/list-expression");
 const TupleExpression = require("../ast/tuple-expression");
 const SetExpression = require("../ast/set-expression");
 const DictionaryExpression = require("../ast/dictionary-expression");
+const KeyValueExpression = require("../ast/keyvalue-expression");
 const Call = require("../ast/call");
 const FunctionType = require("../ast/function-type");
 const SubscriptedExpression = require("../ast/subscripted-expression");
@@ -44,7 +45,6 @@ const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 const IdDeclaration = require("../ast/id-declaration");
-const KeyValueExpression = require("../ast/keyvalue-expression");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -196,7 +196,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 });
 /* eslint-enable no-unused-vars */
 
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);

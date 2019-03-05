@@ -41,12 +41,7 @@ Casper {
               |  Call                                 -- call
               |  VarExp                               
               |  "(" Exp ")"                          -- parens
-  // List        =  "[" ListOf<Exp4, ","> "]"
-  // Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
-  // Set         =  "set" "(" ListOf<Exp4, ","> ")" 
-  // Dictionary  =  "{" ListOf<KeyValue, ","> "}"
   KeyValue    =  (id | numlit) ":" Exp
-  // Key         =  VarExp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
