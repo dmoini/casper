@@ -44,6 +44,7 @@ const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 const IdDeclaration = require("../ast/id-declaration");
+const KeyValueExpression = require("../ast/keyvalue-expression");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -82,7 +83,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast(),
+      block.ast()
     );
   },
   SingleStmt_vardecl(v, _, e) {
@@ -142,6 +143,10 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp6_dict(_1, expressions, _2) {
     return new DictionaryExpression(expressions.ast());
   },
+
+  KeyValue(id, _, exp) {
+    return new KeyValueExpression(id.ast(), exp.ast());
+  },
   // TODO: Exp6_call, Exp6_varexp
   Call(callee, _1, expressions, _2) {
     return new Call(callee.ast(), expressions.ast());
@@ -191,10 +196,11 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 });
 /* eslint-enable no-unused-vars */
 
-module.exports = (text) => {
+module.exports = text => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
   }
+  console.log(JSON.stringify(astGenerator(match).ast()));
   return astGenerator(match).ast();
 };
