@@ -1,4 +1,4 @@
-helloCasper {
+Casper {
   Program     =  newline* Stmt+ newline*
   Stmt        =  SingleStmt newline                   -- simple
               |  "while" Exp Block                    -- while
@@ -34,19 +34,19 @@ helloCasper {
   Exp6        =  boollit
               |  numlit
               |  strlit
-              |  List                                 -- list
-              |  Tuple                                -- tuple
-              |  Set                                  -- set
-              |  Dictionary                           -- dict
+              |  "[" ListOf<Exp4, ","> "]"            -- list
+              |  "(" NonemptyListOf<Exp4, ","> ")"    -- tuple
+              |  "set" "(" ListOf<Exp4, ","> ")"      -- set
+              |  "{" ListOf<KeyValue, ","> "}"        -- dict
               |  Call                                 -- call
-              |  VarExp                               -- varexp
+              |  VarExp                               
               |  "(" Exp ")"                          -- parens
-  List        =  "[" ListOf<Exp4, ","> "]"
-  Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
-  Set         =  "set" "(" ListOf<Exp4, ","> ")" 
-  Dictionary  =  "{" ListOf<KeyValue, ","> "}"
+  // List        =  "[" ListOf<Exp4, ","> "]"
+  // Tuple       =  "(" NonemptyListOf<Exp4, ","> ")"
+  // Set         =  "set" "(" ListOf<Exp4, ","> ")" 
+  // Dictionary  =  "{" ListOf<KeyValue, ","> "}"
   KeyValue    =  (id | numlit) ":" Exp
-//   Key         =  VarExp
+  // Key         =  VarExp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
