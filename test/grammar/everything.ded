@@ -12,9 +12,9 @@ void hello():
 void actions(num a, boo b, tuple c):
         num x = 1
         boo y = false
-        set s = set(1,2,3)
-        tuple t = (4,5,6)
         list l = [1, 2, 3 ,4]
+        tuple t = (4,5,6)
+        set s = set(1,2,3)
         dictionary d = {0 : hi, 1 :bye}
         
         num z = x * 3 
