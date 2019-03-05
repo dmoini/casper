@@ -10,39 +10,41 @@
  *       rules. If there are any errors, this function will throw an error.
  */
 
-const fs = require('fs');
-const ohm = require('ohm-js');
-const withIndentsAndDedents = require('./preparser.js');
+const fs = require("fs");
+const ohm = require("ohm-js");
+const withIndentsAndDedents = require("./preparser.js");
 
-const Program = require('../ast/program');
-const WhileStatement = require('../ast/while-statement');
-const Case = require('../ast/case');
-const IfStatement = require('../ast/if-statement');
-const FromStatement = require('../ast/from-statement');
-const BreakStatement = require('../ast/break-statement');
-const ReturnStatement = require('../ast/return-statement');
-const FunctionDeclaration = require('../ast/function-declaration');
-const VariableDeclaration = require('../ast/variable-declaration');
-const AssignmentStatement = require('../ast/assignment-statement');
-const CallStatement = require('../ast/call-statement');
-const BinaryExpression = require('../ast/binary-expression');
-const UnaryExpression = require('../ast/unary-expression');
-const TernaryExpression = require('../ast/ternary-expression');
-const ListExpression = require('../ast/list-expression');
-const FunctionType = require('../ast/function-type');
-const SubscriptedExpression = require('../ast/subscripted-expression');
-const IdentifierExpression = require('../ast/identifier-expression');
-const Call = require('../ast/call');
-const Parameter = require('../ast/parameter');
-const Argument = require('../ast/argument');
-const BooleanLiteral = require('../ast/boolean-literal');
-const NumericLiteral = require('../ast/numeric-literal');
-const StringLiteral = require('../ast/string-literal');
+const Program = require("../ast/program");
+const WhileStatement = require("../ast/while-statement");
+const Case = require("../ast/case");
+const IfStatement = require("../ast/if-statement");
+const FromStatement = require("../ast/from-statement");
+const BreakStatement = require("../ast/break-statement");
+const ReturnStatement = require("../ast/return-statement");
+const FunctionDeclaration = require("../ast/function-declaration");
+const VariableDeclaration = require("../ast/variable-declaration");
+const AssignmentStatement = require("../ast/assignment-statement");
+const CallStatement = require("../ast/call-statement");
+const BinaryExpression = require("../ast/binary-expression");
+const UnaryExpression = require("../ast/unary-expression");
+const TernaryExpression = require("../ast/ternary-expression");
+const ListExpression = require("../ast/list-expression");
+const FunctionType = require("../ast/function-type");
+const SubscriptedExpression = require("../ast/subscripted-expression");
+const IdentifierExpression = require("../ast/identifier-expression");
+const Call = require("../ast/call");
+const Parameter = require("../ast/parameter");
+const Argument = require("../ast/argument");
+const BooleanLiteral = require("../ast/boolean-literal");
+const NumericLiteral = require("../ast/numeric-literal");
+const StringLiteral = require("../ast/string-literal");
+const IdDeclaration = require("../ast/id-declaration");
 
-// TODO: Add DeclId, ListExpression
+// TODO: Add  ListExpression
+
 // TODO: possible add SetExpression, DictExpression, TupleExpression
 
-const grammar = ohm.grammar(fs.readFileSync('./syntax/casper.ohm'));
+const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
 function unpack(a) {
@@ -50,7 +52,7 @@ function unpack(a) {
 }
 
 /* eslint-disable no-unused-vars */
-const astGenerator = grammar.createSemantics().addOperation('ast', {
+const astGenerator = grammar.createSemantics().addOperation("ast", {
   Program(_1, body, _2) {
     return new Program(body.ast());
   },
@@ -79,7 +81,7 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast(),
+      block.ast()
     );
   },
   SingleStmt_vardecl(v, _, e) {
@@ -128,6 +130,10 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   Exp6_parens(_1, expression, _2) {
     return expression.ast();
   },
+
+  Exp6_list(_1, expressions, _2) {
+    return ListExpression(expressions);
+  },
   // TODO: define files for List, Tuple, Set, Dictionary, KeyValue
   Call(callee, _1, args, _2) {
     return new Call(callee.ast(), args.ast());
@@ -146,6 +152,9 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   // TODO: Params?
   Arg(exp) {
     return new Argument(exp.ast());
+  },
+  DeclId(type, id) {
+    return new IdDeclaration(type.ast(), id.ast());
   },
   // TODO: Args?, Type
   FnType(_1, _2, args, _3) {
@@ -175,7 +184,7 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
 });
 /* eslint-enable no-unused-vars */
 
-module.exports = (text) => {
+module.exports = text => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
