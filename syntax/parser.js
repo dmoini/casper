@@ -10,6 +10,8 @@
  *       rules. If there are any errors, this function will throw an error.
  */
 
+/* eslint quotes: [2, "double"] */
+
 const fs = require("fs");
 const ohm = require("ohm-js");
 const withIndentsAndDedents = require("./preparser.js");
@@ -29,20 +31,19 @@ const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const TernaryExpression = require("../ast/ternary-expression");
 const ListExpression = require("../ast/list-expression");
+const TupleExpression = require("../ast/tuple-expression");
+const SetExpression = require("../ast/set-expression");
+const DictionaryExpression = require("../ast/dictionary-expression");
+const Call = require("../ast/call");
 const FunctionType = require("../ast/function-type");
 const SubscriptedExpression = require("../ast/subscripted-expression");
 const IdentifierExpression = require("../ast/identifier-expression");
-const Call = require("../ast/call");
 const Parameter = require("../ast/parameter");
 const Argument = require("../ast/argument");
 const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 const IdDeclaration = require("../ast/id-declaration");
-
-// TODO: Add  ListExpression
-
-// TODO: possible add SetExpression, DictExpression, TupleExpression
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -81,7 +82,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast()
+      block.ast(),
     );
   },
   SingleStmt_vardecl(v, _, e) {
@@ -126,19 +127,25 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp5_unary(operand, op) {
     return new UnaryExpression(op.ast(), operand.ast());
   },
-  // TODO: Exp6_list, Exp6_tuple, Exp6_set, Exp6_dict, Exp6_call, Exp6_varexp
   Exp6_parens(_1, expression, _2) {
     return expression.ast();
   },
-
   Exp6_list(_1, expressions, _2) {
-    return ListExpression(expressions);
+    return new ListExpression(expressions.ast());
   },
-  // TODO: define files for List, Tuple, Set, Dictionary, KeyValue
-  Call(callee, _1, args, _2) {
-    return new Call(callee.ast(), args.ast());
+  Exp6_tuple(_1, expressions, _2) {
+    return new TupleExpression(expressions.ast());
   },
-  // TODO: Exps, DeclId, Ids
+  Exp6_set(_1, _2, expressions, _3) {
+    return new SetExpression(expressions.ast());
+  },
+  Exp6_dict(_1, expressions, _2) {
+    return new DictionaryExpression(expressions.ast());
+  },
+  // TODO: Exp6_call, Exp6_varexp
+  Call(callee, _1, expressions, _2) {
+    return new Call(callee.ast(), expressions.ast());
+  },
   VarExp_subscripted(v, _1, e, _2) {
     return new SubscriptedExpression(v.ast(), e.ast());
   },
@@ -184,7 +191,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 });
 /* eslint-enable no-unused-vars */
 
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
