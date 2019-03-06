@@ -1,0 +1,5 @@
+num x = 2
+~This should pass
+
+~*
+This should not pass
