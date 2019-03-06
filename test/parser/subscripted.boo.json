@@ -1,0 +1,20 @@
+{
+  "statements": [
+    {
+      "ids": [{ "id": "x", "type": ["list"] }],
+      "initializers": [
+        {
+          "members": [
+            { "value": 1 },
+            { "value": 2 },
+            { "value": 3 },
+            { "value": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "returnValue": { "variable": { "id": "x" }, "subscript": { "value": 0 } }
+    }
+  ]
+}

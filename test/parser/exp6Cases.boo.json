@@ -1,0 +1,60 @@
+{
+  "statements": [
+    {
+      "ids": [{ "id": "b", "type": ["boolean"] }],
+      "initializers": [{ "value": true }]
+    },
+    {
+      "ids": [{ "id": "n", "type": ["num"] }],
+      "initializers": [{ "value": 0.00000123 }]
+    },
+    {
+      "ids": [{ "id": "l", "type": ["list"] }],
+      "initializers": [
+        {
+          "members": [
+            { "value": 1 },
+            { "value": 2 },
+            { "value": 3 },
+            { "value": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [{ "id": "s", "type": ["num"] }],
+      "initializers": [
+        {
+          "members": [
+            { "value": 1 },
+            { "value": 2 },
+            { "value": 3 },
+            { "value": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [{ "id": "d", "type": ["dictionary"] }],
+      "initializers": [
+        {
+          "members": [
+            { "id": { "value": 0 }, "expression": { "value": "\"hi\"" } },
+            { "id": { "value": 1 }, "expression": { "value": "\"hello\"" } },
+            { "id": { "value": 2 }, "expression": { "value": "\"hey\"" } }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [{ "id": "s", "type": ["string"] }],
+      "initializers": [{ "value": "\"hello world\"" }]
+    },
+    {
+      "ids": [{ "id": "i", "type": ["num"] }],
+      "initializers": [
+        { "op": "not", "operand": { "op": "!", "operand": { "value": 2 } } }
+      ]
+    }
+  ]
+}
