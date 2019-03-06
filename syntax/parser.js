@@ -83,7 +83,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast()
+      block.ast(),
     );
   },
   SingleStmt_vardecl(v, _, e) {
@@ -143,11 +143,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp6_dict(_1, expressions, _2) {
     return new DictionaryExpression(expressions.ast());
   },
-
   KeyValue(id, _, exp) {
     return new KeyValueExpression(id.ast(), exp.ast());
   },
-  // TODO: Exp6_call, Exp6_varexp
   Call(callee, _1, expressions, _2) {
     return new Call(callee.ast(), expressions.ast());
   },
@@ -157,18 +155,15 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   VarExp_simple(id) {
     return new IdentifierExpression(id.ast());
   },
-  // TODO: VarExps?
   Param(type, id, fntype, _, exp) {
     return new Parameter(type.ast(), id.ast(), fntype.ast(), unpack(exp.ast()));
   },
-  // TODO: Params?
   Arg(exp) {
     return new Argument(exp.ast());
   },
   DeclId(type, id) {
     return new IdDeclaration(type.ast(), id.ast());
   },
-  // TODO: Args?, Type
   FnType(_1, _2, args, _3) {
     return FunctionType(args.ast());
   },
