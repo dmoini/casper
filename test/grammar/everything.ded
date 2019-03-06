@@ -8,6 +8,7 @@ num a = 42
 
 void hello():
     write(a)
+    return
 
 void actions(num a, boo b, tuple c):
         num x = 1
@@ -30,5 +31,5 @@ void actions(num a, boo b, tuple c):
         num g = 20
         from x to g by 2:
             write(x)
-            
+
 actions(1,2,3)
