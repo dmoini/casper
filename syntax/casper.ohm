@@ -74,6 +74,6 @@ Casper {
 
   newlines    =  "\n"+
   space      :=  " " | "\t" | comment
-  comment     =  "~" ~"~" (~"\n" ~"~" any)*           -- singleline
-              |  "~~" (~"~~" any)* "~~"               -- multiline
+  comment     =  "~" ~"*" (~"\n" any)*           -- singleline
+              |  "~*" (~"*~" any)* "*~"               -- multiline
 }
