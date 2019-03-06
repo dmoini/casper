@@ -1,5 +1,5 @@
 Casper {
-  Program     =  newline* Stmt+ newline*
+  Program     =  (newline* Stmt+ newline*)?
   Stmt        =  SingleStmt newline                   -- simple
               |  "while" Exp Block                    -- while
               |  "if" Exp Block
@@ -74,6 +74,6 @@ Casper {
 
   newline     =  "\n"+
   space      :=  " " | "\t" | comment
-  comment     =  "~" ~"~" (~"\n" any)*                -- singleline
-              |  "~~" (any)* "~~"                     -- multiline
+  comment     =  "~" ~"~" (~"\n" ~"~" any)*           -- singleline
+              |  "~~" (~"~~" any)* "~~"               -- multiline
 }
