@@ -12,7 +12,7 @@ const parse = require('../../syntax/parser.js');
 
 describe('The grammar', () => {
   fs.readdirSync(__dirname).forEach((name) => {
-    if (name.endsWith('.ded')) {
+    if (name.endsWith('.boo')) {
       it(`matches the program ${name}`, (done) => {
         fs.readFile(`${__dirname}/${name}`, 'utf-8', (err, input) => {
           // In this test we just care that it parses without errors

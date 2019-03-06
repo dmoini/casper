@@ -11,7 +11,7 @@ const parse = require('../../syntax/parser');
 
 describe('The parser', () => {
   fs.readdirSync(__dirname).forEach((name) => {
-    if (name.endsWith('.ded')) {
+    if (name.endsWith('.boo')) {
       it(`produces the correct AST for ${name}`, (done) => {
         fs.readFile(`${__dirname}/${name}`, 'utf-8', (err, input) => {
           const ast = parse(input);
