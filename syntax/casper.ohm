@@ -1,6 +1,6 @@
 Casper {
-  Program     =  (newline* Stmt+ newline*)?
-  Stmt        =  SingleStmt newline                   -- simple
+  Program     =  newlines* Stmt+ newlines*
+  Stmt        =  SingleStmt newlines                  -- simple
               |  "while" Exp Block                    -- while
               |  "if" Exp Block
                  ("else if" Exp Block)*
@@ -16,8 +16,8 @@ Casper {
               |  "stop"                               -- break
               |  "return" Exp?                        -- return
               |  Exp
-  Block       =  ":" SingleStmt newline               -- small
-              |  ":" newline indent Stmt+ dedent      -- large
+  Block       =  ":" SingleStmt newlines              -- small
+              |  ":" newlines indent Stmt+ dedent     -- large
   Exp         =  Exp "or" Exp1                        -- or
               |  Exp "and" Exp1                       -- and
               |  Exp1
@@ -72,7 +72,7 @@ Casper {
   indent      =  "⇨"
   dedent      =  "⇦"
 
-  newline     =  "\n"+
+  newlines    =  "\n"+
   space      :=  " " | "\t" | comment
   comment     =  "~" ~"~" (~"\n" ~"~" any)*           -- singleline
               |  "~~" (~"~~" any)* "~~"               -- multiline
