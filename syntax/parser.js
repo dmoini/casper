@@ -10,43 +10,41 @@
  *       rules. If there are any errors, this function will throw an error.
  */
 
-/* eslint quotes: [2, "double"] */
+const fs = require('fs');
+const ohm = require('ohm-js');
+const withIndentsAndDedents = require('./preparser.js');
 
-const fs = require("fs");
-const ohm = require("ohm-js");
-const withIndentsAndDedents = require("./preparser.js");
+const Program = require('../ast/program');
+const WhileStatement = require('../ast/while-statement');
+const Case = require('../ast/case');
+const IfStatement = require('../ast/if-statement');
+const FromStatement = require('../ast/from-statement');
+const BreakStatement = require('../ast/break-statement');
+const ReturnStatement = require('../ast/return-statement');
+const FunctionDeclaration = require('../ast/function-declaration');
+const VariableDeclaration = require('../ast/variable-declaration');
+const AssignmentStatement = require('../ast/assignment-statement');
+const CallStatement = require('../ast/call-statement');
+const BinaryExpression = require('../ast/binary-expression');
+const UnaryExpression = require('../ast/unary-expression');
+const TernaryExpression = require('../ast/ternary-expression');
+const ListExpression = require('../ast/list-expression');
+const TupleExpression = require('../ast/tuple-expression');
+const SetExpression = require('../ast/set-expression');
+const DictionaryExpression = require('../ast/dictionary-expression');
+const KeyValueExpression = require('../ast/keyvalue-expression');
+const Call = require('../ast/call');
+const FunctionType = require('../ast/function-type');
+const SubscriptedExpression = require('../ast/subscripted-expression');
+const IdentifierExpression = require('../ast/identifier-expression');
+const Parameter = require('../ast/parameter');
+const Argument = require('../ast/argument');
+const BooleanLiteral = require('../ast/boolean-literal');
+const NumericLiteral = require('../ast/numeric-literal');
+const StringLiteral = require('../ast/string-literal');
+const IdDeclaration = require('../ast/id-declaration');
 
-const Program = require("../ast/program");
-const WhileStatement = require("../ast/while-statement");
-const Case = require("../ast/case");
-const IfStatement = require("../ast/if-statement");
-const FromStatement = require("../ast/from-statement");
-const BreakStatement = require("../ast/break-statement");
-const ReturnStatement = require("../ast/return-statement");
-const FunctionDeclaration = require("../ast/function-declaration");
-const VariableDeclaration = require("../ast/variable-declaration");
-const AssignmentStatement = require("../ast/assignment-statement");
-const CallStatement = require("../ast/call-statement");
-const BinaryExpression = require("../ast/binary-expression");
-const UnaryExpression = require("../ast/unary-expression");
-const TernaryExpression = require("../ast/ternary-expression");
-const ListExpression = require("../ast/list-expression");
-const TupleExpression = require("../ast/tuple-expression");
-const SetExpression = require("../ast/set-expression");
-const DictionaryExpression = require("../ast/dictionary-expression");
-const KeyValueExpression = require("../ast/keyvalue-expression");
-const Call = require("../ast/call");
-const FunctionType = require("../ast/function-type");
-const SubscriptedExpression = require("../ast/subscripted-expression");
-const IdentifierExpression = require("../ast/identifier-expression");
-const Parameter = require("../ast/parameter");
-const Argument = require("../ast/argument");
-const BooleanLiteral = require("../ast/boolean-literal");
-const NumericLiteral = require("../ast/numeric-literal");
-const StringLiteral = require("../ast/string-literal");
-const IdDeclaration = require("../ast/id-declaration");
-
-const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
+const grammar = ohm.grammar(fs.readFileSync('./syntax/casper.ohm'));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
 function unpack(a) {
@@ -54,7 +52,7 @@ function unpack(a) {
 }
 
 /* eslint-disable no-unused-vars */
-const astGenerator = grammar.createSemantics().addOperation("ast", {
+const astGenerator = grammar.createSemantics().addOperation('ast', {
   Program(_1, body, _2) {
     return new Program(body.ast());
   },
@@ -191,6 +189,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 });
 /* eslint-enable no-unused-vars */
 
+/* eslint-disable no-console */
 module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
