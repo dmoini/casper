@@ -23,11 +23,11 @@
  * built into Node.js.
  */
 
-const fs = require("fs");
-const util = require("util");
-const yargs = require("yargs");
-const parse = require("./syntax/parser");
-// require("./backend/javascript-generator");
+const fs = require('fs');
+const util = require('util');
+const yargs = require('yargs');
+const parse = require('./syntax/parser');
+// require('./backend/javascript-generator');
 
 // If compiling from a string, return the AST, IR, or compiled code as a string.
 function compile(sourceCode, { astOnly, frontEndOnly, shouldOptimize }) {
@@ -47,7 +47,7 @@ function compile(sourceCode, { astOnly, frontEndOnly, shouldOptimize }) {
 
 // If compiling from a file, write to standard output.
 function compileFile(filename, options) {
-  fs.readFile(filename, "utf-8", (error, sourceCode) => {
+  fs.readFile(filename, 'utf-8', (error, sourceCode) => {
     if (error) {
       console.error(error);
       return;
@@ -63,13 +63,13 @@ module.exports = { compile, compileFile };
 // program will come from the file who name is given as the command line argument.
 if (require.main === module) {
   const { argv } = yargs
-    .usage("$0 [-a] [-o] [-i] filename")
-    .boolean(["a", "o", "i"])
-    .describe("a", "show abstract syntax tree after parsing then stop")
-    .describe("o", "do optimizations")
+    .usage('$0 [-a] [-o] [-i] filename')
+    .boolean(['a', 'o', 'i'])
+    .describe('a', 'show abstract syntax tree after parsing then stop')
+    .describe('o', 'do optimizations')
     .describe(
-      "i",
-      "generate and show the decorated abstract syntax tree then stop"
+      'i',
+      'generate and show the decorated abstract syntax tree then stop',
     )
     .demand(1);
   compileFile(argv._[0], {
