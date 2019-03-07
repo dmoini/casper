@@ -163,7 +163,7 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
     return new IdDeclaration(type.ast(), id.ast());
   },
   FnType(_1, _2, args, _3) {
-    return FunctionType(args.ast());
+    return new FunctionType(args.ast());
   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];
