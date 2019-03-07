@@ -1,0 +1,100 @@
+{
+    "statements": [
+      {
+        "id": "double",
+        "function": {
+          "type": "num",
+          "id": "double",
+          "params": [
+            {
+              "id": "num",
+              "defaultExpression": "x"
+            }
+          ],
+          "body": [
+            {
+              "returnValue": {
+                "op": "*",
+                "left": {
+                  "id": "x"
+                },
+                "right": {
+                  "value": 2
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "doTwice",
+        "function": {
+          "type": "num",
+          "id": "doTwice",
+          "params": [
+            {
+              "id": "num",
+              "defaultExpression": "f"
+            },
+            {
+              "id": "num",
+              "defaultExpression": "x"
+            }
+          ],
+          "body": [
+            {
+              "returnValue": {
+                "callee": {
+                  "id": "f"
+                },
+                "args": [
+                  {
+                    "expression": {
+                      "callee": {
+                        "id": "f"
+                      },
+                      "args": [
+                        {
+                          "expression": {
+                            "id": "x"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "call": {
+          "callee": {
+            "id": "write"
+          },
+          "args": [
+            {
+              "expression": {
+                "callee": {
+                  "id": "doTwice"
+                },
+                "args": [
+                  {
+                    "expression": {
+                      "id": "double"
+                    }
+                  },
+                  {
+                    "expression": {
+                      "value": 2
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }

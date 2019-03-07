@@ -9,6 +9,15 @@
       "initializers": [{ "value": 0.00000123 }]
     },
     {
+      "ids": [{"id": "x","type": ["num"]}],
+      "initializers": [
+        {
+          "op":"-",
+          "operand":{ "value": 5 }
+        }
+      ]
+    },
+    {
       "ids": [{ "id": "l", "type": ["list"] }],
       "initializers": [
         {
@@ -22,7 +31,7 @@
       ]
     },
     {
-      "ids": [{ "id": "s", "type": ["num"] }],
+      "ids": [{ "id": "s", "type": ["set"] }],
       "initializers": [
         {
           "members": [

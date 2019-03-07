@@ -3,7 +3,7 @@
     {
       "call": {
         "callee": { "id": "write" },
-        "args": [{ "expression": { "value": "\"hello\"" } }]
+        "args": [{ "expression": { "value": "\"hello\\n\"" } }]
       }
     }
   ]
