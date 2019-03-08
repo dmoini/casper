@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 
 /*
- * A PlainScript Compiler
+ * A Casper Compiler
  *
- * This is a command line application that compiles a PlainScript program from
+ * This is a command line application that compiles a Casper program from
  * a file. Synopsis:
  *
- * ./plainscript.js -a <filename>
+ * ./casper.js -a <filename>
  *     writes out the AST and stops
  *
- * ./plainscript.js -i <filename>
+ * ./casper.js -i <filename>
  *     writes the decorated AST then stops
  *
- * ./plainscript.js <filename>
- *     compiles the PlainScript program to JavaScript, writing the generated
+ * ./casper.js <filename>
+ *     compiles the Casper program to JavaScript, writing the generated
  *     JavaScript code to standard output.
  *
- * ./plainscript.js -o <filename>
+ * ./casper.js -o <filename>
  *     optimizes the intermediate code before generating target JavaScript.
  *
  * Output of the AST and decorated AST uses the object inspection functionality
