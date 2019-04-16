@@ -37,9 +37,9 @@ Casper {
               |  numlit
               |  strlit
               |  nulllit
-              |  "[" ListOf<Exp4, ","> "]"            -- list
-              |  "(" NonemptyListOf<Exp4, ","> ")"    -- tuple
-              |  "set" "(" ListOf<Exp4, ","> ")"      -- set
+              |  "[" ListOf<Exp, ","> "]"            -- list
+              |  "(" NonemptyListOf<Exp, ","> ")"    -- tuple
+              |  "set" "(" ListOf<Exp, ","> ")"      -- set
               |  "{" ListOf<KeyValue, ","> "}"        -- dict
               |  Call                                 -- call
               |  VarExp                               
@@ -56,7 +56,11 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "boolean" | "boo" | "void")
+  Type        =  ("num" | "string" | "boolean" | "boo" | "void" | ListType
+              |  SetType | DictType )
+  ListType    =  "list<" + Type + ">"
+  SetType     =  "set<" + Type + ">"
+  DictType    =  "dict<" + Type + ">"
   FnType      =  ":" "(" Params ")" 
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
