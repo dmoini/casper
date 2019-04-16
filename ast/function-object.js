@@ -6,4 +6,5 @@ module.exports = class FunctionObject {
   get isExternal() {
     return !this.function.body;
   }
+  analyze() {}
 };

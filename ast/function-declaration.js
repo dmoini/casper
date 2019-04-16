@@ -6,4 +6,5 @@ module.exports = class FunctionDeclaration {
     this.id = id;
     this.function = new FunctionObject(type, id, params, body);
   }
+  analyze() {}
 };

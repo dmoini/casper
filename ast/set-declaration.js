@@ -4,4 +4,5 @@ module.exports = class setDeclaration {
     this.id = id;
     this.type = type;
   }
+  analyze() {}
 };

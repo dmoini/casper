@@ -1,3 +1,5 @@
+// TODO Fix grammar to add types for lists, sets, dictionaries, and tuples
+
 Casper {
   Program     =  newline* Stmt+ newline*
   Stmt        =  SingleStmt newline                   -- simple
@@ -34,6 +36,7 @@ Casper {
   Exp6        =  boollit
               |  numlit
               |  strlit
+              |  nulllit
               |  "[" ListOf<Exp4, ","> "]"            -- list
               |  "(" NonemptyListOf<Exp4, ","> ")"    -- tuple
               |  "set" "(" ListOf<Exp4, ","> ")"      -- set
@@ -53,7 +56,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "boolean" | "boo" | "list" | "tuple" | "set" | "dictionary" | "void")
+  Type        =  ("num" | "string" | "boolean" | "boo" | "void")
   FnType      =  ":" "(" Params ")" 
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
@@ -62,6 +65,7 @@ Casper {
   numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
   boollit     =  "true" | "false"
   strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
+  nulllit     = "none"
   escape      =  "\\" ("\\" | "\"" | "n")             -- simple
               |  "\\u{" hexDigit+ "}"                 -- codepoint
   addop       =  "+" | "-"

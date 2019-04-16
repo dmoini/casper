@@ -1,3 +1,5 @@
-module.exports = class BreakStatement {};
+module.exports = class BreakStatement {
+  analyze() {}
+};
 
 // intentionally empty
