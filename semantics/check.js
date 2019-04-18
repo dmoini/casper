@@ -16,23 +16,29 @@ module.exports = {
   isListType(type) {
     doCheck(type.constructor === ListType, 'Not a list type');
   },
+
   isSetType(type) {
     doCheck(type.constructor === SetType, 'Not a set type');
   },
+
+  // TODO: add isDictType
+
   isNumber(type) {
     doCheck(type.constructor === NumType, 'Not a number');
   },
+
   isString(exp) {
     doCheck(exp.type === StringType, 'Not a string');
   },
-  isBoolean(exp) {
-    doCheck(exp.type === BooleanType, 'Not a boolean');
-  },
+
   isNumberOrString(exp) {
     doCheck(
       exp.type === NumType || exp.type === StringType,
       'Not an Number or string'
     );
+  },
+  isBoolean(exp) {
+    doCheck(exp.type === BooleanType, 'Not a boolean');
   },
 
   isFunction(val) {
