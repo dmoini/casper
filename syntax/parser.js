@@ -69,9 +69,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     const cases = tests.map((test, index) => new Case(test, bodies[index]));
     return new IfStatement(cases, unpack(lastBlock.ast()));
   },
-  Stmt_loop(_1, firstTest, _2, secondTest, _3, increments, Block) {
+  Stmt_loop(_1, id, _2, firstTest, _3, secondTest, _4, increments, Block) {
     const tests = [firstTest.ast(), secondTest.ast()];
-    return new FromStatement(tests, increments, Block.ast());
+    return new FromStatement(id, tests, increments, Block.ast());
   },
   Stmt_ternary(_1, firstTest, _2, secondTest, _3, thirdTest) {
     const tests = [firstTest.ast(), secondTest.ast(), thirdTest.ast()];
@@ -85,19 +85,19 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       block.ast()
     );
   },
-  SingleStmt_vardecl(v, _, e) {
+  SimpleStmt_vardecl(v, _, e) {
     return new VariableDeclaration(v.ast(), e.ast());
   },
-  SingleStmt_assign(v, _, e) {
+  SimpleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
   },
-  SingleStmt_call(c) {
+  SimpleStmt_call(c) {
     return new CallStatement(c.ast());
   },
-  SingleStmt_break(_) {
+  SimpleStmt_break(_) {
     return new BreakStatement();
   },
-  SingleStmt_return(_, e) {
+  SimpleStmt_return(_, e) {
     return new ReturnStatement(unpack(e.ast()));
   },
   Block_small(_1, statement, _2) {

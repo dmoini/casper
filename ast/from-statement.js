@@ -1,8 +1,8 @@
 const BooleanLiteral = require("./boolean-literal");
 
 module.exports = class FromStatement {
-  constructor(tests, increments, block) {
-    Object.assign(this, { tests, increments, block });
+  constructor(id, tests, increments, block) {
+    Object.assign(this, {id, tests, increments, block });
   }
   analyze() {}
 };

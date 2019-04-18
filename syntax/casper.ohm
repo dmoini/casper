@@ -1,24 +1,22 @@
-// TODO Fix grammar to add types for lists, sets, dictionaries, and tuples
-
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SingleStmt newline                   -- simple
+  Stmt        =  SimpleStmt newline                   -- simple
               |  "while" Exp Block                    -- while
               |  "if" Exp Block
                  ("else if" Exp Block)*
                  ("else" Block)?                      -- if
-              |  "from" Exp 
-                 "to" Exp 
-                 ("by" (id | numlit))? Block          -- loop 
+              |  "for" id "from" Exp
+                 "to" Exp
+                 ("by" (id | numlit))? Block          -- loop
               |  "do" Exp "if" Exp "else" Exp         -- ternary
               |  Type id "(" Params ")" Block         -- function
-  SingleStmt  =  Ids "=" Exps                         -- vardecl
+  SimpleStmt  =  DeclIds "=" Exps                     -- vardecl
               |  VarExps "=" Exps                     -- assign
               |  Call                                 -- call
               |  "stop"                               -- break
               |  "return" Exp?                        -- return
               |  Exp
-  Block       =  ":" SingleStmt newline               -- small
+  Block       =  ":" SimpleStmt newline               -- small
               |  ":" newline indent Stmt+ dedent      -- large
   Exp         =  Exp "or" Exp1                        -- or
               |  Exp "and" Exp1                       -- and
@@ -32,7 +30,7 @@ Casper {
   Exp4        =  prefixop Exp5                        -- unary
               |  Exp5
   Exp5        =  Exp6 postfixop                       -- unary
-              |  Exp6 
+              |  Exp6
   Exp6        =  boollit
               |  numlit
               |  strlit
@@ -42,26 +40,26 @@ Casper {
               |  "set" "(" ListOf<Exp, ","> ")"      -- set
               |  "{" ListOf<KeyValue, ","> "}"        -- dict
               |  Call                                 -- call
-              |  VarExp                               
+              |  VarExp
               |  "(" Exp ")"                          -- parens
   KeyValue    =  (id | numlit) ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
-  Ids         =  NonemptyListOf<DeclId, ",">
+  DeclIds     =  NonemptyListOf<DeclId, ",">
   VarExp      =  VarExp "[" Exp "]"                   -- subscripted
               |  id                                   -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
-  Param       =  Type id (FnType)? ("=" Exp)? 
+  Param       =  Type id (FnType)? ("=" Exp)?
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
   Type        =  ("num" | "string" | "boolean" | "boo" | "void" | ListType
               |  SetType | DictType )
-  ListType    =  "list<" + Type + ">"
-  SetType     =  "set<" + Type + ">"
-  DictType    =  "dict<" + Type + ">"
-  FnType      =  ":" "(" Params ")" 
+  ListType    =  "list<" Type ">"
+  SetType     =  "set<" Type ">"
+  DictType    =  "dict<" Type "," Type ">"
+  FnType      =  ":" "(" Params ")"
   keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
@@ -79,7 +77,6 @@ Casper {
   postfixop   =  "!"
   indent      =  "⇨"
   dedent      =  "⇦"
-
   newline     =  "\n"+
   space      :=  " " | "\t" | comment
   comment     =  "~" ~"*" (~"\n" any)*                -- singleline

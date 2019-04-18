@@ -1,4 +1,4 @@
-const check = require('../semantic/check');
+// const check = require('../semantic/check');
 
 module.exports = class BooleanLiteral {
   constructor(value) {
