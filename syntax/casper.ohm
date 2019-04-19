@@ -9,7 +9,7 @@ Casper {
                  "to" Exp
                  ("by" (id | numlit))? Block          -- loop
               |  "do" Exp "if" Exp "else" Exp         -- ternary
-              |  Type id "(" Params ")" Block         -- function
+              |  (Type | "void") id "(" Params ")" Block         -- function
   SimpleStmt  =  DeclIds "=" Exps                     -- vardecl
               |  VarExps "=" Exps                     -- assign
               |  Call                                 -- call
@@ -34,7 +34,7 @@ Casper {
   Exp6        =  boollit
               |  numlit
               |  strlit
-              |  nulllit
+              |  nonelit
               |  "[" ListOf<Exp, ","> "]"            -- list
               |  "(" NonemptyListOf<Exp, ","> ")"    -- tuple
               |  "set" "(" ListOf<Exp, ","> ")"      -- set
@@ -54,8 +54,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "boolean" | "boo" | "void" | ListType
-              |  SetType | DictType )
+  Type        =  ("num" | "string" | "boolean" | "boo" | ListType | SetType | DictType )
   ListType    =  "list<" Type ">"
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
@@ -67,7 +66,7 @@ Casper {
   numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
   boollit     =  "true" | "false"
   strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
-  nulllit     = "none"
+  nonelit     = "none"
   escape      =  "\\" ("\\" | "\"" | "n")             -- simple
               |  "\\u{" hexDigit+ "}"                 -- codepoint
   addop       =  "+" | "-"

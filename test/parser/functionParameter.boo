@@ -4,4 +4,4 @@ num double(num x):
 num doTwice(num f:(num z), num x):
     return f(f(x))
 
-write(doTwice(double, 2))
+print(doTwice(double, 2))

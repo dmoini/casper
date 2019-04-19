@@ -1,4 +1,4 @@
 num i = 10
 while i > 1:
-    write(i)
+    print(i)
     i = i - 1
