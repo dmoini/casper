@@ -24,22 +24,31 @@ If you like to see more about casper, please check out casper's official website
 ### Primitive types
 
 - string
-- boolean/boo
+- boo (boolean)
 - num
 - list
-- tuple
 - set
-- dictionary
+- dict (dictionary)
 
 ### Variable Declaration and Assignment
 
+#### Declaration
+
 `num x = 5`
 
-`string y = "ianlizards@icloud.com"`
+`string y = "ianlizards@icould.com"`
 
 `boo z = true`
 
-`list a = [3, "donovan", false]`
+`list<num> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]`
+
+`set<string> awesomeLanguages = set("Casper", "Python", "JavaScript", "Nebula")`
+
+`dict<string, string> professors = {"hustler": "Forney", "wizard": "Toal", "hates tests": "Dondi"}`
+
+`num m, num n = 1, 2`
+
+#### Assignment
 
 `x = 6`
 
@@ -47,20 +56,19 @@ If you like to see more about casper, please check out casper's official website
 
 `z = false`
 
-`num m, num n = 1, 2`
-
 `m, n = 3, 4`
 
 ### Function Declaration
 
 ```casper
-void foobar():
-    write("hello world!")
+void helloWorld():
+    print("Hello world!")
 
-void barfoo(num x):
-    from 0 to x:
-        write("help")
+void help(num x):
+    for i from 0 to 10:
+        print("help")
 ```
+
 
 ## Operators
 
@@ -70,41 +78,46 @@ void barfoo(num x):
 - divide `/`
 - integer division `//`
 - modulus `%`
-- equal `==`
-- not equal `!=`
+- strict equality `==` or `!=`
+- reference equality `is` 
 - less than `<`
 - greater than `>`
 - less than or equal `<=`
 - greater than or equal `>=`
 - logical AND `and`
 - logical OR `or`
-- logical NOT `!`
+- logical NOT `not` or `!`
 
 ## Ternary
 
-`do a if b else c`
+`a if b else c`
+
+`print("isBig" if size > 9000 else "isSmall")`
 
 ## Conditional
 
 ```casper
-if (big equals true):
-    write("big if true")
-else if (big equals false):
-    write("bigly")
+if teamMembersAmount > 5:,
+    print("Too many team members")
+else if teamMembersAmount < 5:
+    print("Not enough team members")
 else:
-    write("covfefe")
+    print("Just the right number of team members")
 ```
 
 ## Loop
 
 ```casper
-from 0 to x:
-    write(x)
+for x from 0 to 10:
+    print(x)
+
+for y from 0 to 10 by 2:
+    print(x)
 ```
 
 ```casper
-while (true):
-    write("I love casper")
+while true:
+    print("I love casper")
 ```
 
 ## Higher Order Functions
@@ -118,7 +131,7 @@ num doTwice(num f:(num z),num x):
 
 ```casper
 num multiples(num x, num y = 2):
-    from 0 to y:
+    for _ from 0 to y:
         x = x * x
 ```
 
@@ -127,10 +140,10 @@ num multiples(num x, num y = 2):
 ```casper
 ~ this is a comment!
 
-~~
+~*
 this is a
 multi-line comment
-~~
+*~
 ```
 
 ## Examples
@@ -140,16 +153,16 @@ multi-line comment
 ```casper
 num fibonacci(num x):
     if (x <= 1):
-        return 1
+        return x
     return fibonacci(x - 1) + fibonacci(x - 2)
 ```
 
 ```Javascript
 function fibonacci(x) {
     if (x <= 1) {
-        return 1
+        return x;
     }
-    return fibonacci(x - 1) + fibonacci(x - 2)
+    return fibonacci(x - 1) + fibonacci(x - 2);
 }
 ```
 
@@ -157,19 +170,25 @@ function fibonacci(x) {
 
 ```casper
 num gcd(num x, num y):
-   while(y):
-       x = y
-       y = x % y
-   return x
+    num a = abs(x)
+    num b = abs(y)
+    while(b > 0):
+        num t = b
+        b = a % b
+        a = t
+    return a
 ```
 
 ```Javascript
 function gcd(x, y) {
-    while(y) {
-        x = y
-        y = x % y
+    let a = Math.abs(x);
+    let b = Math.abs(y);
+    while(b > 0) {
+        let t = b;
+        b = a % b;
+        a = t;
     }
-    return x
+    return a;
 }
 ```
 
@@ -177,7 +196,7 @@ function gcd(x, y) {
 
 ```casper
 num firstFactorial(num x):
-    if (x equals 0 or x equals 1):
+    if (x == 0 or x == 1):
         return 1
     else:
         return x * firstFactorial(x - 1)
@@ -186,7 +205,7 @@ num firstFactorial(num x):
 ```JavaScript
 function firstFactorial(x) {
     if (x === 0 || x === 1) {
-        return 1
+        return x
     }
     else {
         return x * firstFactorial(x - 1)
@@ -198,7 +217,7 @@ function firstFactorial(x) {
 
 ```casper
 boo evenOrOdd(num x):
-    if (x % 2 equals 0):
+    if x % 2 == 0:
         return true
     else:
         return false
