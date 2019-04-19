@@ -59,7 +59,6 @@ module.exports = {
   isAssignableTo(exp, type) {
     doCheck(exp.type === type, `Expression of type ${util.format(exp.type)} not compatible with type ${util.format(type)}`);
   },
-  // Do we need isNotReadOnly?
 
   legalArguments(args, params) {
     doCheck(args.length === params.length,
