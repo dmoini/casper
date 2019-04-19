@@ -22,7 +22,6 @@ module.exports = (source) => {
 
   for (let match = linePattern.exec(text); match !== null; match = linePattern.exec(text)) {
     const [indent, content] = [match[1].length, match[2]];
-
     if (content === '\n') {
       // Empty line
       result += content;
