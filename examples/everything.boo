@@ -40,3 +40,4 @@ void actions(num a, boo b, string c):
 		write(x)
 
 actions(1, true, "BOO!")
+

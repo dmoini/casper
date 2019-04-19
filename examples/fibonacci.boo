@@ -3,5 +3,5 @@ num fibonacci(num x):
     return x
   return fibonacci(x - 1) + fibonacci(x - 2)
     
-write(fibonacci(5))
-write(fibonacci(10))
+print(fibonacci(5))
+print(fibonacci(10))
