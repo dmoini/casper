@@ -27,6 +27,10 @@ const MathFunctions = [
     new Param(NumType, 'start'),
     new Param(NumType, 'end'),
   ]),
+  new Func(NumType, 'pow', [
+    new Param(NumType, 'x'),
+    new Param(NumType, 'y'),
+  ]),
 ];
 
 module.exports = {
