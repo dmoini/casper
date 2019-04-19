@@ -74,7 +74,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     const tests = [firstTest.ast(), secondTest.ast()];
     return new FromStatement(id, tests, increments, Block.ast());
   },
-  Stmt_ternary(_1, firstTest, _2, secondTest, _3, thirdTest) {
+  Stmt_ternary(firstTest, _1, secondTest, _2, thirdTest) {
     const tests = [firstTest.ast(), secondTest.ast(), thirdTest.ast()];
     return new TernaryExpression(tests);
   },

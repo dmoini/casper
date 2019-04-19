@@ -1,2 +1,2 @@
 language = "javascript"
-do print(false) if (language == "php") else print(true)
+print(false) if (language == "php") else print(true)

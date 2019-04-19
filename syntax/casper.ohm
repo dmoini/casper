@@ -8,7 +8,7 @@ Casper {
               |  "for" id "from" Exp
                  "to" Exp
                  ("by" (id | numlit))? Block                -- loop
-              |  "do" Exp "if" Exp "else" Exp               -- ternary
+              |  Exp "if" Exp "else" Exp               -- ternary
               |  (Type | "void") id "(" Params ")" Block    -- function
   SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
               |  VarExps "=" Exps                           -- assign
@@ -51,7 +51,7 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "boolean" | "boo" | ListType | SetType | DictType )
+  Type        =  ("num" | "string" | "bool" | "boo" | ListType | SetType | DictType )
   ListType    =  "list<" Type ">"
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
@@ -67,7 +67,7 @@ Casper {
   escape      =  "\\" ("\\" | "\"" | "n")                   -- simple
               |  "\\u{" hexDigit+ "}"                       -- codepoint
   addop       =  "+" | "-"
-  relop       =  "<=" | "<" | "===" | "==" | "!==" | "!=" | "is" | ">=" | ">"
+  relop       =  "<=" | "<" | "==" | "!=" | "is" | ">=" | ">" 
   mulop       =  "*" | "/" | "//" | "%"
   prefixop    =  "-" | "not" | "!"
   // postfixop   =  "!"
