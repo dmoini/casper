@@ -28,9 +28,12 @@ const CallStatement = require("../ast/call-statement");
 const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const TernaryExpression = require("../ast/ternary-expression");
+const ListType = require("../ast/list-type");
 const ListExpression = require("../ast/list-expression");
+const SetType = require("../ast/set-type");
 const SetExpression = require("../ast/set-expression");
-const DictionaryExpression = require("../ast/dictionary-expression");
+const DictType = require("../ast/dict-type");
+const DictionaryExpression = require("../ast/dict-expression");
 const KeyValueExpression = require("../ast/keyvalue-expression");
 const Call = require("../ast/call");
 const FunctionType = require("../ast/function-type");
@@ -42,8 +45,6 @@ const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 const IdDeclaration = require("../ast/id-declaration");
-const ListType = require("../ast/list-type");
-const SetType = require("../ast/set-type");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -82,7 +83,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast()
+      block.ast(),
     );
   },
   SimpleStmt_vardecl(v, _, e) {
@@ -166,6 +167,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   SetType(_1, type, _2) {
     return new SetType(type.ast());
   },
+  DictType(_1, keyType, _2, valueType, _3) {
+    return new DictType(keyType.ast(), valueType.ast());
+  },
   FnType(_1, _2, args, _3) {
     return new FunctionType(args.ast());
   },
@@ -194,7 +198,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-console */
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
