@@ -8,7 +8,6 @@ const ListType = require('../ast/list-type');
 const SetType = require('../ast/set-type');
 const Function = require('../ast/function-object');
 
-
 function doCheck(condition, message) {
   if (!condition) {
     throw new Error(message);
@@ -44,6 +43,7 @@ module.exports = {
       'Not an Number or string',
     );
   },
+
   isBoolean(exp) {
     doCheck(exp.type === BooleanType, 'Not a boolean');
   },
