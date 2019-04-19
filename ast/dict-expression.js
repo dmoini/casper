@@ -1,4 +1,4 @@
-module.exports = class DictionaryExpression {
+module.exports = class DictExpression {
   constructor(members) {
     this.members = members;
   }
