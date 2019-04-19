@@ -8,7 +8,7 @@ Casper {
               |  "for" id "from" Exp
                  "to" Exp
                  ("by" (id | numlit))? Block                -- loop
-              |  Exp "if" Exp "else" Exp               -- ternary
+              |  Exp "if" Exp "else" Exp                    -- ternary
               |  (Type | "void") id "(" Params ")" Block    -- function
   SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
               |  VarExps "=" Exps                           -- assign
