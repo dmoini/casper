@@ -125,19 +125,16 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp4_unary(op, operand) {
     return new UnaryExpression(op.ast(), operand.ast());
   },
-  Exp5_unary(operand, op) {
-    return new UnaryExpression(op.ast(), operand.ast());
-  },
-  Exp6_parens(_1, expression, _2) {
+  Exp5_parens(_1, expression, _2) {
     return expression.ast();
   },
-  Exp6_list(_1, expressions, _2) {
+  Exp5_list(_1, expressions, _2) {
     return new ListExpression(expressions.ast());
   },
-  Exp6_set(_1, _2, expressions, _3) {
+  Exp5_set(_1, _2, expressions, _3) {
     return new SetExpression(expressions.ast());
   },
-  Exp6_dict(_1, expressions, _2) {
+  Exp5_dict(_1, expressions, _2) {
     return new DictionaryExpression(expressions.ast());
   },
   KeyValue(id, _, exp) {
@@ -203,6 +200,7 @@ module.exports = (text) => {
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);
   }
-  console.log(JSON.stringify(astGenerator(match).ast()));
+  // NOTE: uncomment if needed
+  // console.log(JSON.stringify(astGenerator(match).ast()));
   return astGenerator(match).ast();
 };

@@ -29,9 +29,7 @@ Casper {
               |  Exp4
   Exp4        =  prefixop Exp5                              -- unary
               |  Exp5
-  Exp5        =  Exp6 postfixop                             -- unary
-              |  Exp6
-  Exp6        =  boollit
+  Exp5        =  boollit
               |  numlit
               |  strlit
               |  nonelit
@@ -58,8 +56,8 @@ Casper {
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
   FnType      =  ":" "(" Params ")"
-  keyword     =  ("while" | "if" | "else" | "return" | "break" | "and" | "not equals"
-              |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
+  keyword     =  ("while" | "if" | "else" | "return" | "break" | "and" | "or" | "is"
+              |  "not" | "true" | "false" | "for" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
   idrest      =  "_" | alnum
   numlit      =  digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
@@ -69,9 +67,9 @@ Casper {
   escape      =  "\\" ("\\" | "\"" | "n")                   -- simple
               |  "\\u{" hexDigit+ "}"                       -- codepoint
   addop       =  "+" | "-"
-  relop       =  "<=" | "<" | "==" | "equals" | "!=" | "not equals" | ">=" | ">"
+  relop       =  "<=" | "<" | "===" | "==" | "!==" | "!=" | "is" | ">=" | ">"
   mulop       =  "*" | "/" | "//" | "%"
-  prefixop    =  "-" | "not"
+  prefixop    =  "-" | "not" | "!"
   postfixop   =  "!"
   indent      =  "⇨"
   dedent      =  "⇦"
