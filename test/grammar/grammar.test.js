@@ -16,6 +16,7 @@ describe('The grammar', () => {
       it(`matches the program ${name}`, (done) => {
         fs.readFile(`${__dirname}/${name}`, 'utf-8', (err, input) => {
           // In this test we just care that it parses without errors
+          // console.log(`{${input}}`);
           assert.ok(parse(input));
           done();
         });

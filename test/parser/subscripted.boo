@@ -1,2 +1,2 @@
-list x = [1, 2, 3, 4]
+list<num> x = [1, 2, 3, 4]
 return x[0]

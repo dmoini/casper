@@ -1,69 +1,120 @@
 {
-  "statements": [
-    {
-      "ids": [{ "id": "b", "type": ["boolean"] }],
-      "initializers": [{ "value": true }]
-    },
-    {
-      "ids": [{ "id": "n", "type": ["num"] }],
-      "initializers": [{ "value": 0.00000123 }]
-    },
-    {
-      "ids": [{"id": "x","type": ["num"]}],
-      "initializers": [
-        {
-          "op":"-",
-          "operand":{ "value": 5 }
+  "statements": [{
+    "ids": [{
+      "id": "b",
+      "type": ["boo"]
+    }],
+    "initializers": [{
+      "value": true
+    }]
+  }, {
+    "ids": [{
+      "id": "n",
+      "type": ["num"]
+    }],
+    "initializers": [{
+      "value": 0.00000123
+    }]
+  }, {
+    "ids": [{
+      "id": "x",
+      "type": ["num"]
+    }],
+    "initializers": [{
+      "op": "-",
+      "operand": {
+        "value": 5
+      }
+    }]
+  }, {
+    "ids": [{
+      "id": "s",
+      "type": ["string"]
+    }],
+    "initializers": [{
+      "value": "\"hello world\""
+    }]
+  }, {
+    "ids": [{
+      "id": "l",
+      "type": [{
+        "memberType": "num"
+      }]
+    }],
+    "initializers": [{
+      "members": [{
+        "value": 1
+      }, {
+        "value": 2
+      }, {
+        "value": 3
+      }, {
+        "value": 4
+      }]
+    }]
+  }, {
+    "ids": [{
+      "id": "s",
+      "type": [{
+        "memberType": "num"
+      }]
+    }],
+    "initializers": [{
+      "members": [{
+        "value": 1
+      }, {
+        "value": 2
+      }, {
+        "value": 3
+      }, {
+        "value": 4
+      }]
+    }]
+  }, {
+    "ids": [{
+      "id": "d",
+      "type": [{
+        "keyType": "num",
+        "valueType": "string"
+      }]
+    }],
+    "initializers": [{
+      "members": [{
+        "id": {
+          "value": 1
+        },
+        "expression": {
+          "value": "\"hello\""
         }
-      ]
-    },
-    {
-      "ids": [{ "id": "l", "type": ["list"] }],
-      "initializers": [
-        {
-          "members": [
-            { "value": 1 },
-            { "value": 2 },
-            { "value": 3 },
-            { "value": 4 }
-          ]
+      }, {
+        "id": {
+          "value": 2
+        },
+        "expression": {
+          "value": "\"bye\""
         }
-      ]
-    },
-    {
-      "ids": [{ "id": "s", "type": ["set"] }],
-      "initializers": [
-        {
-          "members": [
-            { "value": 1 },
-            { "value": 2 },
-            { "value": 3 },
-            { "value": 4 }
-          ]
+      }, {
+        "id": {
+          "value": 3
+        },
+        "expression": {
+          "value": "\"CASPER IS THE BEST\""
         }
-      ]
-    },
-    {
-      "ids": [{ "id": "d", "type": ["dictionary"] }],
-      "initializers": [
-        {
-          "members": [
-            { "id": { "value": 0 }, "expression": { "value": "\"hi\"" } },
-            { "id": { "value": 1 }, "expression": { "value": "\"hello\"" } },
-            { "id": { "value": 2 }, "expression": { "value": "\"hey\"" } }
-          ]
+      }]
+    }]
+  }, {
+    "ids": [{
+      "id": "i",
+      "type": ["num"]
+    }],
+    "initializers": [{
+      "op": "not",
+      "operand": {
+        "op": "!",
+        "operand": {
+          "value": 2
         }
-      ]
-    },
-    {
-      "ids": [{ "id": "s", "type": ["string"] }],
-      "initializers": [{ "value": "\"hello world\"" }]
-    },
-    {
-      "ids": [{ "id": "i", "type": ["num"] }],
-      "initializers": [
-        { "op": "not", "operand": { "op": "!", "operand": { "value": 2 } } }
-      ]
-    }
-  ]
+      }
+    }]
+  }]
 }

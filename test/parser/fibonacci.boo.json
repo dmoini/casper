@@ -1,82 +1,104 @@
 {
-  "statements": [
-    {
+  "statements": [{
+    "id": "fibonacci",
+    "function": {
+      "type": "num",
       "id": "fibonacci",
-      "function": {
+      "params": [{
         "type": "num",
-        "id": "fibonacci",
-        "params": [{ "id": "num", "defaultExpression": "x" }],
-        "body": [
-          {
-            "cases": [
-              {
-                "test": {
-                  "op": "<=",
-                  "left": { "id": "x" },
-                  "right": { "value": 1 }
-                },
-                "body": [{ "returnValue": { "value": 1 } }]
-              }
-            ],
-            "alternate": null
+        "id": "x"
+      }],
+      "body": [{
+        "cases": [{
+          "test": {
+            "op": "<=",
+            "left": {
+              "id": "x"
+            },
+            "right": {
+              "value": 1
+            }
           },
-          {
+          "body": [{
             "returnValue": {
-              "op": "+",
-              "left": {
-                "callee": { "id": "fibonacci" },
-                "args": [
-                  {
-                    "expression": {
-                      "op": "-",
-                      "left": { "id": "x" },
-                      "right": { "value": 1 }
-                    }
-                  }
-                ]
-              },
-              "right": {
-                "callee": { "id": "fibonacci" },
-                "args": [
-                  {
-                    "expression": {
-                      "op": "-",
-                      "left": { "id": "x" },
-                      "right": { "value": 2 }
-                    }
-                  }
-                ]
+              "value": 1
+            }
+          }]
+        }],
+        "alternate": null
+      }, {
+        "returnValue": {
+          "op": "+",
+          "left": {
+            "callee": {
+              "id": "fibonacci"
+            },
+            "args": [{
+              "expression": {
+                "op": "-",
+                "left": {
+                  "id": "x"
+                },
+                "right": {
+                  "value": 1
+                }
               }
-            }
+            }]
+          },
+          "right": {
+            "callee": {
+              "id": "fibonacci"
+            },
+            "args": [{
+              "expression": {
+                "op": "-",
+                "left": {
+                  "id": "x"
+                },
+                "right": {
+                  "value": 2
+                }
+              }
+            }]
           }
-        ]
-      }
-    },
-    {
-      "call": {
-        "callee": { "id": "write" },
-        "args": [
-          {
-            "expression": {
-              "callee": { "id": "fibonacci" },
-              "args": [{ "expression": { "value": 5 } }]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "call": {
-        "callee": { "id": "write" },
-        "args": [
-          {
-            "expression": {
-              "callee": { "id": "fibonacci" },
-              "args": [{ "expression": { "value": 10 } }]
-            }
-          }
-        ]
-      }
+        }
+      }]
     }
-  ]
+  }, {
+    "call": {
+      "callee": {
+        "id": "print"
+      },
+      "args": [{
+        "expression": {
+          "callee": {
+            "id": "fibonacci"
+          },
+          "args": [{
+            "expression": {
+              "value": 5
+            }
+          }]
+        }
+      }]
+    }
+  }, {
+    "call": {
+      "callee": {
+        "id": "print"
+      },
+      "args": [{
+        "expression": {
+          "callee": {
+            "id": "fibonacci"
+          },
+          "args": [{
+            "expression": {
+              "value": 10
+            }
+          }]
+        }
+      }]
+    }
+  }]
 }

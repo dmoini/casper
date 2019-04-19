@@ -12,7 +12,11 @@ This is also a multiline comment
 
 ~Just declaring x as 5
 num x = 5
+if x < 5:
+    x = 9
+    ~* WOW
+        comments work great!
+                                COOL
+    :)*~
 
-~* WOW
-   comments work great!
-   			*~
+~Hello

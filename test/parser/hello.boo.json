@@ -1,10 +1,14 @@
 {
-  "statements": [
-    {
-      "call": {
-        "callee": { "id": "write" },
-        "args": [{ "expression": { "value": "\"hello\\n\"" } }]
-      }
+  "statements": [{
+    "call": {
+      "callee": {
+        "id": "print"
+      },
+      "args": [{
+        "expression": {
+          "value": "\"hello\\n\""
+        }
+      }]
     }
-  ]
+  }]
 }

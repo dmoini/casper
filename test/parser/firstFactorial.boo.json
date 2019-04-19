@@ -1,54 +1,67 @@
 {
-  "statements": [
-    {
+  "statements": [{
+    "id": "firstFactorial",
+    "function": {
+      "type": "num",
       "id": "firstFactorial",
-      "function": {
+      "params": [{
         "type": "num",
-        "id": "firstFactorial",
-        "params": [{ "id": "num", "defaultExpression": "x" }],
-        "body": [
-          {
-            "cases": [
-              {
-                "test": {
-                  "op": "or",
+        "id": "x"
+      }],
+      "body": [{
+        "cases": [{
+          "test": {
+            "op": "or",
+            "left": {
+              "op": "==",
+              "left": {
+                "id": "x"
+              },
+              "right": {
+                "value": 0
+              }
+            },
+            "right": {
+              "op": "==",
+              "left": {
+                "id": "x"
+              },
+              "right": {
+                "value": 1
+              }
+            }
+          },
+          "body": [{
+            "returnValue": {
+              "value": 1
+            }
+          }]
+        }],
+        "alternate": [{
+          "returnValue": {
+            "op": "*",
+            "left": {
+              "id": "x"
+            },
+            "right": {
+              "callee": {
+                "id": "firstFactorial"
+              },
+              "args": [{
+                "expression": {
+                  "op": "-",
                   "left": {
-                    "op": "equals",
-                    "left": { "id": "x" },
-                    "right": { "value": 0 }
+                    "id": "x"
                   },
                   "right": {
-                    "op": "equals",
-                    "left": { "id": "x" },
-                    "right": { "value": 1 }
-                  }
-                },
-                "body": [{ "returnValue": { "value": 1 } }]
-              }
-            ],
-            "alternate": [
-              {
-                "returnValue": {
-                  "op": "*",
-                  "left": { "id": "x" },
-                  "right": {
-                    "callee": { "id": "firstFactorial" },
-                    "args": [
-                      {
-                        "expression": {
-                          "op": "-",
-                          "left": { "id": "x" },
-                          "right": { "value": 1 }
-                        }
-                      }
-                    ]
+                    "value": 1
                   }
                 }
-              }
-            ]
+              }]
+            }
           }
-        ]
-      }
+        }]
+      }]
     }
-  ]
+  }]
 }

@@ -1,25 +1,39 @@
 {
-  "statements": [
-    {
-      "ids": [{ "id": "language", "type": [] }],
-      "initializers": [{ "value": "\"javascript\"" }]
-    },
-    {
-      "exp": [
-        {
-          "callee": { "id": "write" },
-          "args": [{ "expression": { "value": true } }]
-        },
-        {
-          "op": "equals",
-          "left": { "id": "language" },
-          "right": { "value": "\"php\"" }
-        },
-        {
-          "callee": { "id": "write" },
-          "args": [{ "expression": { "value": true } }]
+  "statements": [{
+    "ids": [{
+      "id": "language",
+      "type": []
+    }],
+    "initializers": [{
+      "value": "\"javascript\""
+    }]
+  }, {
+    "exp": [{
+      "callee": {
+        "id": "print"
+      },
+      "args": [{
+        "expression": {
+          "value": true
         }
-      ]
-    }
-  ]
+      }]
+    }, {
+      "op": "==",
+      "left": {
+        "id": "language"
+      },
+      "right": {
+        "value": "\"php\""
+      }
+    }, {
+      "callee": {
+        "id": "print"
+      },
+      "args": [{
+        "expression": {
+          "value": true
+        }
+      }]
+    }]
+  }]
 }

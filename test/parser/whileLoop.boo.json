@@ -1,22 +1,60 @@
 {
   "statements": [
     {
-      "ids": [{ "id": "i", "type": ["num"] }],
-      "initializers": [{ "value": 10 }]
+      "ids": [
+        {
+          "id": "i",
+          "type": ["num"]
+        }
+      ],
+      "initializers": [
+        {
+          "value": 10
+        }
+      ]
     },
     {
-      "test": { "op": ">", "left": { "id": "i" }, "right": { "value": 1 } },
+      "test": {
+        "op": ">",
+        "left": {
+          "id": "i"
+        },
+        "right": {
+          "value": 1
+        }
+      },
       "body": [
         {
           "call": {
-            "callee": { "id": "write" },
-            "args": [{ "expression": { "id": "i" } }]
+            "callee": {
+              "id": "print"
+            },
+            "args": [
+              {
+                "expression": {
+                  "id": "i"
+                }
+              }
+            ]
           }
         },
         {
-          "ids": [{ "id": "i", "type": [] }],
+          "ids": [
+            {
+              "id": "i",
+              "type": []
+            }
+          ],
           "initializers": [
-            { "op": "-", "left": { "id": "i" }, "right": { "value": 1 } }
+            {
+              "op": "-",
+              "left": {
+                "id": "i"
+              },
+              "right": {
+                "value": 1
+              }
+            }
           ]
         }
       ]

@@ -2,8 +2,8 @@ num x = 1
 num y = 2
 
 if x > 3:
-    write("something")
+    print("something")
 else if:
-    write("something else")
+    print("something else")
 else:
-    write("something something else")
+    print("something something else")
