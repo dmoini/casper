@@ -217,19 +217,12 @@ function firstFactorial(x) {
 
 ```casper
 boo evenOrOdd(num x):
-    if x % 2 == 0:
-        return true
-    else:
-        return false
+    return x % 2 == 0
 ```
 
 ```JavaScript
 function evenOrOdd(x) {
-    if (x % 2 === 0) {
-        return true
-    } else {
-        return false
-    }
+    return x % 2 == 0;
 }
 ```
 
@@ -237,16 +230,12 @@ function evenOrOdd(x) {
 
 ```casper
 num areaOfCircle(num r):
-   num pi = 3.14159265
-   num area = pi * r * r
-   return area
+   return pi() * r * r
 ```
 
 ```JavaScript
 function areaOfCircle(r) {
-    pi = 3.14159265
-    area = pi * r * r
-    return area
+    return Math.PI * r * r;
 }
 ```
 
@@ -265,11 +254,48 @@ num largestNum(num x, num y, num z):
 ```JavaScript
 function largestNum(x, y, z) {
     if (x >= y && x >= z) {
-        return x
+        return x;
     } else if (y >= x && y >= z) {
-        return y
+        return y;
     } else {
-        return z
+        return z;
     }
 }
 ```
+
+### [Two Sum]([https://link](https://leetcode.com/problems/two-sum/))
+
+```casper
+list<num> twoSum(list<num> nums, num target):
+    if len(nums) == 2:
+        return [0, 1]
+    list<num> ans = []
+    dict<num, num> hashTable = {}
+    for i from 0 to len(hashTable):
+        num complement = target - nums[i]
+        num find = hashTable[complement]
+        if hashTable.getValue(complement) != none:
+            ans = [find, i]
+            break
+        hashTable[nums[i]] = i
+    return ans
+```
+
+```JavaScript
+function twoSum(nums, target) {
+    if (nums.length === 2) {
+        return [0, 1];
+    }
+    let ans = [];
+    let hashTable = {};
+    for (let i = 0; i < nums.length; i++) {
+        let complement = target - nums[i];
+        let find = hashTable[complement];
+        if (find !== undefined) {
+            ans = [find, i];
+            break;
+        }
+        hashTable[nums[i]] = i;
+    }
+	return ans;
+};
