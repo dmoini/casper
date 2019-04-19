@@ -1,10 +1,9 @@
-~* 
-The purpose of this example program is to just throw every syntactic
+
+~*The purpose of this example program is to just throw every syntactic
 construct of the language in one file. One can write a test that checks
 that this file can be matched agains the grammar, but as it is a kitchen
 sink of features, we probably don't need to use this file as a source of
-AST generation tests. 
-*~
+AST generation tests. *~
 
 num a = 42
 

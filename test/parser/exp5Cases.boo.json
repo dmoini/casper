@@ -1,0 +1,67 @@
+{
+  "statements": [
+    {
+      "ids": [{ "id": "b", "type": ["boo"] }],
+      "initializers": [{ "value": true }]
+    },
+    {
+      "ids": [{ "id": "n", "type": ["num"] }],
+      "initializers": [{ "value": 0.00000123 }]
+    },
+    {
+      "ids": [{ "id": "x", "type": ["num"] }],
+      "initializers": [{ "op": "-", "operand": { "value": 5 } }]
+    },
+    {
+      "ids": [{ "id": "s", "type": ["string"] }],
+      "initializers": [{ "value": "\"hello world\"" }]
+    },
+    {
+      "ids": [{ "id": "l", "type": [{ "memberType": "num" }] }],
+      "initializers": [
+        {
+          "members": [
+            { "value": 1 },
+            { "value": 2 },
+            { "value": 3 },
+            { "value": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [{ "id": "s", "type": [{ "memberType": "num" }] }],
+      "initializers": [
+        {
+          "members": [
+            { "value": 1 },
+            { "value": 2 },
+            { "value": 3 },
+            { "value": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        { "id": "d", "type": [{ "keyType": "num", "valueType": "string" }] }
+      ],
+      "initializers": [
+        {
+          "members": [
+            { "expression": { "value": "\"hello\"" }, "id": { "value": 1 } },
+            { "expression": { "value": "\"bye\"" }, "id": { "value": 2 } },
+            {
+              "expression": { "value": "\"CASPER IS THE BEST\"" },
+              "id": { "value": 3 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [{ "id": "i", "type": ["num"] }],
+      "initializers": [{ "op": "not", "operand": { "value": 2 } }]
+    }
+  ]
+}
