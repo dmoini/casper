@@ -20,22 +20,22 @@
 // type called "list" and a variable called "list" in the same scope. But you
 // probably shouldn't.
 
-const {
-  standardFunctions,
-  IntType,
-  StringType,
-  BooleanType,
-  VoidType,
-} = require("./builtins");
+// const {
+//   standardFunctions,
+//   IntType,
+//   StringType,
+//   BooleanType,
+//   VoidType,
+// } = require("./builtins");
 
-class Context {
-  constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
-    Object.assign(this, {
-      parent,
-      currentFunction,
-      inLoop,
-      typeMap: Object.create(null),
-      valueMap: Object.create(null),
-    });
-  }
-}
+// class Context {
+//   constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
+//     Object.assign(this, {
+//       parent,
+//       currentFunction,
+//       inLoop,
+//       typeMap: Object.create(null),
+//       valueMap: Object.create(null),
+//     });
+//   }
+// }
