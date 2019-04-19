@@ -1,54 +1,54 @@
 Casper {
   Program     =  newline* Stmt+ newline*
-  Stmt        =  SimpleStmt newline                   -- simple
-              |  "while" Exp Block                    -- while
+  Stmt        =  SimpleStmt newline                         -- simple
+              |  "while" Exp Block                          -- while
               |  "if" Exp Block
                  ("else if" Exp Block)*
-                 ("else" Block)?                      -- if
+                 ("else" Block)?                            -- if
               |  "for" id "from" Exp
                  "to" Exp
-                 ("by" (id | numlit))? Block          -- loop
-              |  "do" Exp "if" Exp "else" Exp         -- ternary
-              |  (Type | "void") id "(" Params ")" Block         -- function
-  SimpleStmt  =  DeclIds "=" Exps                     -- vardecl
-              |  VarExps "=" Exps                     -- assign
-              |  Call                                 -- call
-              |  "stop"                               -- break
-              |  "return" Exp?                        -- return
+                 ("by" (id | numlit))? Block                -- loop
+              |  "do" Exp "if" Exp "else" Exp               -- ternary
+              |  (Type | "void") id "(" Params ")" Block    -- function
+  SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
+              |  VarExps "=" Exps                           -- assign
+              |  Call                                       -- call
+              |  "break"                                     -- break
+              |  "return" Exp?                              -- return
               |  Exp
-  Block       =  ":" SimpleStmt newline               -- small
-              |  ":" newline indent Stmt+ dedent      -- large
-  Exp         =  Exp "or" Exp1                        -- or
-              |  Exp "and" Exp1                       -- and
+  Block       =  ":" SimpleStmt newline                     -- small
+              |  ":" newline indent Stmt+ dedent            -- large
+  Exp         =  Exp "or" Exp1                              -- or
+              |  Exp "and" Exp1                             -- and
               |  Exp1
-  Exp1        =  Exp2 relop Exp2                      -- binary
+  Exp1        =  Exp2 relop Exp2                            -- binary
               |  Exp2
-  Exp2        =  Exp2 addop Exp3                      -- binary
+  Exp2        =  Exp2 addop Exp3                            -- binary
               |  Exp3
-  Exp3        =  Exp3 mulop Exp4                      -- binary
+  Exp3        =  Exp3 mulop Exp4                            -- binary
               |  Exp4
-  Exp4        =  prefixop Exp5                        -- unary
+  Exp4        =  prefixop Exp5                              -- unary
               |  Exp5
-  Exp5        =  Exp6 postfixop                       -- unary
+  Exp5        =  Exp6 postfixop                             -- unary
               |  Exp6
   Exp6        =  boollit
               |  numlit
               |  strlit
               |  nonelit
-              |  "[" ListOf<Exp, ","> "]"            -- list
-              |  "(" NonemptyListOf<Exp, ","> ")"    -- tuple
-              |  "set" "(" ListOf<Exp, ","> ")"      -- set
-              |  "{" ListOf<KeyValue, ","> "}"        -- dict
-              |  Call                                 -- call
+              |  "[" ListOf<Exp, ","> "]"                   -- list
+              |  "(" NonemptyListOf<Exp, ","> ")"           -- tuple
+              |  "set" "(" ListOf<Exp, ","> ")"             -- set
+              |  "{" ListOf<KeyValue, ","> "}"              -- dict
+              |  Call                                       -- call
               |  VarExp
-              |  "(" Exp ")"                          -- parens
+              |  "(" Exp ")"                                -- parens
   KeyValue    =  (id | numlit) ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
   DeclIds     =  NonemptyListOf<DeclId, ",">
-  VarExp      =  VarExp "[" Exp "]"                   -- subscripted
-              |  id                                   -- simple
+  VarExp      =  VarExp "[" Exp "]"                         -- subscripted
+              |  id                                         -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
   Param       =  Type id (FnType)? ("=" Exp)?
   Params      =  ListOf<Param, ",">
@@ -59,7 +59,7 @@ Casper {
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
   FnType      =  ":" "(" Params ")"
-  keyword     =  ("while" | "if" | "else" | "return" | "stop" | "and" | "not equals"
+  keyword     =  ("while" | "if" | "else" | "return" | "break" | "and" | "not equals"
               |  "or" | "not" | "true" | "false" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
   idrest      =  "_" | alnum
@@ -67,8 +67,8 @@ Casper {
   boollit     =  "true" | "false"
   strlit      =  "\"" (~"\\" ~"\"" ~"\n" any | escape)* "\""
   nonelit     = "none"
-  escape      =  "\\" ("\\" | "\"" | "n")             -- simple
-              |  "\\u{" hexDigit+ "}"                 -- codepoint
+  escape      =  "\\" ("\\" | "\"" | "n")                   -- simple
+              |  "\\u{" hexDigit+ "}"                       -- codepoint
   addop       =  "+" | "-"
   relop       =  "<=" | "<" | "==" | "equals" | "!=" | "not equals" | ">=" | ">"
   mulop       =  "*" | "/" | "//" | "%"
@@ -78,6 +78,6 @@ Casper {
   dedent      =  "⇦"
   newline     =  "\n"+
   space      :=  " " | "\t" | comment
-  comment     =  "~" ~"*" (~"\n" any)*                -- singleline
-              |  "~*" (~"*~" any)* "*~"               -- multiline
+  comment     =  "~" ~"*" (~"\n" any)*                      -- singleline
+              |  "~*" (~"*~" any)* "*~"                     -- multiline
 }
