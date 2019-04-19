@@ -36,13 +36,12 @@ Casper {
               |  strlit
               |  nonelit
               |  "[" ListOf<Exp, ","> "]"                   -- list
-              |  "(" NonemptyListOf<Exp, ","> ")"           -- tuple
               |  "set" "(" ListOf<Exp, ","> ")"             -- set
               |  "{" ListOf<KeyValue, ","> "}"              -- dict
               |  Call                                       -- call
               |  VarExp
               |  "(" Exp ")"                                -- parens
-  KeyValue    =  (id | numlit) ":" Exp
+  KeyValue    =  (id | numlit | strlit) ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
   DeclId      =  Type? id
