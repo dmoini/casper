@@ -1,3 +1,5 @@
+const util = require('util');
+
 const {
   NumType, StringType, BooleanType,
 } = require('./builtins');
@@ -6,7 +8,6 @@ const ListType = require('../ast/list-type');
 const SetType = require('../ast/set-type');
 const Function = require('../ast/function-object');
 
-// const util = require('util');
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -24,6 +25,10 @@ module.exports = {
   },
 
   // TODO: add isDictType
+
+  // TODO: add isRecordType (objects
+
+  // TODO: add isFieldOfRecord
 
   isNumber(type) {
     doCheck(type.constructor === NumType, 'Not a number');
@@ -51,13 +56,15 @@ module.exports = {
     doCheck(e1.type === e2.type, 'Types must match exactly');
   },
 
-  //   isAssignableTo(exp, type) {
-  //     doCheck(
-  //       (exp.type === VoidType && type.constructor === RecordType) ||
-  //         exp.type === type,
-  //       `Expression of type ${util.format(
-  //         exp.type
-  //       )} not compatible with type ${util.format(type)}`
-  //     );
-  //   },
+  isAssignableTo(exp, type) {
+    doCheck(exp.type === type, `Expression of type ${util.format(exp.type)} not compatible with type ${util.format(type)}`);
+  },
+  // Do we need isNotReadOnly?
+
+  legalArguments(args, params) {
+    doCheck(args.length === params.length,
+      `Expected ${params.length} args in call, got ${args.length}`);
+    args.forEach((arg, i) => this.isAssignableTo(arg, params[i].type));
+  },
+
 };
