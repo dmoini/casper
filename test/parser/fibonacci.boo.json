@@ -9,22 +9,22 @@
         "id": "x"
       }],
       "body": [{
-        "cases": [{
-          "test": {
-            "op": "<=",
-            "left": {
-              "id": "x"
-            },
-            "right": {
-              "value": 1
-            }
+        "tests": [{
+          "op": "<=",
+          "left": {
+            "id": "x"
           },
-          "body": [{
+          "right": {
+            "value": 1
+          }
+        }],
+        "consequents": [
+          [{
             "returnValue": {
               "value": 1
             }
           }]
-        }],
+        ],
         "alternate": null
       }, {
         "returnValue": {

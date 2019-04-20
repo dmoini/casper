@@ -9,34 +9,34 @@
         "id": "x"
       }],
       "body": [{
-        "cases": [{
-          "test": {
-            "op": "or",
+        "tests": [{
+          "op": "or",
+          "left": {
+            "op": "==",
             "left": {
-              "op": "==",
-              "left": {
-                "id": "x"
-              },
-              "right": {
-                "value": 0
-              }
+              "id": "x"
             },
             "right": {
-              "op": "==",
-              "left": {
-                "id": "x"
-              },
-              "right": {
-                "value": 1
-              }
+              "value": 0
             }
           },
-          "body": [{
+          "right": {
+            "op": "==",
+            "left": {
+              "id": "x"
+            },
+            "right": {
+              "value": 1
+            }
+          }
+        }],
+        "consequents": [
+          [{
             "returnValue": {
               "value": 1
             }
           }]
-        }],
+        ],
         "alternate": [{
           "returnValue": {
             "op": "*",
