@@ -1,11 +1,10 @@
 const util = require('util');
-
 const {
   NumType, StringType, BooleanType,
 } = require('./builtins');
-
 const ListType = require('../ast/list-type');
 const SetType = require('../ast/set-type');
+const DictType = require('../ast/dict-type');
 const Function = require('../ast/function-object');
 
 function doCheck(condition, message) {
@@ -23,11 +22,21 @@ module.exports = {
     doCheck(type.constructor === SetType, 'Not a set type');
   },
 
-  // TODO: add isDictType
+  isDictType(type) {
+    doCheck(type.constructor === DictType, 'Not a dictionary type');
+  },
 
-  // TODO: add isRecordType (objects
+  isList(expression) {
+    doCheck(expression.type.constructor === ListType, 'Not a list');
+  },
 
-  // TODO: add isFieldOfRecord
+  isSet(expression) {
+    doCheck(expression.type.constructor === SetType, 'Not a set');
+  },
+
+  isDict(expression) {
+    doCheck(expression.type.constructor === DictType, 'Not a dictionary');
+  },
 
   isNumber(type) {
     doCheck(type.constructor === NumType, 'Not a number');
@@ -51,6 +60,9 @@ module.exports = {
   isFunction(val) {
     doCheck(val.constructor === Function, 'Not a function');
   },
+
+  // TODO: isFieldOfRecord equivalent
+  // NOTE: would this be checking if there exists a value within a dict?
 
   expressionsHaveTheSameType(e1, e2) {
     doCheck(e1.type === e2.type, 'Types must match exactly');
