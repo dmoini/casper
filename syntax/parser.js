@@ -16,7 +16,7 @@ const withIndentsAndDedents = require("./preparser.js");
 
 const Program = require("../ast/program");
 const WhileStatement = require("../ast/while-statement");
-const Case = require("../ast/case");
+// const Case = require("../ast/case");
 const IfStatement = require("../ast/if-statement");
 const FromStatement = require("../ast/from-statement");
 const BreakStatement = require("../ast/break-statement");
@@ -49,7 +49,7 @@ const IdDeclaration = require("../ast/id-declaration");
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
-function unpack(a) {
+function arrayToNullable(a) {
   return a.length === 0 ? null : a[0];
 }
 
@@ -66,9 +66,10 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   Stmt_if(_1, firstTest, firstBlock, _2, moreTests, moreBlocks, _3, lastBlock) {
     const tests = [firstTest.ast(), ...moreTests.ast()];
-    const bodies = [firstBlock.ast(), ...moreBlocks.ast()];
-    const cases = tests.map((test, index) => new Case(test, bodies[index]));
-    return new IfStatement(cases, unpack(lastBlock.ast()));
+    const consequents = [firstBlock.ast(), ...moreBlocks.ast()];
+    // const cases = tests.map((test, index) => new Case(test, consequents[index]));
+    const alternate = arrayToNullable(lastBlock.ast());
+    return new IfStatement(tests, consequents, alternate);
   },
   Stmt_loop(_1, id, _2, firstTest, _3, secondTest, _4, increments, Block) {
     const tests = [firstTest.ast(), secondTest.ast()];
@@ -99,7 +100,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new BreakStatement();
   },
   SimpleStmt_return(_, e) {
-    return new ReturnStatement(unpack(e.ast()));
+    return new ReturnStatement(arrayToNullable(e.ast()));
   },
   Block_small(_1, statement, _2) {
     return [statement.ast()];
@@ -150,7 +151,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new IdentifierExpression(id.ast());
   },
   Param(type, id, fntype, _, exp) {
-    return new Parameter(type.ast(), id.ast(), fntype.ast(), unpack(exp.ast()));
+    return new Parameter(type.ast(), id.ast(), fntype.ast(), arrayToNullable(exp.ast()));
   },
   Arg(exp) {
     return new Argument(exp.ast());
@@ -201,6 +202,6 @@ module.exports = (text) => {
     throw new Error(`Syntax Error: ${match.message}`);
   }
   // NOTE: uncomment if needed
-  // console.log(JSON.stringify(astGenerator(match).ast()));
+  console.log(JSON.stringify(astGenerator(match).ast()));
   return astGenerator(match).ast();
 };
