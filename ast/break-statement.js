@@ -1,8 +1,8 @@
-// const check = require('../semantic/check');
 module.exports = class BreakStatement {
-  analyze() {
-    // check.inLoop(context); 
-    // we would need inLoop
+  analyze(context) { // eslint-disable-line class-methods-use-this
+    if (!context.inLoop) {
+      throw new Error('Break Statement out of Loop');
+    }
   }
 };
 

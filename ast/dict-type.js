@@ -2,7 +2,11 @@ module.exports = class DictType {
   constructor(keyType, valueType) {
     Object.assign(this, { keyType, valueType });
   }
-  analyze() {}
+
+  // TODO
+  analyze(context) {
+
+  }
 };
 
 // Do we need this?

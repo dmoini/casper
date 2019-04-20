@@ -7,5 +7,6 @@ module.exports = class FunctionObject {
     return !this.function.body;
   }
 
+  // TODO
   analyze() {}
 };

@@ -1,8 +1,11 @@
-const BooleanLiteral = require("./boolean-literal");
-
 module.exports = class WhileStatement {
   constructor(test, body) {
     Object.assign(this, { test, body });
   }
-  analyze() {}
+
+  analyze(context) {
+    this.text.analyze(context);
+    const bodyContext = context.createChildContextForLoop();
+    this.body.forEach(s => s.analyze(bodyContext));
+  }
 };

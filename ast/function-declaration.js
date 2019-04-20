@@ -6,5 +6,10 @@ module.exports = class FunctionDeclaration {
     this.id = id;
     this.function = new FunctionObject(type, id, params, body);
   }
-  analyze() {}
+
+  // TODO: make sure function returns given type
+  analyze(context) {
+    context.add(this.function);
+    this.function.analyze(context.createChildContextForFunctionBody(this));
+  }
 };

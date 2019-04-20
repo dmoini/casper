@@ -2,5 +2,8 @@ module.exports = class StringLiteral {
   constructor(value) {
     this.value = value;
   }
-  analyze() {}
+
+  analyze() { // eslint-disable-line class-methods-use-this
+    // Intentionally empty
+  }
 };

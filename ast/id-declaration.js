@@ -4,5 +4,8 @@ module.exports = class IdDeclaration {
     this.id = id;
     this.type = type;
   }
-  analyze() {}
+
+  analyze(context) {
+    this.type.analyze(context);
+  }
 };
