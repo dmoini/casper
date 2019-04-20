@@ -13,7 +13,7 @@ Casper {
   SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
               |  VarExps "=" Exps                           -- assign
               |  Call                                       -- call
-              |  "break"                                     -- break
+              |  "break"                                    -- break
               |  "return" Exp?                              -- return
               |  Exp
   Block       =  ":" SimpleStmt newline                     -- small
