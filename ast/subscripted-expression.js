@@ -8,8 +8,8 @@ module.exports = class SubscriptedExpression {
   // TODO: Add for dictionaries
   analyze(context) {
     this.variable.analyze(context);
-    check.isList(this.variable)
-    this.subscript.analyze(context);  
+    check.isList(this.variable);
+    this.subscript.analyze(context);
     check.isNumber(this.subscript);
     this.type = this.variable.type.memberType;
   }
