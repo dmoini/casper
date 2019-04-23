@@ -146,7 +146,10 @@ multi-line comment
 *~
 ```
 
-## Examples
+## Types of Static Semantic Errors
+<!-- TODO: add list of static semantic errors -->
+
+## Code Examples
 
 ### Fibonacci Program
 
