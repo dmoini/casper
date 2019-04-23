@@ -1,9 +1,9 @@
-const BooleanLiteral = require("./boolean-literal");
+// const BooleanLiteral = require("./boolean-literal");
 const check = require("../semantics/check");
 const VariableDeclaration = require("./variable-declaration");
 
 module.exports = class FromStatement {
-  //change to for statement at some point
+  // change to for statement at some point
   constructor(id, expressions, increments, block) {
     Object.assign(this, { id, expressions, increments, block });
   }

@@ -84,7 +84,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast()
+      block.ast(),
     );
   },
   // TODO: update
@@ -156,7 +156,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       fntype.ast(),
-      arrayToNullable(exp.ast())
+      arrayToNullable(exp.ast()),
     );
   },
   Arg(exp) {
@@ -202,7 +202,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-console */
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);

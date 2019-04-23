@@ -1,4 +1,5 @@
 module.exports = class BreakStatement {
+  // eslint-disable-next-line class-methods-use-this
   analyze(context) {
     // eslint-disable-line class-methods-use-this
     if (!context.inLoop) {
@@ -6,8 +7,8 @@ module.exports = class BreakStatement {
     }
   }
 
-  analyze() {
-    // eslint-disable-line class-methods-use-this
-    // Intentionally Empty
-  }
+  // // eslint-disable-line class-methods-use-this
+  // analyze() {
+  //   // Intentionally Empty
+  // }
 };
