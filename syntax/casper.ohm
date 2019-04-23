@@ -42,7 +42,7 @@ Casper {
   KeyValue    =  (id | numlit | strlit) ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
-  DeclId      =  Type? id
+  DeclId      =  Type id
   DeclIds     =  NonemptyListOf<DeclId, ",">
   VarExp      =  VarExp "[" Exp "]"                         -- subscripted
               |  id                                         -- simple
