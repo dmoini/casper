@@ -44,7 +44,7 @@ const Argument = require("../ast/argument");
 const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
-const IdDeclaration = require("../ast/id-declaration");
+// const IdDeclaration = require("../ast/id-declaration");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -87,8 +87,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       block.ast(),
     );
   },
-  SimpleStmt_vardecl(v, _, e) {
-    return new VariableDeclaration(v.ast(), e.ast());
+  // TODO: update
+  SimpleStmt_vardecl(t, v, _, e) {
+    return new VariableDeclaration(t.ast(), ...v.ast(), ...e.ast());
   },
   SimpleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
@@ -156,9 +157,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Arg(exp) {
     return new Argument(exp.ast());
   },
-  DeclId(type, id) {
-    return new IdDeclaration(type.ast(), id.ast());
-  },
+  // DeclId(type, id) {
+  //   return new IdDeclaration(type.ast(), id.ast());
+  // },
   ListType(_1, type, _2) {
     return new ListType(type.ast());
   },

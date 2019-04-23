@@ -2,7 +2,7 @@ module.exports = class ListType {
   constructor(memberType) {
     Object.assign(this, { memberType });
   }
+  
+  // TODO
   analyze() {}
 };
-
-// Do we need this?

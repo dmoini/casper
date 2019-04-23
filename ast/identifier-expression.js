@@ -4,7 +4,7 @@ module.exports = class IdentifierExpression {
   }
 
   analyze(context) {
-    this.ref = context.lookup(this.id); // Make sure we lookup VALUE
+    this.ref = context.lookup(this.id); // TODO: Make sure we lookup VALUE
     this.type = this.ref.type;
   }
 };

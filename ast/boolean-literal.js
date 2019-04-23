@@ -6,6 +6,6 @@ module.exports = class BooleanLiteral {
   }
 
   analyze() { // eslint-disable-line class-methods-use-this
-    // Toal says empty - ask him
+    // Intentionally Empty
   }
 };

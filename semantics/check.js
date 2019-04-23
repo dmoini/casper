@@ -38,6 +38,11 @@ module.exports = {
     doCheck(expression.type.constructor === DictType, 'Not a dictionary');
   },
 
+  isListOrDict(expression) {
+    doCheck(expression.type.constructor === ListType || expression.type.constructor === DictType, 'Not a list or dictionary');
+    return expression.type.constructor;
+  },
+
   isNumber(type) {
     doCheck(type.constructor === NumType, 'Not a number');
   },

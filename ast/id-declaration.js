@@ -5,6 +5,7 @@ module.exports = class IdDeclaration {
     this.type = type;
   }
 
+  // TODO: check
   analyze(context) {
     this.type.analyze(context);
   }

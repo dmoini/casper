@@ -33,6 +33,12 @@ const MathFunctions = [
   ]),
 ];
 
+// const ListFunctions;
+
+// const SetFunctions;
+
+// const DictFunctions;
+
 module.exports = {
   NumType,
   StringType,

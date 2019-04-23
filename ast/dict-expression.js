@@ -3,6 +3,8 @@ module.exports = class DictExpression {
     this.members = members;
   }
 
-  // TODO
-  analyze() {}
+  // TODO: Check for correctness
+  analyze(context) {
+    this.members.forEach(p => p.analyze(context));
+  }
 };

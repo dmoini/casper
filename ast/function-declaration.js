@@ -1,4 +1,5 @@
 const FunctionObject = require("./function-object");
+// const check = require('../semantics/check');
 
 // A function declaration binds a function object to a name.
 module.exports = class FunctionDeclaration {
@@ -7,9 +8,12 @@ module.exports = class FunctionDeclaration {
     this.function = new FunctionObject(type, id, params, body);
   }
 
-  // TODO: make sure function returns given type
+  // TODO
   analyze(context) {
-    context.add(this.function);
-    this.function.analyze(context.createChildContextForFunctionBody(this));
+    // context.add(this.function);
+    // this.function.analyze(context.createChildContextForFunctionBody(this));
+    this.bodyContext = context.createChildContextForFunctionBody();
+    this.params.forEach(p => p.analyze(this.bodyContext));
+    this.returnType = context.lookupType(this.returnType);
   }
 };

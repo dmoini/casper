@@ -8,5 +8,9 @@ module.exports = class Parameter {
   //   return this.
   // }
 
-  analyze() {}
+  // TODO: Taken from tiger, check to see if works better
+  analyze(context) {
+    this.type = context.lookupType(this.type);
+    context.add(this);
+  }
 };

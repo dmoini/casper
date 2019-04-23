@@ -1,11 +1,11 @@
 const check = require('../semantics/check');
+const NumType = require('../semantics/builtins');
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
     Object.assign(this, { op, left, right });
   }
 
-  // TODO
   analyze() {
     this.left.analyze(context);
     this.right.analyze(context);

@@ -5,10 +5,10 @@ module.exports = class AssignmentStatement {
     Object.assign(this, { targets, sources });
   }
 
-  // TODO
+  // TODO: Make this work for multiple targets
   analyze(context) {
     this.source.analyze(context);
-    this.targets.analyze(context); // TODO: need to make this for multiple
+    this.targets.analyze(context);
     check.isAssignableTo(this.source, this.targets.type);
   }
 };

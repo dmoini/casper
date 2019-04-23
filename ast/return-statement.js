@@ -3,6 +3,7 @@ module.exports = class ReturnStatement {
     this.returnValue = returnValue;
   }
 
+  // TODO
   analyze(context) {
     if (this.returnValue) {
       this.returnValue.analyze(context);

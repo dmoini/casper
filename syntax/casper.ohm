@@ -39,11 +39,11 @@ Casper {
               |  Call                                       -- call
               |  VarExp
               |  "(" Exp ")"                                -- parens
-  KeyValue    =  (id | numlit | strlit) ":" Exp
+  KeyValue    =  Exp ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
-  DeclId      =  Type id
-  DeclIds     =  NonemptyListOf<DeclId, ",">
+//   DeclId      =  Type id
+  DeclIds     =  Type NonemptyListOf<id, ",">
   VarExp      =  VarExp "[" Exp "]"                         -- subscripted
               |  id                                         -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
@@ -70,7 +70,7 @@ Casper {
   relop       =  "<=" | "<" | "==" | "!=" | "is" | ">=" | ">" 
   mulop       =  "*" | "/" | "//" | "%"
   prefixop    =  "-" | "not" | "!"
-  // postfixop   =  "!"
+  postfixop   =  ~"!=" "!"
   indent      =  "⇨"
   dedent      =  "⇦"
   newline     =  "\n"+
