@@ -5,6 +5,7 @@ module.exports = class DictExpression {
 
   // TODO: Check for correctness
   analyze(context) {
-    this.members.forEach(p => p.analyze(context));
+    // this.members.forEach(p => p.analyze(context)); ?
+    this.members.analyze(context);
   }
 };

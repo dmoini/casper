@@ -3,6 +3,8 @@ module.exports = class SetExpression {
     this.members = members;
   }
 
-  // TODO
-  analyze() {}
+  // TODO: Check for correctness
+  analyze(context) {
+    this.members.forEach(m => m.analyze(context));
+  }
 };

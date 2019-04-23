@@ -3,6 +3,8 @@ module.exports = class FunctionType {
     Object.assign(this, { args });
   }
 
-  // TODO implement when semantic analysis is done
-  analyze() {}
+  // TODO: Check for Correctness
+  analyze(context) {
+    this.args.analyze(context);
+  }
 };

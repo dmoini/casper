@@ -2,5 +2,8 @@ module.exports = class KeyValueExpression {
   constructor(id, expression) {
     Object.assign(this, { id, expression });
   }
-  analyze() {}
+  analyze(context) {
+    this.id.analyze(context);
+    this.expression.analyze(context);
+  }
 };

@@ -10,10 +10,7 @@ module.exports = class FunctionDeclaration {
 
   // TODO
   analyze(context) {
-    // context.add(this.function);
-    // this.function.analyze(context.createChildContextForFunctionBody(this));
-    this.bodyContext = context.createChildContextForFunctionBody();
-    this.params.forEach(p => p.analyze(this.bodyContext));
-    this.returnType = context.lookupType(this.returnType);
+    context.add(this.function);
+    this.function.analyze(context.createChildContextForFunctionBody(this));
   }
 };

@@ -1,5 +1,5 @@
 const Variable = require("./variable");
-const check = require('../semantics/check');
+const check = require("../semantics/check");
 
 module.exports = class VariableDeclaration {
   constructor(type, ids, initializers) {
@@ -7,22 +7,17 @@ module.exports = class VariableDeclaration {
   }
 
   analyze(context) {
+    console.log("ID length: " + this.ids.length);
+    console.log("Intializers length: " + this.initializers.length);
     if (this.ids.length !== this.initializers.length) {
-      throw new Error('Number of variables does not equal number of initializers');
+      throw new Error(
+        "Number of variables does not equal number of initializers"
+      );
     }
 
     this.initializers.forEach(i => i.analyze(context));
 
-    this.variables = this.ids.map(id => new Variable(id));
-    this.variables.forEach(variable => context.add(variable));
-
-    this.initializers.analyze(context);
-    if (this.type) {
-      this.type = context.lookupType(this.type);
-      check.isAssignableTo(this.initializers, this.type);
-    } else {
-      this.type = this.initializers.type;
-    }
-    context.add(this);
+    this.variables = this.ids.map(id => new Variable(this.type, id));
+    this.variables.forEach(variable => context.add(variable)); // Enable/disable for AST generation
   }
 };

@@ -3,10 +3,9 @@ module.exports = class DictType {
     Object.assign(this, { keyType, valueType });
   }
 
-  // TODO
+  // TODO: Check for correctness
   analyze(context) {
-
+    this.keyType.analyze(context);
+    this.valueType.analyze(context);
   }
 };
-
-// Do we need this?

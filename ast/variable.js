@@ -1,19 +1,18 @@
-// TODO: figure out how to add types to this
-const check = require('../semantics/check');
+const check = require("../semantics/check");
 
 module.exports = class Variable {
-  constructor(id) {
+  constructor(type, id) {
+    this.type = type;
     this.id = id;
   }
 
   analyze(context) {
-    this.init.analyze(context);
+    this.id.analyze(context);
     if (this.type) {
       this.type = context.lookupType(this.type);
-      check.isAssignableTo(this.init, this.type);
+      check.isAssignableTo(this.id, this.type);
     } else {
-      // Yay! type inference!
-      this.type = this.init.type;
+      this.type = this.id.type;
     }
     context.add(this);
   }

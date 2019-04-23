@@ -10,7 +10,7 @@ Casper {
                  ("by" (id | numlit))? Block                -- loop
               |  Exp "if" Exp "else" Exp                    -- ternary
               |  (Type | "void") id "(" Params ")" Block    -- function
-  SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
+  SimpleStmt  =  Type DeclIds "=" Exps                           -- vardecl
               |  VarExps "=" Exps                           -- assign
               |  Call                                       -- call
               |  "break"                                    -- break
@@ -43,7 +43,7 @@ Casper {
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
 //   DeclId      =  Type id
-  DeclIds     =  Type NonemptyListOf<id, ",">
+  DeclIds     =  NonemptyListOf<id, ",">
   VarExp      =  VarExp "[" Exp "]"                         -- subscripted
               |  id                                         -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
