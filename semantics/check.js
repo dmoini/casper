@@ -11,6 +11,22 @@ function doCheck(condition, message) {
   }
 }
 
+function expressionsHaveTheSameType(e1, e2) {
+  if (isPrimitiveType(e1) && isPrimitiveType(e2)) {
+    doCheck(e1.type === e2.type, "Types must match exactly");
+  } else if (isListType(e1.type) && isListType(e2.type)) {
+    expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
+  } else if (isSetType(e1) && isSetType(e2)) {
+    expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
+  } else if (isDictType(e1) && isDictType(e2)) {
+    // TODO: check keys and values
+    expressionsHaveTheSameType(e1.keyType, e2.keyType);
+    expressionsHaveTheSameType(e1.valueType, e2.valueType);
+  } else {
+    doCheck(false, "Types must match exactly");
+  }
+}
+
 module.exports = {
   isPrimitiveType(type) {
     doCheck(
@@ -84,22 +100,22 @@ module.exports = {
   //   doCheck(e1.type === e2.type, 'Types must match exactly');
   // },
 
-  // TODO: check to see if works
-  expressionsHaveTheSameType(e1, e2) {
-    if (this.isPrimitiveType(e1) && this.isPrimitiveType(e2)) {
-      doCheck(e1.type === e2.type, "Types must match exactly");
-    } else if (this.isListType(e1.type) && this.isListType(e2.type)) {
-      this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
-    } else if (this.isSetType(e1) && this.isSetType(e2)) {
-      this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
-    } else if (this.isDictType(e1) && this.isDictType(e2)) {
-      // TODO: check keys and values
-      this.expressionsHaveTheSameType(e1.keyType, e2.keyType);
-      this.expressionsHaveTheSameType(e1.valueType, e2.valueType);
-    } else {
-      doCheck(false, "Types must match exactly");
-    }
-  },
+  // THIS IS TURNED INTO A FUNCTION EARLIER
+//   expressionsHaveTheSameType(e1, e2) {
+//     if (this.isPrimitiveType(e1) && this.isPrimitiveType(e2)) {
+//       doCheck(e1.type === e2.type, "Types must match exactly");
+//     } else if (this.isListType(e1.type) && this.isListType(e2.type)) {
+//       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
+//     } else if (this.isSetType(e1) && this.isSetType(e2)) {
+//       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
+//     } else if (this.isDictType(e1) && this.isDictType(e2)) {
+//       // TODO: check keys and values
+//       this.expressionsHaveTheSameType(e1.keyType, e2.keyType);
+//       this.expressionsHaveTheSameType(e1.valueType, e2.valueType);
+//     } else {
+//       doCheck(false, "Types must match exactly");
+//     }
+//   },
 
   isAssignableTo(exp, type) {
     doCheck(

@@ -7,5 +7,5 @@ module.exports = class setDeclaration {
 
   // TODO
   // eslint-disable-next-line class-methods-use-this
-  analyze() {}
+  analyze(context) {}
 };

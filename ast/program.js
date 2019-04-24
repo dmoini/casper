@@ -3,9 +3,9 @@ module.exports = class Program {
     this.statements = statements;
   }
 
-  analyze() {
-    this.statements.forEach((stmt) => {
-      stmt.analyze();
+  analyze(context) {
+    this.statements.forEach(stmt => {
+      stmt.analyze(context);
     });
   }
 };

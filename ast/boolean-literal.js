@@ -1,11 +1,13 @@
 // const check = require('../semantics/check');
+const { BooleanType } = require("../semantics/builtins");
 
 module.exports = class BooleanLiteral {
   constructor(value) {
     this.value = value;
+    this.type = undefined;
   }
 
-  analyze() { // eslint-disable-line class-methods-use-this
-    // Intentionally Empty
+  analyze(context) {
+    this.type = BooleanType;
   }
 };

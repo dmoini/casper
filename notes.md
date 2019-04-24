@@ -16,3 +16,10 @@ Semantic Analysis
 - Are our analyze functions correct?
 
 * Figure out how to do type inference on dictionaries, sets, and lists, etc.
+
+NEED TO:
+
+- fix expressionsHaveSameType in check.js and add it to isAssignableTo
+- in fixing that ^, make it work for lists, dicts, and sets
+- check to see if our var decl semantic analysis works
+- write TESTS!!!!!!!!!!

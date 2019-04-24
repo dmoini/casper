@@ -3,7 +3,7 @@ module.exports = class PrimitiveType {
     Object.assign(this, { name });
   }
 
-  analyze() {
+  analyze(context) {
     // Intentionally left blank
   }
 };

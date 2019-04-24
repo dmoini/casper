@@ -3,7 +3,7 @@ module.exports = class SetType {
     Object.assign(this, { memberType });
   }
 
-  analyze() {
+  analyze(context) {
     this.memberType = context.lookupType(this.memberType);
   }
 };

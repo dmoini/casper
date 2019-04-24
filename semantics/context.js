@@ -23,6 +23,14 @@
 const FunctionDeclaration = require("../ast/function-declaration");
 const FunctionObject = require("../ast/function-object");
 const Parameter = require("../ast/parameter");
+const {
+  NumType,
+  StringType,
+  BooleanType,
+  StandardFunctions,
+  StringFunctions,
+  MathFunctions,
+} = require("./builtins");
 
 class Context {
   constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
@@ -31,6 +39,7 @@ class Context {
       currentFunction,
       inLoop,
       declarations: Object.create(null),
+      typeMap: Object.create(null),
     });
   }
 
@@ -114,8 +123,24 @@ class Context {
 }
 
 // TODO(dmoini): how do we do builtins here???
-// Context.INITIAL = new Context();
+Context.INITIAL = new Context();
 // new FunctionDeclaration('print', [new Parameter('_', null)], null).analyze(Context.INITIAL);
 // new FunctionDeclaration('sqrt', [new Parameter('_', null)], null).analyze(Context.INITIAL);
+
+StandardFunctions.forEach(f => {
+  Context.INITIAL.declarations[f.id] = f;
+});
+StringFunctions.forEach(f => {
+  Context.INITIAL.declarations[f.id] = f;
+});
+MathFunctions.forEach(f => {
+  Context.INITIAL.declarations[f.id] = f;
+});
+Context.INITIAL.typeMap.num = NumType;
+Context.INITIAL.typeMap.string = StringType;
+Context.INITIAL.typeMap.boo = BooleanType;
+Context.INITIAL.typeMap.bool = BooleanType;
+
+// Context.INITIAL.typeMap.nil = NilType;
 
 module.exports = Context;

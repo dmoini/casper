@@ -8,7 +8,7 @@ module.exports = class BreakStatement {
   }
 
   // // eslint-disable-line class-methods-use-this
-  // analyze() {
+  // analyze(context) {
   //   // Intentionally Empty
   // }
 };

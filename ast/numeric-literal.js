@@ -1,11 +1,13 @@
-const { NumType } = require('../semantics/builtins');
+const { NumType } = require("../semantics/builtins");
 
 module.exports = class NumericLiteral {
   constructor(value) {
     this.value = value;
+    this.type = undefined;
   }
 
-  analyze() {
+  analyze(context) {
     this.type = NumType;
+    console.log(this.type);
   }
 };

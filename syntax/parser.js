@@ -44,7 +44,7 @@ const Argument = require("../ast/argument");
 const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
-// const IdDeclaration = require("../ast/id-declaration");
+const IdDeclaration = require("../ast/identifier-declaration");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -84,7 +84,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast(),
+      block.ast()
     );
   },
   // TODO: update
@@ -156,15 +156,15 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       fntype.ast(),
-      arrayToNullable(exp.ast()),
+      arrayToNullable(exp.ast())
     );
   },
   Arg(exp) {
     return new Argument(exp.ast());
   },
-  // DeclId(type, id) {
-  //   return new IdDeclaration(type.ast(), id.ast());
-  // },
+  DeclId(id) {
+    return new IdDeclaration(id.ast());
+  },
   ListType(_1, type, _2) {
     return new ListType(type.ast());
   },
@@ -202,7 +202,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-console */
-module.exports = (text) => {
+module.exports = text => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);

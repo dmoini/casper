@@ -1,23 +1,16 @@
 const Variable = require("./variable");
-const check = require("../semantics/check");
+const AssignmentStatement = require("./assignment-statement");
 
 module.exports = class VariableDeclaration {
-  constructor(type, ids, initializers) {
-    Object.assign(this, { type, ids, initializers });
+  constructor(type, ids, exps) {
+    Object.assign(this, { type, ids, exps });
   }
 
   analyze(context) {
-    console.log("ID length: " + this.ids.length);
-    console.log("Intializers length: " + this.initializers.length);
-    if (this.ids.length !== this.initializers.length) {
-      throw new Error(
-        "Number of variables does not equal number of initializers"
-      );
-    }
-
-    this.initializers.forEach(i => i.analyze(context));
-
+    this.type = context.lookupType(this.type);
     this.variables = this.ids.map(id => new Variable(this.type, id));
     this.variables.forEach(variable => context.add(variable)); // Enable/disable for AST generation
+    const a = new AssignmentStatement(this.ids, this.exps);
+    a.analyze(context);
   }
 };
