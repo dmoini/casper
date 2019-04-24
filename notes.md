@@ -23,3 +23,9 @@ NEED TO:
 - in fixing that ^, make it work for lists, dicts, and sets
 - check to see if our var decl semantic analysis works
 - write TESTS!!!!!!!!!!
+
+TO-DO 4/24
+- Add list of semantic errors to README
+- Dictionaries???
+- Make tests pass
+- Add tests where necessary

@@ -40,7 +40,7 @@ If you like to see more about casper, please check out casper's official website
 
 `boo z = true`
 
-`list<num> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]`
+`list<string> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]`
 
 `set<string> awesomeLanguages = set("Casper", "Python", "JavaScript", "Nebula")`
 
@@ -52,7 +52,7 @@ If you like to see more about casper, please check out casper's official website
 
 `x = 6`
 
-`y = "ianlizarda@icloud.com"`
+`y = "ianlizarda@icould.com"`
 
 `z = false`
 
@@ -112,7 +112,7 @@ for x from 0 to 10:
     print(x)
 
 for y from 0 to 10 by 2:
-    print(x)
+    print(y)
 ```
 
 ```casper
