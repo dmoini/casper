@@ -7,6 +7,10 @@ module.exports = class ListExpression {
 
   analyze(context) {
     this.members.forEach(m => m.analyze(context));
-    // this.values.forEach(v => check.expressionsHaveTheSameType(v, t));
-  }
+    // this.type = this.members[0].type;
+    // for 1 ..
+    //   if this.members[i].type != this.type
+    //     throw error
+    // got to the end, I'm ok
+    }
 };
