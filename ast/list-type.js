@@ -3,7 +3,6 @@ module.exports = class ListType {
     Object.assign(this, { memberType });
   }
 
-  // TODO
   analyze() {
     this.memberType = context.lookupType(this.memberType);
   }

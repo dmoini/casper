@@ -3,9 +3,8 @@ module.exports = class DictType {
     Object.assign(this, { keyType, valueType });
   }
 
-  // TODO: Check for correctness
   analyze(context) {
-    this.keyType.analyze(context);
-    this.valueType.analyze(context);
+    this.keyType = context.lookupType(this.keyType);
+    this.valueType = context.lookupType(this.valueType);
   }
 };
