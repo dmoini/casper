@@ -20,13 +20,18 @@
 // type called "list" and a variable called "list" in the same scope. But you
 // probably shouldn't.
 
-const FunctionDeclaration = require('../ast/function-declaration');
-const FunctionObject = require('../ast/function-object');
-const Parameter = require('../ast/parameter');
+const FunctionDeclaration = require("../ast/function-declaration");
+const FunctionObject = require("../ast/function-object");
+const Parameter = require("../ast/parameter");
 
 class Context {
   constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
-    Object.assign(this, { parent, currentFunction, inLoop, declarations: Object.create(null) });
+    Object.assign(this, {
+      parent,
+      currentFunction,
+      inLoop,
+      declarations: Object.create(null),
+    });
   }
 
   createChildContextForFunctionBody(currentFunction) {
@@ -36,7 +41,11 @@ class Context {
 
   createChildContextForLoop() {
     // When entering a loop body, just set the inLoop field, retain others
-    return new Context({ parent: this, currentFunction: this.currentFunction, inLoop: true });
+    return new Context({
+      parent: this,
+      currentFunction: this.currentFunction,
+      inLoop: true,
+    });
   }
 
   createChildContextForBlock() {
@@ -87,7 +96,7 @@ class Context {
     if (this.parent === null) {
       throw new Error(`Identifier ${id} has not been declared`);
     }
-    return this.parent.lookup(id);
+    return this.parent.lookupValue(id);
   }
 
   assertInFunction(message) {
@@ -96,7 +105,8 @@ class Context {
     }
   }
 
-  assertIsFunction(entity) { // eslint-disable-line class-methods-use-this
+  assertIsFunction(entity) {
+    // eslint-disable-line class-methods-use-this
     if (entity.constructor !== FunctionObject) {
       throw new Error(`${entity.id} is not a function`);
     }
