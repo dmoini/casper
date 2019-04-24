@@ -62,9 +62,25 @@ class Context {
     this.declarations[entity.id] = entity;
   }
 
+  addType(typeDec) {
+    if (typeDec.id in this.typeMap) {
+      throw new Error(`Type ${typeDec.id} already declared in this scope`);
+    }
+    this.typeMap[typeDec.id] = typeDec.type;
+  }
+
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
-  lookup(id) {
+  lookupType(id) {
+    for (let context = this; context !== null; context = context.parent) {
+      if (id in context.typeMap) {
+        return context.typeMap[id];
+      }
+    }
+    throw new Error(`Type ${id} has not been declared`);
+  }
+
+  lookupValue(id) {
     if (id in this.declarations) {
       return this.declarations[id];
     }

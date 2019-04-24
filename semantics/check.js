@@ -1,6 +1,8 @@
 const util = require('util');
 const {
-  NumType, StringType, BooleanType,
+  NumType,
+  StringType,
+  BooleanType,
 } = require('./builtins');
 const ListType = require('../ast/list-type');
 const SetType = require('../ast/set-type');
@@ -14,6 +16,11 @@ function doCheck(condition, message) {
 }
 
 module.exports = {
+  isPrimitiveType(type) {
+    doCheck(type.constructor === NumType || type.constructor === StringType ||
+      type.constructor === BooleanType, 'Not a primitive type');
+  },
+
   isListType(type) {
     doCheck(type.constructor === ListType, 'Not a list type');
   },
@@ -43,8 +50,8 @@ module.exports = {
     return expression.type.constructor;
   },
 
-  isNumber(type) {
-    doCheck(type.constructor === NumType, 'Not a number');
+  isNumber(exp) {
+    doCheck(exp.type === NumType, 'Not a number');
   },
 
   isString(exp) {
@@ -69,8 +76,25 @@ module.exports = {
   // TODO: isFieldOfRecord equivalent
   // NOTE: would this be checking if there exists a value within a dict?
 
+  // expressionsHaveTheSameType(e1, e2) {
+  //   doCheck(e1.type === e2.type, 'Types must match exactly');
+  // },
+
+  // TODO: check to see if works
   expressionsHaveTheSameType(e1, e2) {
-    doCheck(e1.type === e2.type, 'Types must match exactly');
+    if (this.isPrimitiveType(e1) && this.isPrimitiveType(e2)) {
+      doCheck(e1.type === e2.type, 'Types must match exactly');
+    } else if (this.isListType(e1.type) && this.isListType(e2.type)) {
+      this.expressionsHaveTheSameType(e1.type, e2.type);
+    } else if (this.isSetType(e1) && this.isSetType(e2)) {
+      this.expressionsHaveTheSameType(e1.type, e2.type);
+    } else if (this.isDictType(e1) && this.isDictType(e2)) {
+      // TODO: check keys and values
+      this.expressionsHaveTheSameType(e1.keyType, e2.keyType);
+      this.expressionsHaveTheSameType(e1.valueType, e2.valueType);
+    } else {
+      doCheck(false, 'Types must match exactly');
+    }
   },
 
   isAssignableTo(exp, type) {
