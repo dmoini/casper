@@ -1,2 +1,2 @@
 num z = 5
-z = "penis"
+z = 3
