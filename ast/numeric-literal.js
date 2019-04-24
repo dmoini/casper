@@ -8,6 +8,5 @@ module.exports = class NumericLiteral {
 
   analyze(context) {
     this.type = NumType;
-    console.log(this.type);
   }
 };

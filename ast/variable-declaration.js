@@ -1,5 +1,6 @@
 const Variable = require("./variable");
 const AssignmentStatement = require("./assignment-statement");
+const util = require("util");
 
 module.exports = class VariableDeclaration {
   constructor(type, ids, exps) {
@@ -7,9 +8,8 @@ module.exports = class VariableDeclaration {
   }
 
   analyze(context) {
-    this.type = context.lookupType(this.type);
     this.variables = this.ids.map(id => new Variable(this.type, id));
-    this.variables.forEach(variable => context.add(variable)); // Enable/disable for AST generation
+    this.variables.forEach(variable => context.add(variable, variable.id.id));
     const a = new AssignmentStatement(this.ids, this.exps);
     a.analyze(context);
   }

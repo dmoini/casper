@@ -51,7 +51,10 @@ Casper {
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "bool" | "boo" | ListType | SetType | DictType )
+  Type        =  ( NumType | StringType | BooleanType | ListType | SetType | DictType )
+  NumType     =  "num"
+  StringType  =  "string"
+  BooleanType =  "bool" | "boo"
   ListType    =  "list<" Type ">"
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"

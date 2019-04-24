@@ -3,5 +3,5 @@ module.exports = class IdentifierDeclaration {
     this.id = id;
   }
 
-  analyze() {}
+  analyze(context) {}
 };

@@ -1,14 +1,24 @@
+const check = require("../semantics/check");
+const DictType = require("./dict-type");
+const KeyValueExpression = require("./keyvalue-expression");
+
 module.exports = class DictExpression {
-  constructor(members) {
-    this.members = members;
+  constructor(exp) {
+    Object.assign(this, { exp });
+    this.type = undefined;
   }
 
   analyze(context) {
-    this.members.forEach(m => m.analyze(context));
-    this.type = this.members[0].type;
-    this.members.forEach;
-    for (let i = 1; i < members.length; i += 1) {
-      if (this.members[i].type != this.type) {
+    // this.values.forEach(value => value.analyze(context));
+
+    this.type = new DictType(this.keyVals[0].type, this.values[0].type);
+    for (let i = 1; i < this.keyVals.length; i += 1) {
+      if (
+        JSON.stringify(this.keyVals[i].type) !==
+          JSON.stringify(this.type.keyType) &&
+        JSON.stringify(this.values[i].type) !==
+          JSON.stringify(this.type.valueType)
+      ) {
         throw new Error("Incompatible types within Dictionary");
       }
     }

@@ -45,6 +45,7 @@ const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 const IdDeclaration = require("../ast/identifier-declaration");
+const { NumType, BooleanType, StringType } = require("../semantics/builtins");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
@@ -164,6 +165,15 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   DeclId(id) {
     return new IdDeclaration(id.ast());
+  },
+  NumType(_) {
+    return NumType;
+  },
+  StringType(_) {
+    return StringType;
+  },
+  BooleanType(_) {
+    return BooleanType;
   },
   ListType(_1, type, _2) {
     return new ListType(type.ast());

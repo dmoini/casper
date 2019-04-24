@@ -73,11 +73,13 @@ class Context {
   // to check enclosing contexts because in this language, shadowing is always
   // allowed. Note that if we allowed overloading, this method would have to
   // be a bit more sophisticated.
-  add(entity) {
-    if (entity.id in this.declarations) {
-      throw new Error(`Identifier ${entity.id} already declared in this scope`);
+  add(entity, id) {
+    if ((id || entity.id) in this.declarations) {
+      throw new Error(
+        `Identifier ${id || entity.id} already declared in this scope`
+      );
     }
-    this.declarations[entity.id] = entity;
+    this.declarations[id || entity.id] = entity;
   }
 
   addType(typeDec) {
@@ -99,13 +101,12 @@ class Context {
   }
 
   lookupValue(id) {
-    if (id in this.declarations) {
-      return this.declarations[id];
+    for (let context = this; context !== null; context = context.parent) {
+      if (id in context.declarations) {
+        return context.declarations[id];
+      }
     }
-    if (this.parent === null) {
-      throw new Error(`Identifier ${id} has not been declared`);
-    }
-    return this.parent.lookupValue(id);
+    throw new Error(`${id} has not been declared`);
   }
 
   assertInFunction(message) {

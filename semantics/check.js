@@ -101,25 +101,25 @@ module.exports = {
   // },
 
   // THIS IS TURNED INTO A FUNCTION EARLIER
-//   expressionsHaveTheSameType(e1, e2) {
-//     if (this.isPrimitiveType(e1) && this.isPrimitiveType(e2)) {
-//       doCheck(e1.type === e2.type, "Types must match exactly");
-//     } else if (this.isListType(e1.type) && this.isListType(e2.type)) {
-//       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
-//     } else if (this.isSetType(e1) && this.isSetType(e2)) {
-//       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
-//     } else if (this.isDictType(e1) && this.isDictType(e2)) {
-//       // TODO: check keys and values
-//       this.expressionsHaveTheSameType(e1.keyType, e2.keyType);
-//       this.expressionsHaveTheSameType(e1.valueType, e2.valueType);
-//     } else {
-//       doCheck(false, "Types must match exactly");
-//     }
-//   },
+  //   expressionsHaveTheSameType(e1, e2) {
+  //     if (this.isPrimitiveType(e1) && this.isPrimitiveType(e2)) {
+  //       doCheck(e1.type === e2.type, "Types must match exactly");
+  //     } else if (this.isListType(e1.type) && this.isListType(e2.type)) {
+  //       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
+  //     } else if (this.isSetType(e1) && this.isSetType(e2)) {
+  //       this.expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
+  //     } else if (this.isDictType(e1) && this.isDictType(e2)) {
+  //       // TODO: check keys and values
+  //       this.expressionsHaveTheSameType(e1.keyType, e2.keyType);
+  //       this.expressionsHaveTheSameType(e1.valueType, e2.valueType);
+  //     } else {
+  //       doCheck(false, "Types must match exactly");
+  //     }
+  //   },
 
   isAssignableTo(exp, type) {
     doCheck(
-      exp.type === type,
+      JSON.stringify(exp.type) === JSON.stringify(type),
       `Expression of type ${util.format(
         exp.type
       )} not compatible with type ${util.format(type)}`
