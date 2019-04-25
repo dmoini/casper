@@ -94,12 +94,17 @@ module.exports = {
   },
 
   isAssignableTo(exp, type) {
-    console.log(exp.type);
     doCheck(
       JSON.stringify(exp.type) === JSON.stringify(type),
-      `Expression of type ${util.format(
-        exp.type
-      )} not compatible with type ${util.format(type)}`
+      "Types are not compatible"
+    );
+  },
+
+  sameType(t1, t2) {
+    console.log("hello?");
+    doCheck(
+      JSON.stringify(t1) === JSON.stringify(t2),
+      "Types are not compatible"
     );
   },
 

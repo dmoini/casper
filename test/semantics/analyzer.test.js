@@ -6,19 +6,26 @@
  * throwing the expected errors.
  */
 
+const argument = require("../../ast/argument");
+const assignmentStatement = require("../../ast/assignment-statement");
+
+const errors = {
+  "break-outside-of-loop.error": "break outside of loop",
+  "funct-returns-wrong-type.error": "incorrect return type",
+};
+
+const Context = require("../../semantics/context");
+
 const fs = require("fs");
 const parse = require("../../syntax/parser");
 
 describe("The semantic analyzer", () => {
   fs.readdirSync(__dirname).forEach(name => {
     if (name.endsWith(".error")) {
-      test(`detects a ${name.replace(/[^a-z]/g, " ")}`, done => {
+      test(`detects a ${errors[name]}`, done => {
         const program = parse(fs.readFileSync(`${__dirname}/${name}`, "utf-8"));
-        const errorPattern = RegExp(
-          name.replace(".error", "").replace(/-/g, " "),
-          "i"
-        );
-        expect(() => program.analyze()).toThrow(errorPattern);
+        const errorPattern = errors[name];
+        expect(() => program.analyze(Context.INITIAL)).toThrow(errorPattern);
         done();
       });
     } else if (name.endsWith(".boo")) {
@@ -26,7 +33,7 @@ describe("The semantic analyzer", () => {
         // For now, we are happy to know that these files pass semantic analysis.
         // We eventually need to check that the ASTs are properly decorated.
         const program = parse(fs.readFileSync(`${__dirname}/${name}`, "utf-8"));
-        program.analyze();
+        program.analyze(Context.INITIAL);
         done();
       });
     }

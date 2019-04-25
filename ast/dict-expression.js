@@ -5,7 +5,6 @@ const KeyValueExpression = require("./keyvalue-expression");
 module.exports = class DictExpression {
   constructor(exp) {
     Object.assign(this, { exp });
-    this.type = undefined;
   }
 
   analyze(context) {

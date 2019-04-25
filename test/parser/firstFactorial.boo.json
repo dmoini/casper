@@ -3,9 +3,9 @@
     {
       "id": "firstFactorial",
       "function": {
-        "type": "num",
+        "type": { "name": "num" },
         "id": "firstFactorial",
-        "params": [{ "type": "num", "id": "x" }],
+        "params": [{ "type": { "name": "num" }, "id": "x" }],
         "body": [
           {
             "tests": [

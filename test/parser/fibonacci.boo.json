@@ -3,9 +3,9 @@
     {
       "id": "fibonacci",
       "function": {
-        "type": "num",
+        "type": { "name": "num" },
         "id": "fibonacci",
-        "params": [{ "type": "num", "id": "x" }],
+        "params": [{ "type": { "name": "num" }, "id": "x" }],
         "body": [
           {
             "tests": [

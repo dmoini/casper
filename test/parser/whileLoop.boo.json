@@ -1,6 +1,10 @@
 {
   "statements": [
-    { "type": "num", "ids": ["i"], "initializers": [{ "value": 10 }] },
+    {
+      "type": { "name": "num" },
+      "ids": [{ "id": "i" }],
+      "exps": [{ "value": 10 }]
+    },
     {
       "test": { "op": ">", "left": { "id": "i" }, "right": { "value": 1 } },
       "body": [
@@ -9,8 +13,8 @@
           "args": [{ "expression": { "id": "i" } }]
         },
         {
-          "targets": [{ "id": "i" }],
-          "sources": [
+          "ids": [{ "id": "i" }],
+          "exps": [
             { "op": "-", "left": { "id": "i" }, "right": { "value": 1 } }
           ]
         }

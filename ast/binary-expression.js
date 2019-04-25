@@ -1,5 +1,5 @@
 const check = require("../semantics/check");
-const NumType = require("../semantics/builtins");
+const { NumType } = require("../semantics/builtins");
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
@@ -22,6 +22,7 @@ module.exports = class BinaryExpression {
     } else {
       check.expressionsHaveTheSameType(this.left, this.right);
     }
-    this.type(NumType);
+    // this.type(NumType);
+    this.type = NumType;
   }
 };

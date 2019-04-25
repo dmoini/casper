@@ -1,9 +1,9 @@
 {
   "statements": [
     {
-      "type": { "memberType": "num" },
-      "ids": ["x"],
-      "initializers": [
+      "type": { "memberType": { "name": "num" } },
+      "ids": [{ "id": "x" }],
+      "exps": [
         {
           "members": [
             { "value": 1 },

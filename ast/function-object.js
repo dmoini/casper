@@ -1,4 +1,8 @@
-// const check = require("../semantics/check");
+const Variable = require("./variable");
+const ReturnStatement = require("./return-statement");
+const util = require("util");
+const check = require("../semantics/check");
+const NumType = require("../semantics/builtins");
 
 module.exports = class FunctionObject {
   constructor(type, id, params, body) {
@@ -11,21 +15,14 @@ module.exports = class FunctionObject {
 
   // TODO: Based off of Tiger, please check
   analyze(context) {
-    this.params.forEach(p => p.analyze(context));
-    this.requiredParameterNames = new Set();
-    this.allParameterNames = new Set();
-    this.params.forEach((p) => {
-      this.allParameterNames.add(p.id);
-      if (p.isRequired) {
-        this.requiredParameterNames.add(p.id);
-        if (this.requiredParameterNames.size < this.allParameterNames.size) {
-          throw new Error(
-            "Required parameter cannot appear after an optional parameter",
-          );
-        }
-      }
-    });
+    // context.add()
+    console.log("TYPE: " + util.format(this.type));
+
+    this.params = this.params.map(id => new Variable(this.type, id));
+    this.params.forEach(p => context.add(p, p.id.id));
+    context.add(this.id);
     if (this.body) {
+      //   console.log("BODY: " + util.format(this.body[0].returnValue.type));
       this.body.forEach(s => s.analyze(context));
     }
   }

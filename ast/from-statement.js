@@ -1,22 +1,24 @@
 // const BooleanLiteral = require("./boolean-literal");
 const check = require("../semantics/check");
 const VariableDeclaration = require("./variable-declaration");
+const { NumType } = require("../semantics/builtins");
+const Variable = require("./variable");
+const util = require("util");
 
 module.exports = class FromStatement {
   // change to for statement at some point
-  constructor(id, expressions, increments, block) {
-    Object.assign(this, { id, expressions, increments, block });
+  constructor(id, expressions, increments, blocks) {
+    Object.assign(this, { id, expressions, increments, blocks });
   }
 
-  // TODO: Check for Correctness
   analyze(context) {
-    this.expressions.analyze(context);
-    check.isNumber(this.expressions);
-    this.increments.analyze(context);
-    check.isNumber(this.increments);
+    // console.log(this.expressions);
+    // console.log(this.increments);
+    this.expressions.forEach(exp => exp.analyze(context));
+    this.expressions.forEach(exp => check.isNumber(exp));
     const bodyContext = context.createChildContextForLoop();
-    this.id = new VariableDeclaration(this.expressions.type, this.id);
+    this.id = new Variable(NumType, this.id);
     bodyContext.add(this.id);
-    this.block.analyze(bodyContext);
+    this.blocks.forEach(b => b.analyze(bodyContext));
   }
 };

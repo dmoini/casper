@@ -3,9 +3,9 @@
     {
       "id": "double",
       "function": {
-        "type": "num",
+        "type": { "name": "num" },
         "id": "double",
-        "params": [{ "type": "num", "id": "x" }],
+        "params": [{ "type": { "name": "num" }, "id": "x" }],
         "body": [
           {
             "returnValue": {
@@ -20,9 +20,12 @@
     {
       "id": "doTwice",
       "function": {
-        "type": "num",
+        "type": { "name": "num" },
         "id": "doTwice",
-        "params": [{ "type": "num", "id": "f" }, { "type": "num", "id": "x" }],
+        "params": [
+          { "type": { "name": "num" }, "id": "f" },
+          { "type": { "name": "num" }, "id": "x" }
+        ],
         "body": [
           {
             "returnValue": {

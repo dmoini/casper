@@ -1,9 +1,6 @@
 {
   "statements": [
-    {
-      "targets": [{ "id": "language" }],
-      "sources": [{ "value": "\"javascript\"" }]
-    },
+    { "ids": [{ "id": "language" }], "exps": [{ "value": "\"javascript\"" }] },
     {
       "exp": [
         {

@@ -4,7 +4,6 @@ const ListType = require("./list-type");
 module.exports = class ListExpression {
   constructor(members) {
     this.members = members;
-    this.type = undefined;
   }
 
   analyze(context) {
@@ -15,7 +14,7 @@ module.exports = class ListExpression {
         JSON.stringify(this.members[i].type) !==
         JSON.stringify(this.type.memberType)
       ) {
-        throw new Error("Incompatible types within list");
+        throw new Error("list mixed types");
       }
     }
   }
