@@ -21,7 +21,7 @@
 // probably shouldn't.
 
 const FunctionDeclaration = require("../ast/function-declaration");
-const FunctionObject = require("../ast/function-object").default;
+const FunctionObject = require("../ast/function-object");
 const Parameter = require("../ast/parameter");
 const {
   NumType,
@@ -127,6 +127,12 @@ class Context {
 Context.INITIAL = new Context();
 // new FunctionDeclaration('print', [new Parameter('_', null)], null).analyze(Context.INITIAL);
 // new FunctionDeclaration('sqrt', [new Parameter('_', null)], null).analyze(Context.INITIAL);
+new FunctionDeclaration(
+  "void",
+  "print",
+  [new Parameter("void", [])],
+  []
+).analyze(Context.INITIAL);
 
 StandardFunctions.forEach(f => {
   Context.INITIAL.declarations[f.id] = f;

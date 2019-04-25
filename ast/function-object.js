@@ -13,7 +13,7 @@ module.exports = class FunctionObject {
       console.log(
         `${util.format(exp.type)} and ${util.format(type)} are not compatible`
       );
-      throw new Error("Types are not compatible");
+      throw new Error("Incorrect function return type");
     }
   }
 
@@ -27,7 +27,7 @@ module.exports = class FunctionObject {
       b => b.constructor === ReturnStatement
     );
     if (returnStatement.length === 0 && this.type !== "void") {
-      throw new Error("No return statement: Function type must be void");
+      throw new Error("no return statement found");
     } else if (returnStatement.length > 0) {
       if (this.type === "void") {
         throw new Error("void functions cannot have return statements");

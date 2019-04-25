@@ -12,8 +12,6 @@ module.exports = class FromStatement {
   }
 
   analyze(context) {
-    // console.log(this.expressions);
-    // console.log(this.increments);
     this.expressions.forEach(exp => exp.analyze(context));
     this.expressions.forEach(exp => check.isNumber(exp));
     const bodyContext = context.createChildContextForLoop();

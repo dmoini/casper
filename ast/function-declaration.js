@@ -1,5 +1,4 @@
 const FunctionObject = require("./function-object");
-const check = require("../semantics/check");
 // console.log(FunctionObject);
 // console.log(check);
 
