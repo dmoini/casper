@@ -1,5 +1,6 @@
 const check = require("../semantics/check");
 const util = require("util");
+// console.log("assignment check: ", check);
 
 module.exports = class AssignmentStatement {
   constructor(ids, exps) {
@@ -16,6 +17,7 @@ module.exports = class AssignmentStatement {
     }
     // Make sure that the types of expressions are compatible with the ids
     this.ids.forEach((id, index) => {
+      //   console.log("EXPS" + util.format(this.exps));
       const variable = context.lookupValue(id.id);
       check.isAssignableTo(this.exps[index], variable.type);
     });

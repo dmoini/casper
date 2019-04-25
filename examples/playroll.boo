@@ -1,2 +1,3 @@
 num f(num x):
-    return 5
+    string s = 3
+    return 3

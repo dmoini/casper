@@ -1,8 +1,7 @@
 const Variable = require("./variable");
-const ReturnStatement = require("./return-statement");
 const util = require("util");
-const check = require("../semantics/check");
 const NumType = require("../semantics/builtins");
+const ReturnStatement = require("./return-statement");
 
 module.exports = class FunctionObject {
   constructor(type, id, params, body) {
@@ -13,17 +12,26 @@ module.exports = class FunctionObject {
     return !this.function.body;
   }
 
+  isAssignableTo(exp, type) {
+    if (JSON.stringify(exp.type) !== JSON.stringify(type)) {
+      throw new Error("Types are not compatible");
+    }
+  }
+
   // TODO: Based off of Tiger, please check
   analyze(context) {
     // context.add()
-    console.log("TYPE: " + util.format(this.type));
-
+    // console.log("TYPE: " + util.format(this.type));
     this.params = this.params.map(id => new Variable(this.type, id));
     this.params.forEach(p => context.add(p, p.id.id));
     context.add(this.id);
     if (this.body) {
-      //   console.log("BODY: " + util.format(this.body[0].returnValue.type));
       this.body.forEach(s => s.analyze(context));
+      this.body
+        .filter(b => b.constructor === ReturnStatement)
+        .forEach(b => {
+          this.isAssignableTo(b.returnValue, this.type);
+        });
     }
   }
 };

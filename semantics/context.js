@@ -21,7 +21,7 @@
 // probably shouldn't.
 
 const FunctionDeclaration = require("../ast/function-declaration");
-const FunctionObject = require("../ast/function-object");
+const FunctionObject = require("../ast/function-object").default;
 const Parameter = require("../ast/parameter");
 const {
   NumType,

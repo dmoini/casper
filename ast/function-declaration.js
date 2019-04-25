@@ -1,5 +1,7 @@
 const FunctionObject = require("./function-object");
-// const check = require('../semantics/check');
+const check = require("../semantics/check");
+// console.log(FunctionObject);
+// console.log(check);
 
 // A function declaration binds a function object to a name.
 module.exports = class FunctionDeclaration {

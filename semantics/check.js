@@ -11,22 +11,6 @@ function doCheck(condition, message) {
   }
 }
 
-function expressionsHaveTheSameType(e1, e2) {
-  if (isPrimitiveType(e1) && isPrimitiveType(e2)) {
-    doCheck(e1.type === e2.type, "Types must match exactly");
-  } else if (isListType(e1.type) && isListType(e2.type)) {
-    expressionsHaveTheSameType(e1.type, e2.type); //Type Param?
-  } else if (isSetType(e1) && isSetType(e2)) {
-    expressionsHaveTheSameType(e1.type, e2.type); //Type Param??
-  } else if (isDictType(e1) && isDictType(e2)) {
-    // TODO: check keys and values
-    expressionsHaveTheSameType(e1.keyType, e2.keyType);
-    expressionsHaveTheSameType(e1.valueType, e2.valueType);
-  } else {
-    doCheck(false, "Types must match exactly");
-  }
-}
-
 module.exports = {
   isPrimitiveType(type) {
     doCheck(
@@ -101,7 +85,6 @@ module.exports = {
   },
 
   sameType(t1, t2) {
-    console.log("hello?");
     doCheck(
       JSON.stringify(t1) === JSON.stringify(t2),
       "Types are not compatible"
