@@ -25,7 +25,7 @@ NEED TO:
 - write TESTS!!!!!!!!!!
 
 TO-DO 4/24
-- Add list of semantic errors to README
+
 - Dictionaries???
 - Make tests pass
 - Add tests where necessary

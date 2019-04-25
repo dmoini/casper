@@ -73,7 +73,6 @@ Casper {
   relop       =  "<=" | "<" | "==" | "!=" | "is" | ">=" | ">" 
   mulop       =  "*" | "/" | "//" | "%"
   prefixop    =  "-" | "not" | "!"
-  postfixop   =  ~"!=" "!"
   indent      =  "⇨"
   dedent      =  "⇦"
   newline     =  "\n"+

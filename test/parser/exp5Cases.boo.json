@@ -1,21 +1,29 @@
 {
   "statements": [
-    { "type": "boo", "ids": ["b"], "initializers": [{ "value": true }] },
-    { "type": "num", "ids": ["n"], "initializers": [{ "value": 0.00000123 }] },
     {
-      "type": "num",
-      "ids": ["x"],
-      "initializers": [{ "op": "-", "operand": { "value": 5 } }]
+      "type": { "name": "boo" },
+      "ids": [{ "id": "b" }],
+      "exps": [{ "value": true }]
     },
     {
-      "type": "string",
-      "ids": ["s"],
-      "initializers": [{ "value": "\"hello world\"" }]
+      "type": { "name": "num" },
+      "ids": [{ "id": "n" }],
+      "exps": [{ "value": 0.00000123 }]
     },
     {
-      "type": { "memberType": "num" },
-      "ids": ["l"],
-      "initializers": [
+      "type": { "name": "num" },
+      "ids": [{ "id": "x" }],
+      "exps": [{ "op": "-", "operand": { "value": 5 } }]
+    },
+    {
+      "type": { "name": "string" },
+      "ids": [{ "id": "s" }],
+      "exps": [{ "value": "\"hello world\"" }]
+    },
+    {
+      "type": { "memberType": { "name": "num" } },
+      "ids": [{ "id": "l" }],
+      "exps": [
         {
           "members": [
             { "value": 1 },
@@ -27,9 +35,9 @@
       ]
     },
     {
-      "type": { "memberType": "num" },
-      "ids": ["s"],
-      "initializers": [
+      "type": { "memberType": { "name": "num" } },
+      "ids": [{ "id": "z" }],
+      "exps": [
         {
           "members": [
             { "value": 1 },
@@ -39,27 +47,6 @@
           ]
         }
       ]
-    },
-    {
-      "type": { "keyType": "num", "valueType": "string" },
-      "ids": ["d"],
-      "initializers": [
-        {
-          "members": [
-            { "id": { "value": 1 }, "expression": { "value": "\"hello\"" } },
-            { "id": { "value": 2 }, "expression": { "value": "\"bye\"" } },
-            {
-              "id": { "value": 3 },
-              "expression": { "value": "\"CASPER IS THE BEST\"" }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "num",
-      "ids": ["i"],
-      "initializers": [{ "op": "not", "operand": { "value": 2 } }]
     }
   ]
 }

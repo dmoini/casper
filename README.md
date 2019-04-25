@@ -69,7 +69,6 @@ void help(num x):
         print("help")
 ```
 
-
 ## Operators
 
 - add `+`
@@ -79,7 +78,7 @@ void help(num x):
 - integer division `//`
 - modulus `%`
 - strict equality `==` or `!=`
-- reference equality `is` 
+- reference equality `is`
 - less than `<`
 - greater than `>`
 - less than or equal `<=`
@@ -147,7 +146,20 @@ multi-line comment
 ```
 
 ## Types of Static Semantic Errors
+
 <!-- TODO: add list of static semantic errors -->
+
+Type Related  
+Incompatible type assignemnt  
+Mismatched type  
+Type has not been declared
+
+Other Errors  
+Break statement outside of loop  
+Expression not assignable to
+Identifier already declared in scope  
+Identifier has not been declared  
+BLANK is not a function
 
 ## Code Examples
 
@@ -266,7 +278,7 @@ function largestNum(x, y, z) {
 }
 ```
 
-### [Two Sum]([https://link](https://leetcode.com/problems/two-sum/))
+### [Two Sum](<[https://link](https://leetcode.com/problems/two-sum/)>)
 
 ```casper
 list<num> twoSum(list<num> nums, num target):
@@ -302,3 +314,4 @@ function twoSum(nums, target) {
     }
 	return ans;
 };
+```
