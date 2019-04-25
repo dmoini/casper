@@ -21,6 +21,7 @@ module.exports = class FunctionObject {
   // TODO: Based off of Tiger, please check
   analyze(context) {
     // context.add()
+    // thank you justin
     // console.log("TYPE: " + util.format(this.type));
     this.params = this.params.map(id => new Variable(this.type, id));
     this.params.forEach(p => context.add(p, p.id.id));
