@@ -26,6 +26,14 @@ module.exports = class BinaryExpression {
       check.isBoolean(this.right);
       this.type = BooleanType;
       // this.type = this.left.type === (NumType ? NumType : StringType);
+    } else if ("+" === this.op) {
+      check.isNumberOrString(this.left);
+      check.isNumberOrString(this.right);
+      if (check.sameType(this.left.type, this.right.type)) {
+        this.type = isNumber(this.left) ? NumberType : StringType;
+      } else {
+        this.type = StringType;
+      }
     } else {
       //Math Operations
       // [// / - * %]

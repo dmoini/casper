@@ -47,7 +47,7 @@ Casper {
   VarExp      =  VarExp "[" Exp "]"                         -- subscripted
               |  id                                         -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
-  Param       =  Type id (FnType)? ("=" Exp)?
+  Param       =  Type id ("=" Exp)?
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
@@ -58,7 +58,6 @@ Casper {
   ListType    =  "list<" Type ">"
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
-  FnType      =  ":" "(" Params ")"
   keyword     =  ("while" | "if" | "else" | "return" | "break" | "and" | "or" | "is"
               |  "not" | "true" | "false" | "for" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*

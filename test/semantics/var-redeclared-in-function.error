@@ -1,5 +1,4 @@
-num lookANum = 99
-
 void printANum():
-    num lookANum = 5
+    string anon = "hello"
+    num anon = 5
     print(lookANum)

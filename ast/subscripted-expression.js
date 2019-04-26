@@ -11,10 +11,7 @@ module.exports = class SubscriptedExpression {
   analyze(context) {
     this.subscript.analyze(context);
     this.variable.analyze(context);
-    // console.log("VARIABLE", this.variable);
     const variableType = check.isListOrDict(this.variable);
-    // console.log("VARIABLETYPE:" + variableType);
-    // console.log(variableType.con)
     if (variableType === ListType) {
       check.isNumber(this.subscript);
       this.type = this.variable.type.memberType;

@@ -19,6 +19,17 @@
     "test:watch": "jest test/**/*test.js --watch"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/casper.js",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/docs/**",
+      "!**/ast/dict-expression.js",
+      "!**/ast/dict-type.js",
+      "!**/ast/keyvalue-expression.js",
+      "!**/ast/ternary-expression.js"
+    ],
     "testPathIgnorePatterns": [
       "/node_modules/"
     ],

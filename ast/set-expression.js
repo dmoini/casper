@@ -13,7 +13,7 @@ module.exports = class SetExpression {
         JSON.stringify(this.members[i].type) !==
         JSON.stringify(this.type.memberType)
       ) {
-        throw new Error("Incompatible types within list");
+        throw new Error("set mixed type");
       }
     }
   }

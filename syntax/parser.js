@@ -36,7 +36,7 @@ const DictType = require("../ast/dict-type");
 const DictionaryExpression = require("../ast/dict-expression");
 const KeyValueExpression = require("../ast/keyvalue-expression");
 const Call = require("../ast/call");
-const FunctionType = require("../ast/function-type");
+// const FunctionType = require("../ast/function-type");
 const SubscriptedExpression = require("../ast/subscripted-expression");
 const IdentifierExpression = require("../ast/identifier-expression");
 const Parameter = require("../ast/parameter");
@@ -157,13 +157,8 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   VarExp_simple(id) {
     return new IdentifierExpression(id.ast());
   },
-  Param(type, id, fntype, _, exp) {
-    return new Parameter(
-      type.ast(),
-      id.ast(),
-      fntype.ast(),
-      arrayToNullable(exp.ast())
-    );
+  Param(type, id, _, exp) {
+    return new Parameter(type.ast(), id.ast(), arrayToNullable(exp.ast()));
   },
   Arg(exp) {
     return new Argument(exp.ast());
@@ -189,9 +184,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   DictType(_1, keyType, _2, valueType, _3) {
     return new DictType(keyType.ast(), valueType.ast());
   },
-  FnType(_1, _2, args, _3) {
-    return new FunctionType(args.ast());
-  },
+  //   FnType(_1, _2, args, _3) {
+  //     return new FunctionType(args.ast());
+  //   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];
   },

@@ -25,7 +25,11 @@ const errors = {
   "var-not-declared.error": "Variable has not been declared",
   "var-out-of-function-scope.error": "Variable has not been declared",
   "var-redeclared-in-function.error":
-    "argument and parameter types do not match",
+    "Identifier already declared in this scope",
+  "set-improper.error": "set mixed type",
+  "subscripted-wrong-type.error": "Not a list or dictionary",
+  "while-loop-break.error": "break outside of loop",
+  "unary-wrong-type.error": "improper type of operand",
 };
 
 const Context = require("../../semantics/context");
@@ -39,7 +43,9 @@ describe("The semantic analyzer", () => {
       test(`detected in ${name}`, done => {
         const program = parse(fs.readFileSync(`${__dirname}/${name}`, "utf-8"));
         const errorPattern = errors[name];
-        expect(() => program.analyze(Context.INITIAL)).toThrow(errorPattern);
+        expect(() =>
+          program.analyze(Context.INITIAL.createChildContextForBlock())
+        ).toThrow(errorPattern);
         done();
       });
     } else if (name.endsWith(".boo")) {
