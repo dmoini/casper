@@ -9,17 +9,16 @@ module.exports = class SubscriptedExpression {
 
   // TODO: Check for dictionaries. Check to see if it compiles
   analyze(context) {
-    const variableType = check.isListOrDict(this.variable);
     this.subscript.analyze(context);
-    if (variableType.constructor === ListType) {
+    this.variable.analyze(context);
+    // console.log("VARIABLE", this.variable);
+    const variableType = check.isListOrDict(this.variable);
+    // console.log("VARIABLETYPE:" + variableType);
+    // console.log(variableType.con)
+    if (variableType === ListType) {
       check.isNumber(this.subscript);
       this.type = this.variable.type.memberType;
-    } else {
-      // NOTE(dmoini): i think this is correct (referencing the keytype)????
-      check.expressionsHaveTheSameType(
-        this.subscript,
-        this.variableType.keyType
-      );
     }
+    // console.log("TYPE", this.type);
   }
 };

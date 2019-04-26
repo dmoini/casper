@@ -223,6 +223,6 @@ module.exports = text => {
     throw new Error(`Syntax Error: ${match.message}`);
   }
   // NOTE: uncomment if needed
-  console.log(JSON.stringify(astGenerator(match).ast()));
+  // console.log(JSON.stringify(astGenerator(match).ast()));
   return astGenerator(match).ast();
 };

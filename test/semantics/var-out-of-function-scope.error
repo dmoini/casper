@@ -1,4 +1,4 @@
-void help()
+void help():
     string message = "pls help"
     print(message)
 

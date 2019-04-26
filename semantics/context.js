@@ -75,9 +75,7 @@ class Context {
   // be a bit more sophisticated.
   add(entity, id) {
     if ((id || entity.id) in this.declarations) {
-      throw new Error(
-        `Identifier ${id || entity.id} already declared in this scope`
-      );
+      throw new Error(`Identifier already declared in this scope`);
     }
     this.declarations[id || entity.id] = entity;
   }
@@ -106,7 +104,7 @@ class Context {
         return context.declarations[id];
       }
     }
-    throw new Error(`${id} has not been declared`);
+    throw new Error(`Variable has not been declared`);
   }
 
   assertInFunction(message) {
@@ -127,13 +125,6 @@ class Context {
 Context.INITIAL = new Context();
 // new FunctionDeclaration('print', [new Parameter('_', null)], null).analyze(Context.INITIAL);
 // new FunctionDeclaration('sqrt', [new Parameter('_', null)], null).analyze(Context.INITIAL);
-new FunctionDeclaration(
-  "void",
-  "print",
-  [new Parameter("void", [])],
-  []
-).analyze(Context.INITIAL);
-
 StandardFunctions.forEach(f => {
   Context.INITIAL.declarations[f.id] = f;
 });

@@ -1,3 +1,5 @@
+const check = require("../semantics/check");
+
 module.exports = class CallExpression {
   constructor(callee, args) {
     Object.assign(this, { callee, args });
@@ -5,37 +7,18 @@ module.exports = class CallExpression {
 
   analyze(context) {
     this.callee.analyze(context);
+    this.args.forEach(arg => arg.analyze(context));
+    this.type = this.callee.ref.type;
     console.log("Callee", this.callee);
     context.assertIsFunction(this.callee.ref);
-    this.checkArgumentMatching(this.callee.ref);
-    this.args.forEach(arg => arg.analyze(context));
+    if (this.args.length !== this.callee.ref.params.length) {
+      throw new Error("incorrect number of arguments");
+    }
+    this.args.forEach((a, i) => {
+      if (a.expression.type !== this.callee.ref.params[i].type) {
+        throw new Error("argument and parameter types do not match");
+      }
+    });
     console.log("args", this.args);
-  }
-
-  checkArgumentMatching(callee) {
-    // let keywordArgumentSeen = false;
-    // const matchedParameterNames = new Set([]);
-    // this.args.forEach((arg, index) => {
-    //   if (index >= callee.params.length) {
-    //     throw new Error("Too many arguments in call");
-    //   }
-    //   const parameterName = arg.id ? arg.id : callee.params[index].id;
-    //   if (!callee.allParameterNames.has(parameterName)) {
-    //     throw new Error(
-    //       `Function does not have a parameter called ${parameterName}`
-    //     );
-    //   }
-    //   if (matchedParameterNames.has(parameterName)) {
-    //     throw new Error(`Multiple arguments for parameter ${parameterName}`);
-    //   }
-    //   matchedParameterNames.add(parameterName);
-    // });
-    // // Look for and report a required parameter that is not matched
-    // const miss = [...callee.requiredParameterNames].find(
-    //   name => !matchedParameterNames.has(name)
-    // );
-    // if (miss) {
-    //   throw new Error(`Required parameter ${miss} is not matched in call`);
-    // }
   }
 };

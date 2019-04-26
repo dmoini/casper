@@ -9,9 +9,9 @@ module.exports = class FunctionObject {
   }
 
   isAssignableTo(exp, type) {
-    if (JSON.stringify(exp.type) !== JSON.stringify(type)) {
+    if (JSON.stringify(exp) !== JSON.stringify(type)) {
       console.log(
-        `${util.format(exp.type)} and ${util.format(type)} are not compatible`
+        `${util.format(exp)} and ${util.format(type)} are not compatible`
       );
       throw new Error("Incorrect function return type");
     }
@@ -32,7 +32,8 @@ module.exports = class FunctionObject {
       if (this.type === "void") {
         throw new Error("void functions cannot have return statements");
       }
-      this.isAssignableTo(returnStatement[0].returnValue, this.type);
+      console.log("RETURN", returnStatement[0].returnValue);
+      this.isAssignableTo(returnStatement[0].returnValue.type, this.type);
     }
   }
 };

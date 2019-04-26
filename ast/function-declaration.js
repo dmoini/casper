@@ -9,7 +9,6 @@ module.exports = class FunctionDeclaration {
     this.function = new FunctionObject(type, id, params, body);
   }
 
-  // TODO
   analyze(context) {
     context.add(this.function);
     this.function.analyze(context.createChildContextForFunctionBody(this));

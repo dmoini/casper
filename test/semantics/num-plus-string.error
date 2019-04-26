@@ -1,2 +1,1 @@
-num value;
-value = 66 + "buffalo"
+num value = 66 + "buffalo"

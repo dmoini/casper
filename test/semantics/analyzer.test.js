@@ -12,8 +12,20 @@ const assignmentStatement = require("../../ast/assignment-statement");
 const errors = {
   "break-outside-of-loop.error": "break outside of loop",
   "incompatible-func-return-types.error": "Incorrect function return type",
-  //   "list-incorrect-type.error": "Incorrect list type",
-  //   "list-mixed-types.error": "Incorrect list type",
+  "list-incorrect-type.error": "Types are not compatible",
+  "list-mixed-types.error": "list mixed type",
+  "num-assigned-to-list.error": "Types are not compatible",
+  "num-assigned-to-string": "Types are not compatible",
+  "num-plus-string.error": "Types are not compatible",
+  "reused-var-declaration.error": "Identifier already declared in this scope",
+  "string-assigned-to-list.error": "Types are not compatible",
+  "string-assigned-to-num.error": "Types are not compatible",
+  "binary-exp.error": "Not a number",
+  "var-incorrect-type-reassignment.error": "Types are not compatible",
+  "var-not-declared.error": "Variable has not been declared",
+  "var-out-of-function-scope.error": "Variable has not been declared",
+  "var-redeclared-in-function.error":
+    "argument and parameter types do not match",
 };
 
 const Context = require("../../semantics/context");
@@ -24,7 +36,7 @@ const parse = require("../../syntax/parser");
 describe("The semantic analyzer", () => {
   fs.readdirSync(__dirname).forEach(name => {
     if (name.endsWith(".error")) {
-      test(`detects a ${errors[name]}`, done => {
+      test(`detected in ${name}`, done => {
         const program = parse(fs.readFileSync(`${__dirname}/${name}`, "utf-8"));
         const errorPattern = errors[name];
         expect(() => program.analyze(Context.INITIAL)).toThrow(errorPattern);
