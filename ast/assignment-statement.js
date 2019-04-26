@@ -1,5 +1,5 @@
 const check = require("../semantics/check");
-const util = require("util");
+// const util = require("util");
 console.log("assignment check: ", check);
 
 module.exports = class AssignmentStatement {

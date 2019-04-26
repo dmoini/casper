@@ -12,21 +12,20 @@ module.exports = class BinaryExpression {
     console.log("LEFT: ", this.left);
     console.log("RIGHT: ", this.right);
     if (["<=", ">=", "<", ">"].includes(this.op)) {
-      //Relational operators
+      // Relational operators
       check.isNumber(this.left);
       check.isNumber(this.right);
       this.type = BooleanType;
     } else if (["!=", "==", "is"].includes(this.op)) {
-      //Equality operators
+      // Equality operators
       check.sameType(this.left.type, this.right.type);
       this.type = BooleanType;
     } else if (["and", "or"].includes(this.op)) {
-      //Truthy and Falsy
+      // Truthy and Falsy
       check.isBoolean(this.left);
       check.isBoolean(this.right);
       this.type = BooleanType;
-      // this.type = this.left.type === (NumType ? NumType : StringType);
-    } else if ("+" === this.op) {
+    } else if (this.op === "+") {
       console.log("left", this.left);
       console.log("right", this.right);
       check.sameType(this.left.type, this.right.type);
@@ -35,10 +34,9 @@ module.exports = class BinaryExpression {
       this.type = this.left.type === NumType ? NumType : StringType;
       console.log("TYPE", this.type);
     } else {
-      //Math Operations
+      // Math Operations
       // [// / - * %]
-      // console.log("if4");
-      check.sameType(this.left, this.right);
+      check.sameType(this.left.type, this.right.type);
       this.type = NumType;
     }
   }

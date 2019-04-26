@@ -1,6 +1,3 @@
-// const BooleanLiteral = require("./boolean-literal");
-// const NumericLiteral = require("./numeric-literal");
-const util = require("util");
 const check = require("../semantics/check");
 const { BooleanType, NumType } = require("../semantics/builtins");
 

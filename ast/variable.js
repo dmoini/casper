@@ -1,5 +1,3 @@
-const check = require("../semantics/check");
-
 module.exports = class Variable {
   constructor(type, id) {
     this.type = type;

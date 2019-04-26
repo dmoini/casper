@@ -7,7 +7,6 @@ module.exports = class SubscriptedExpression {
     Object.assign(this, { variable, subscript });
   }
 
-  // TODO: Check for dictionaries. Check to see if it compiles
   analyze(context) {
     this.subscript.analyze(context);
     this.variable.analyze(context);
@@ -15,7 +14,8 @@ module.exports = class SubscriptedExpression {
     if (variableType === ListType) {
       check.isNumber(this.subscript);
       this.type = this.variable.type.memberType;
+    } else {
+      // TODO: Check for dictionaries
     }
-    // console.log("TYPE", this.type);
   }
 };

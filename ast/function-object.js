@@ -1,6 +1,7 @@
-const Variable = require("./variable");
 const util = require("util");
-const NumType = require("../semantics/builtins");
+// const Variable = require("./variable");
+const Parameter = require("./parameter");
+// const NumType = require("../semantics/builtins");
 const ReturnStatement = require("./return-statement");
 
 module.exports = class FunctionObject {
@@ -8,29 +9,28 @@ module.exports = class FunctionObject {
     Object.assign(this, { type, id, params, body });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   isAssignableTo(exp, type) {
     if (JSON.stringify(exp) !== JSON.stringify(type)) {
-      console.log(
-        `${util.format(exp)} and ${util.format(type)} are not compatible`
-      );
+      console.log(`${util.format(exp)} and ${util.format(type)} are not compatible`);
       throw new Error("Incorrect function return type");
     }
   }
 
   analyze(context) {
-    // thank you justin
-    this.params = this.params.map(p => new Variable(p.type, p.id));
-    this.params.forEach(p => context.add(p, p.id.id));
+    // Thank you Justin <3
+    this.params = this.params.map(p => new Parameter(p.type, p.id));
+    this.params.forEach(p => p.analyze(context));
     this.body.forEach(s => s.analyze(context));
 
     const returnStatement = this.body.filter(
-      b => b.constructor === ReturnStatement
+      b => b.constructor === ReturnStatement,
     );
     if (returnStatement.length === 0 && this.type !== "void") {
-      throw new Error("no return statement found");
+      throw new Error("No return statement found");
     } else if (returnStatement.length > 0) {
       if (this.type === "void") {
-        throw new Error("void functions cannot have return statements");
+        throw new Error("Void functions cannot have return statements");
       }
       console.log("RETURN", returnStatement[0].returnValue);
       this.isAssignableTo(returnStatement[0].returnValue.type, this.type);

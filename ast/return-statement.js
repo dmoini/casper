@@ -1,5 +1,3 @@
-const util = require("util");
-
 module.exports = class ReturnStatement {
   constructor(returnValue) {
     this.returnValue = returnValue;
@@ -9,6 +7,6 @@ module.exports = class ReturnStatement {
     if (this.returnValue) {
       this.returnValue.analyze(context);
     }
-    context.assertInFunction("Return Statement not in Function");
+    context.assertInFunction("Return statement not in function");
   }
 };

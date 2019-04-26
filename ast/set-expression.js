@@ -9,10 +9,7 @@ module.exports = class SetExpression {
     this.members.forEach(m => m.analyze(context));
     this.type = new SetType(this.members[0].type);
     for (let i = 1; i < this.members.length; i += 1) {
-      if (
-        JSON.stringify(this.members[i].type) !==
-        JSON.stringify(this.type.memberType)
-      ) {
+      if (JSON.stringify(this.members[i].type) !== JSON.stringify(this.type.memberType)) {
         throw new Error("Set mixed types");
       }
     }

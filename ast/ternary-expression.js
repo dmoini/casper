@@ -3,7 +3,7 @@ module.exports = class TernaryStatement {
     Object.assign(this, { exp });
   }
 
-  // TODO: not sure if this is correct, please check it
+  // TODO: make ternary expressions work
   analyze(context) {
     this.exp.analyze(context);
   }
