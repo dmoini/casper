@@ -27,6 +27,7 @@ NEED TO:
 TO-DO 4/24
 
 - Dictionaries???
-- Make tests pass
 - Add tests where necessary
 - add getters/setters for Dict & Sets
+- Recursively get primitive type
+- For in loop
