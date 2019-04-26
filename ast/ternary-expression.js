@@ -1,6 +1,6 @@
 module.exports = class TernaryStatement {
-  constructor(exp) {
-    Object.assign(this, { exp });
+  constructor(test, trueTest, falseTest) {
+    Object.assign(this, { test, trueTest, falseTest });
   }
 
   // TODO: make ternary expressions work
