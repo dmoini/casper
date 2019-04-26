@@ -70,7 +70,7 @@ Casper {
               |  "\\u{" hexDigit+ "}"                       -- codepoint
   addop       =  "+" | "-"
   relop       =  "<=" | "<" | "==" | "!=" | "is" | ">=" | ">" 
-  mulop       =  "*" | "/" | "//" | "%"
+  mulop       =  "*" | "//" | "/" | "%"
   prefixop    =  "-" | "not" | "!"
   indent      =  "⇨"
   dedent      =  "⇦"
