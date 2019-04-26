@@ -7,8 +7,6 @@ module.exports = class CallExpression {
     this.callee.analyze(context);
     this.args.forEach(arg => arg.analyze(context));
     this.type = this.callee.ref.type;
-    console.log("Callee ", this.callee.ref);
-    console.log("Args ", this.args);
     context.assertIsFunction(this.callee.ref);
     if (this.args.length !== this.callee.ref.params.length) {
       throw new Error("Incorrect number of arguments");
@@ -19,6 +17,5 @@ module.exports = class CallExpression {
         throw new Error("Argument and parameter types do not match");
       }
     });
-    console.log("args", this.args);
   }
 };

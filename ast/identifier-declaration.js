@@ -3,5 +3,9 @@ module.exports = class IdentifierDeclaration {
     this.id = id;
   }
 
-  analyze(context) {}
+
+  // eslint-disable-next-line class-methods-use-this
+  analyze(context) {
+    // NOTE: intentionally left blank
+  }
 };

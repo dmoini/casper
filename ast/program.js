@@ -4,7 +4,7 @@ module.exports = class Program {
   }
 
   analyze(context) {
-    this.statements.forEach(stmt => {
+    this.statements.forEach((stmt) => {
       stmt.analyze(context);
     });
   }

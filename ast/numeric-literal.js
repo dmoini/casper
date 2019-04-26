@@ -5,6 +5,7 @@ module.exports = class NumericLiteral {
     this.value = value;
   }
 
+  // eslint-disable-next-line no-unused-vars
   analyze(context) {
     this.type = NumType;
   }

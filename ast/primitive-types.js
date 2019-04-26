@@ -3,7 +3,8 @@ module.exports = class PrimitiveType {
     Object.assign(this, { name });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   analyze(context) {
-    // Intentionally left blank
+    // Note: intentionally left blank
   }
 };

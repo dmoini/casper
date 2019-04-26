@@ -1,6 +1,5 @@
 const Variable = require("./variable");
 const AssignmentStatement = require("./assignment-statement");
-const util = require("util");
 
 module.exports = class VariableDeclaration {
   constructor(type, ids, exps) {
