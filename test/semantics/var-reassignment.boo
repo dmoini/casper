@@ -1,7 +1,7 @@
-string favoriteAnimal = "puppies"
-num favoriteNumber = 17
-boo favoriteBoo = false
+string favAnimal = "puppies"
+num favNumber = 17
+boo favBoo = false
 
-favoriteAnimal = "giraffes"
-favoriteNumber = 420
-favoriteBoo = true
+favAnimal = "giraffes"
+favNumber = 420
+favBoo = true

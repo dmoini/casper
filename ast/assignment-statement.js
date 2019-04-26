@@ -1,6 +1,6 @@
 const check = require("../semantics/check");
 const util = require("util");
-// console.log("assignment check: ", check);
+console.log("assignment check: ", check);
 
 module.exports = class AssignmentStatement {
   constructor(ids, exps) {
@@ -15,6 +15,7 @@ module.exports = class AssignmentStatement {
     if (this.ids.length !== this.exps.length) {
       throw new Error("Number of ids does not equal number of exps");
     }
+    console.log(this.exps);
     // Make sure that the types of expressions are compatible with the ids
     this.ids.forEach((id, index) => {
       //   console.log("EXPS" + util.format(this.exps));

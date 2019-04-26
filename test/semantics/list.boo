@@ -1,3 +1,3 @@
-list<string> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]
-list<num> dumbNums = [13, 666, 9999]
-list<boo> randomBoos = [true, false, true, false]
+list<string> s = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]
+list<num> n = [13, 666, 9999]
+list<boo> b = [true, false, true, false]

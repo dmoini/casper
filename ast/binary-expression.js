@@ -7,6 +7,8 @@ module.exports = class BinaryExpression {
   }
 
   analyze(context) {
+    this.left.analyze(context);
+    this.right.analyze(context);
     console.log("LEFT: ", this.left);
     console.log("RIGHT: ", this.right);
     if (["<=", ">=", "<", ">"].includes(this.op)) {
@@ -27,7 +29,7 @@ module.exports = class BinaryExpression {
     } else {
       //Math Operations
       // [// / - * %]
-      console.log("if4");
+      // console.log("if4");
       check.sameType(this.left, this.right);
       this.type = NumType;
     }

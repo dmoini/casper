@@ -1,3 +1,3 @@
-string favoriteAnimal = "puppies"
-num favoriteNumber = 17
-boo favoriteBoo = false
+string puppy = "puppies"
+num bestnum = 17
+boo bestboo = false
