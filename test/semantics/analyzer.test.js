@@ -38,6 +38,7 @@ const errors = {
   "void-function-with-return": "Void functions cannot have return statements",
   "function-no-return": "No return statement found",
   "return-outside-of-function": "Return statement not in function",
+  "ternary-test-not-boolean": "Not a boolean",
 };
 
 

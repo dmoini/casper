@@ -1,0 +1,1 @@
+print(2) if 2 else print(-2)
