@@ -1,4 +1,4 @@
 string compilers = "false"
 
-if(!compilers):
+if(-compilers):
     print("oh no")

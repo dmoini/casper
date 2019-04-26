@@ -14,7 +14,7 @@ module.exports = class ListExpression {
         JSON.stringify(this.members[i].type) !==
         JSON.stringify(this.type.memberType)
       ) {
-        throw new Error("list mixed types");
+        throw new Error("List mixed types");
       }
     }
   }

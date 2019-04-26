@@ -78,6 +78,9 @@ module.exports = {
   //   },
 
   isAssignableTo(exp, type) {
+    console.log(
+      `\nt1 ${util.format(exp.type)} not equal to t2 ${util.format(type)}\n`
+    );
     doCheck(
       JSON.stringify(exp.type) === JSON.stringify(type),
       "Types are not compatible"

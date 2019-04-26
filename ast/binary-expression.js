@@ -27,13 +27,13 @@ module.exports = class BinaryExpression {
       this.type = BooleanType;
       // this.type = this.left.type === (NumType ? NumType : StringType);
     } else if ("+" === this.op) {
+      console.log("left", this.left);
+      console.log("right", this.right);
+      check.sameType(this.left.type, this.right.type);
       check.isNumberOrString(this.left);
       check.isNumberOrString(this.right);
-      if (check.sameType(this.left.type, this.right.type)) {
-        this.type = isNumber(this.left) ? NumberType : StringType;
-      } else {
-        this.type = StringType;
-      }
+      this.type = this.left.type === NumType ? NumType : StringType;
+      console.log("TYPE", this.type);
     } else {
       //Math Operations
       // [// / - * %]

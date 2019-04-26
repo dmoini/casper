@@ -1,6 +1,8 @@
 // const BooleanLiteral = require("./boolean-literal");
 // const NumericLiteral = require("./numeric-literal");
 const util = require("util");
+const check = require("../semantics/check");
+const { BooleanType, NumType } = require("../semantics/builtins");
 
 module.exports = class UnaryExpression {
   constructor(op, operand) {
@@ -9,6 +11,12 @@ module.exports = class UnaryExpression {
 
   analyze(context) {
     this.operand.analyze(context);
-    this.type = this.operand.type;
+    if (["!", "not"].includes(this.op)) {
+      check.isBoolean(this.operand);
+      this.type = BooleanType;
+    } else {
+      check.isNumber(this.operand);
+      this.type = NumType;
+    }
   }
 };

@@ -10,10 +10,10 @@ const argument = require("../../ast/argument");
 const assignmentStatement = require("../../ast/assignment-statement");
 
 const errors = {
-  "break-outside-of-loop.error": "break outside of loop",
+  "break-outside-of-loop.error": "Break outside of loop",
   "incompatible-func-return-types.error": "Incorrect function return type",
   "list-incorrect-type.error": "Types are not compatible",
-  "list-mixed-types.error": "list mixed type",
+  "list-mixed-types.error": "List mixed types",
   "num-assigned-to-list.error": "Types are not compatible",
   "num-assigned-to-string": "Types are not compatible",
   "num-plus-string.error": "Types are not compatible",
@@ -26,10 +26,11 @@ const errors = {
   "var-out-of-function-scope.error": "Variable has not been declared",
   "var-redeclared-in-function.error":
     "Identifier already declared in this scope",
-  "set-improper.error": "set mixed type",
+  "set-improper.error": "Set mixed types",
   "subscripted-wrong-type.error": "Not a list or dictionary",
-  "while-loop-break.error": "break outside of loop",
-  "unary-wrong-type.error": "improper type of operand",
+  "while-loop-break.error": "Break outside of loop",
+  "unary-wrong-boo-type.error": "Not a boolean",
+  "unary-wrong-num-type.error": "Not a number",
 };
 
 const Context = require("../../semantics/context");
