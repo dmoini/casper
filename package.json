@@ -17,7 +17,6 @@
     "lint": "./node_modules/.bin/eslint **/*.js;exit 0",
     "test": "jest test/**/*test.js",
     "test:watch": "jest test/**/*test.js --watch"
-
   },
   "jest": {
     "testPathIgnorePatterns": [
