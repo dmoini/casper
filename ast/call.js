@@ -12,6 +12,7 @@ module.exports = class CallExpression {
     console.log("args", this.args);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   checkArgumentMatching(callee) {
     // let keywordArgumentSeen = false;
     // const matchedParameterNames = new Set([]);
