@@ -24,7 +24,7 @@ const ReturnStatement = require("../ast/return-statement");
 const FunctionDeclaration = require("../ast/function-declaration");
 const VariableDeclaration = require("../ast/variable-declaration");
 const AssignmentStatement = require("../ast/assignment-statement");
-// const CallStatement = require("../ast/call-statement");
+// const CallStatement = require("../ast/call");
 const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const TernaryExpression = require("../ast/ternary-expression");
@@ -78,7 +78,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       id.sourceString,
       tests,
       increments.ast(),
-      Block.ast()
+      Block.ast(),
     );
   },
   Stmt_ternary(firstTest, _1, secondTest, _2, thirdTest) {
@@ -90,19 +90,18 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       type.ast(),
       id.ast(),
       params.ast(),
-      block.ast()
+      block.ast(),
     );
   },
-  // TODO: update
   SimpleStmt_vardecl(t, v, _, e) {
     return new VariableDeclaration(t.ast(), v.ast(), e.ast());
   },
   SimpleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
   },
-  //   SimpleStmt_call(c) {
-  //     return new CallStatement(c.ast());
-  //   },
+  // SimpleStmt_call(c) {
+  //   return new CallStatement(c.ast());
+  // },
   SimpleStmt_break(_) {
     return new BreakStatement();
   },
@@ -212,7 +211,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-console */
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(withIndentsAndDedents(text));
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);

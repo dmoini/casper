@@ -20,9 +20,8 @@
 // type called "list" and a variable called "list" in the same scope. But you
 // probably shouldn't.
 
-const FunctionDeclaration = require("../ast/function-declaration");
 const FunctionObject = require("../ast/function-object");
-const Parameter = require("../ast/parameter");
+
 const {
   NumType,
   StringType,
@@ -113,25 +112,22 @@ class Context {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   assertIsFunction(entity) {
-    // eslint-disable-line class-methods-use-this
     if (entity.constructor !== FunctionObject) {
       throw new Error(`${entity.id} is not a function`);
     }
   }
 }
 
-// TODO(dmoini): how do we do builtins here???
 Context.INITIAL = new Context();
-// new FunctionDeclaration('print', [new Parameter('_', null)], null).analyze(Context.INITIAL);
-// new FunctionDeclaration('sqrt', [new Parameter('_', null)], null).analyze(Context.INITIAL);
-StandardFunctions.forEach(f => {
+StandardFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
-StringFunctions.forEach(f => {
+StringFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
-MathFunctions.forEach(f => {
+MathFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
 Context.INITIAL.typeMap.num = NumType;
