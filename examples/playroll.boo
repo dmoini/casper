@@ -1,2 +1,1 @@
-list<num> l = [1, 2, 3, 4]
-l[2]
+"cool" if 2 < 3 else false

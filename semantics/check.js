@@ -1,9 +1,9 @@
-const util = require("util");
+// const util = require("util");
 const { NumType, StringType, BooleanType } = require("./builtins");
 const ListType = require("../ast/list-type");
-const SetType = require("../ast/set-type");
+// const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
-const Function = require("../ast/function-object");
+// const Function = require("../ast/function-object");
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -46,11 +46,7 @@ module.exports = {
   //   },
 
   isListOrDict(expression) {
-    doCheck(
-      expression.type.constructor === ListType ||
-        expression.type.constructor === DictType,
-      "Not a list or dictionary"
-    );
+    doCheck(expression.type.constructor === ListType || expression.type.constructor === DictType, "Not a list or dictionary");
     return expression.type.constructor;
   },
 
@@ -63,10 +59,7 @@ module.exports = {
   //   },
 
   isNumberOrString(exp) {
-    doCheck(
-      exp.type === NumType || exp.type === StringType,
-      "Not an Number or string"
-    );
+    doCheck(exp.type === NumType || exp.type === StringType, "Not an Number or string");
   },
 
   isBoolean(exp) {
@@ -78,20 +71,12 @@ module.exports = {
   //   },
 
   isAssignableTo(exp, type) {
-    console.log(
-      `\nt1 ${util.format(exp.type)} not equal to t2 ${util.format(type)}\n`
-    );
-    doCheck(
-      JSON.stringify(exp.type) === JSON.stringify(type),
-      "Types are not compatible"
-    );
+    // console.log(`\nt1 ${util.format(exp.type)} not equal to t2 ${util.format(type)}\n`);
+    doCheck(JSON.stringify(exp.type) === JSON.stringify(type), "Types are not compatible");
   },
 
   sameType(t1, t2) {
-    doCheck(
-      JSON.stringify(t1) === JSON.stringify(t2),
-      "Types are not compatible"
-    );
+    doCheck(JSON.stringify(t1) === JSON.stringify(t2), "Types are not compatible");
   },
 
   //   legalArguments(args, params) {
