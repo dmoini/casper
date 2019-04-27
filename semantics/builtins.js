@@ -18,7 +18,10 @@ const StringFunctions = [
     new Param("start", NumType),
     new Param("end", NumType),
   ]),
-  new Func(StringType, "getChar", [new Param(NumType, "index")]),
+  new Func(StringType, "charAt", [
+    new Param(StringType, "s"),
+    new Param(NumType, "index"),
+  ]),
   new Func(NumType, "ord", [new Param(StringType, "c")]),
 ];
 
