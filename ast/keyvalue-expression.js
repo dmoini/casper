@@ -1,10 +1,11 @@
 module.exports = class KeyValueExpression {
-  constructor(id, expression) {
-    Object.assign(this, { id, expression });
+  constructor(key, value) {
+    Object.assign(this, { key, value });
   }
 
   analyze(context) {
-    this.id.analyze(context);
-    this.expression.analyze(context);
+    this.key.analyze(context);
+    // console.log("KEY TYPE:", this.key);
+    this.value.analyze(context);
   }
 };

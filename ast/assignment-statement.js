@@ -8,6 +8,7 @@ module.exports = class AssignmentStatement {
   analyze(context) {
     this.exps.forEach(exp => exp.analyze(context));
     this.ids.forEach(id => id.analyze(context));
+    console.log("ASSIGNMENT:", this);
     if (this.ids.length !== this.exps.length) {
       throw new Error("Number of ids does not equal number of exps");
     }
