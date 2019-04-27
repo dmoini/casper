@@ -19,7 +19,7 @@ If you like to see more about casper, please check out casper's official website
 - Higher order functions
 - Optional parameters
 
-## Type
+## Types
 
 ### Primitive types
 
@@ -30,7 +30,7 @@ If you like to see more about casper, please check out casper's official website
 - set
 - dict (dictionary)
 
-### Variable Declaration and Assignment
+## Variable Declaration and Assignment
 
 #### Declaration
 
@@ -119,7 +119,8 @@ while true:
     print("I love casper")
 ```
 
-## Higher Order Functions
+<!-- TODO: implement higher order functions and optional parameters -->
+<!-- ## Higher Order Functions
 
 ```casper
 num doTwice(num f:(num z),num x):
@@ -132,7 +133,7 @@ num doTwice(num f:(num z),num x):
 num multiples(num x, num y = 2):
     for _ from 0 to y:
         x = x * x
-```
+``` -->
 
 ## Comments
 
@@ -149,7 +150,24 @@ multi-line comment
 
 <!-- TODO: add list of static semantic errors -->
 
-Type Related  
+- Argument and parameter types do not match
+- Break outside of loop
+- Identifier already declared in this scope
+- Incorrect function return type
+- Incorrect number of arguments
+- List mixed types
+- No return statement found
+- Not a boolean
+- Not a list or dictionary
+- Not a number
+- Number of ids does not equal number of exps
+- Return statement not in function
+- Set mixed types
+- Types are not compatible
+- Variable has not been declared
+- Void functions cannot have return statements
+
+<!-- Type Related  
 Incompatible type assignemnt  
 Mismatched type  
 Type has not been declared
@@ -159,7 +177,7 @@ Break statement outside of loop
 Expression not assignable to
 Identifier already declared in scope  
 Identifier has not been declared  
-BLANK is not a function
+BLANK is not a function -->
 
 ## Code Examples
 
