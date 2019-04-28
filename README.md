@@ -40,19 +40,19 @@ If you like to see more about casper, please check out casper's official website
 
 `boo z = true`
 
-`list<string> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]`
+`list<string> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia", "Eddie from Playroll"]`
 
 `set<string> awesomeLanguages = set("Casper", "Python", "JavaScript", "Nebula")`
 
 `dict<string, string> professors = {"hustler": "Forney", "wizard": "Toal", "hates tests": "Dondi"}`
 
-`num m, num n = 1, 2`
+`num m, n = 1, 2`
 
 #### Assignment
 
 `x = 6`
 
-`y = "ianlizarda@icould.com"`
+`y = "ianlizards@icould.com"`
 
 `z = false`
 
@@ -148,8 +148,6 @@ multi-line comment
 
 ## Types of Static Semantic Errors
 
-<!-- TODO: add list of static semantic errors -->
-
 - Argument and parameter types do not match
 - Break outside of loop
 - Identifier already declared in this scope
@@ -166,18 +164,6 @@ multi-line comment
 - Types are not compatible
 - Variable has not been declared
 - Void functions cannot have return statements
-
-<!-- Type Related  
-Incompatible type assignemnt  
-Mismatched type  
-Type has not been declared
-
-Other Errors  
-Break statement outside of loop  
-Expression not assignable to
-Identifier already declared in scope  
-Identifier has not been declared  
-BLANK is not a function -->
 
 ## Code Examples
 

@@ -65,7 +65,6 @@ module.exports = {
   isNumber(exp) {
     doCheck(exp.type === NumType, "Not a number");
   },
-
   //   isString(exp) {
   //     doCheck(exp.type === StringType, "Not a string");
   //   },
