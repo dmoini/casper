@@ -1,0 +1,4 @@
+num thanosKillCount(num allLife):
+    return allLife / 2
+
+thanosKillCount(9000, 1)

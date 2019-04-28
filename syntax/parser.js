@@ -16,7 +16,7 @@ const withIndentsAndDedents = require("./preparser.js");
 
 const Program = require("../ast/program");
 const WhileStatement = require("../ast/while-statement");
-const Case = require("../ast/case");
+// const Case = require("../ast/case");
 const IfStatement = require("../ast/if-statement");
 const FromStatement = require("../ast/from-statement");
 const BreakStatement = require("../ast/break-statement");
@@ -24,7 +24,7 @@ const ReturnStatement = require("../ast/return-statement");
 const FunctionDeclaration = require("../ast/function-declaration");
 const VariableDeclaration = require("../ast/variable-declaration");
 const AssignmentStatement = require("../ast/assignment-statement");
-const CallStatement = require("../ast/call-statement");
+// const CallStatement = require("../ast/call");
 const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const TernaryExpression = require("../ast/ternary-expression");
@@ -36,7 +36,7 @@ const DictType = require("../ast/dict-type");
 const DictionaryExpression = require("../ast/dict-expression");
 const KeyValueExpression = require("../ast/keyvalue-expression");
 const Call = require("../ast/call");
-const FunctionType = require("../ast/function-type");
+// const FunctionType = require("../ast/function-type");
 const SubscriptedExpression = require("../ast/subscripted-expression");
 const IdentifierExpression = require("../ast/identifier-expression");
 const Parameter = require("../ast/parameter");
@@ -44,12 +44,13 @@ const Argument = require("../ast/argument");
 const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
-const IdDeclaration = require("../ast/id-declaration");
+const IdDeclaration = require("../ast/identifier-declaration");
+const { NumType, BooleanType, StringType } = require("../semantics/builtins");
 
 const grammar = ohm.grammar(fs.readFileSync("./syntax/casper.ohm"));
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
-function unpack(a) {
+function arrayToNullable(a) {
   return a.length === 0 ? null : a[0];
 }
 
@@ -66,17 +67,24 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   Stmt_if(_1, firstTest, firstBlock, _2, moreTests, moreBlocks, _3, lastBlock) {
     const tests = [firstTest.ast(), ...moreTests.ast()];
-    const bodies = [firstBlock.ast(), ...moreBlocks.ast()];
-    const cases = tests.map((test, index) => new Case(test, bodies[index]));
-    return new IfStatement(cases, unpack(lastBlock.ast()));
+    const consequents = [firstBlock.ast(), ...moreBlocks.ast()];
+    // const cases = tests.map((test, index) => new Case(test, consequents[index]));
+    const alternate = arrayToNullable(lastBlock.ast());
+    return new IfStatement(tests, consequents, alternate);
   },
   Stmt_loop(_1, id, _2, firstTest, _3, secondTest, _4, increments, Block) {
     const tests = [firstTest.ast(), secondTest.ast()];
-    return new FromStatement(id, tests, increments, Block.ast());
+    return new FromStatement(
+      id.sourceString,
+      tests,
+      increments.ast(),
+      Block.ast(),
+    );
   },
-  Stmt_ternary(firstTest, _1, secondTest, _2, thirdTest) {
-    const tests = [firstTest.ast(), secondTest.ast(), thirdTest.ast()];
-    return new TernaryExpression(tests);
+  Stmt_ternary(trueTest, _1, test, _2, falseTest) {
+    // const tests = [trueTest.ast(), test.ast(), falseTest.ast()];
+    // return new TernaryExpression(tests);
+    return new TernaryExpression(test.ast(), trueTest.ast(), falseTest.ast());
   },
   Stmt_function(type, id, _1, params, _2, block) {
     return new FunctionDeclaration(
@@ -86,20 +94,20 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       block.ast(),
     );
   },
-  SimpleStmt_vardecl(v, _, e) {
-    return new VariableDeclaration(v.ast(), e.ast());
+  SimpleStmt_vardecl(t, v, _, e) {
+    return new VariableDeclaration(t.ast(), v.ast(), e.ast());
   },
   SimpleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
   },
-  SimpleStmt_call(c) {
-    return new CallStatement(c.ast());
-  },
+  // SimpleStmt_call(c) {
+  //   return new CallStatement(c.ast());
+  // },
   SimpleStmt_break(_) {
     return new BreakStatement();
   },
   SimpleStmt_return(_, e) {
-    return new ReturnStatement(unpack(e.ast()));
+    return new ReturnStatement(arrayToNullable(e.ast()));
   },
   Block_small(_1, statement, _2) {
     return [statement.ast()];
@@ -149,14 +157,23 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   VarExp_simple(id) {
     return new IdentifierExpression(id.ast());
   },
-  Param(type, id, fntype, _, exp) {
-    return new Parameter(type.ast(), id.ast(), fntype.ast(), unpack(exp.ast()));
+  Param(type, id, _, exp) {
+    return new Parameter(type.ast(), id.ast(), arrayToNullable(exp.ast()));
   },
   Arg(exp) {
     return new Argument(exp.ast());
   },
-  DeclId(type, id) {
-    return new IdDeclaration(type.ast(), id.ast());
+  DeclId(id) {
+    return new IdDeclaration(id.ast());
+  },
+  NumType(_) {
+    return NumType;
+  },
+  StringType(_) {
+    return StringType;
+  },
+  BooleanType(_) {
+    return BooleanType;
   },
   ListType(_1, type, _2) {
     return new ListType(type.ast());
@@ -167,9 +184,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   DictType(_1, keyType, _2, valueType, _3) {
     return new DictType(keyType.ast(), valueType.ast());
   },
-  FnType(_1, _2, args, _3) {
-    return new FunctionType(args.ast());
-  },
+  //   FnType(_1, _2, args, _3) {
+  //     return new FunctionType(args.ast());
+  //   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];
   },

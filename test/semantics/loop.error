@@ -1,0 +1,2 @@
+for y from 0 to "s" by 2:
+    print(y)

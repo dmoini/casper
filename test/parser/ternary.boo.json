@@ -1,39 +1,20 @@
 {
-  "statements": [{
-    "ids": [{
-      "id": "language",
-      "type": []
-    }],
-    "initializers": [{
-      "value": "\"javascript\""
-    }]
-  }, {
-    "exp": [{
-      "callee": {
-        "id": "print"
+  "statements": [
+    { "exps": [{ "value": "\"javascript\"" }], "ids": [{ "id": "language" }] },
+    {
+      "falseTest": {
+        "args": [{ "expression": { "value": true } }],
+        "callee": { "id": "print" }
       },
-      "args": [{
-        "expression": {
-          "value": true
-        }
-      }]
-    }, {
-      "op": "==",
-      "left": {
-        "id": "language"
+      "test": {
+        "left": { "id": "language" },
+        "op": "==",
+        "right": { "value": "\"php\"" }
       },
-      "right": {
-        "value": "\"php\""
+      "trueTest": {
+        "args": [{ "expression": { "value": true } }],
+        "callee": { "id": "print" }
       }
-    }, {
-      "callee": {
-        "id": "print"
-      },
-      "args": [{
-        "expression": {
-          "value": true
-        }
-      }]
-    }]
-  }]
+    }
+  ]
 }

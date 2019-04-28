@@ -10,10 +10,10 @@ Casper {
                  ("by" (id | numlit))? Block                -- loop
               |  Exp "if" Exp "else" Exp                    -- ternary
               |  (Type | "void") id "(" Params ")" Block    -- function
-  SimpleStmt  =  DeclIds "=" Exps                           -- vardecl
+  SimpleStmt  =  Type DeclIds "=" Exps                      -- vardecl
               |  VarExps "=" Exps                           -- assign
               |  Call                                       -- call
-              |  "break"                                     -- break
+              |  "break"                                    -- break
               |  "return" Exp?                              -- return
               |  Exp
   Block       =  ":" SimpleStmt newline                     -- small
@@ -39,23 +39,25 @@ Casper {
               |  Call                                       -- call
               |  VarExp
               |  "(" Exp ")"                                -- parens
-  KeyValue    =  (id | numlit | strlit) ":" Exp
+  KeyValue    =  Exp ":" Exp
   Call        =  VarExp "(" Args ")"
   Exps        =  NonemptyListOf<Exp, ",">
-  DeclId      =  Type? id
+  DeclId      =  id
   DeclIds     =  NonemptyListOf<DeclId, ",">
   VarExp      =  VarExp "[" Exp "]"                         -- subscripted
               |  id                                         -- simple
   VarExps     =  NonemptyListOf<VarExp, ",">
-  Param       =  Type id (FnType)? ("=" Exp)?
+  Param       =  Type id ("=" Exp)?
   Params      =  ListOf<Param, ",">
   Arg         =  Exp
   Args        =  ListOf<Arg, ",">
-  Type        =  ("num" | "string" | "bool" | "boo" | ListType | SetType | DictType )
+  Type        =  ( NumType | StringType | BooleanType | ListType | SetType | DictType )
+  NumType     =  "num"
+  StringType  =  "string"
+  BooleanType =  "bool" | "boo"
   ListType    =  "list<" Type ">"
   SetType     =  "set<" Type ">"
   DictType    =  "dict<" Type "," Type ">"
-  FnType      =  ":" "(" Params ")"
   keyword     =  ("while" | "if" | "else" | "return" | "break" | "and" | "or" | "is"
               |  "not" | "true" | "false" | "for" | "from" | "to" | "by" | "equals") ~idrest
   id          =  ~keyword ("_" | letter) idrest*
@@ -68,9 +70,8 @@ Casper {
               |  "\\u{" hexDigit+ "}"                       -- codepoint
   addop       =  "+" | "-"
   relop       =  "<=" | "<" | "==" | "!=" | "is" | ">=" | ">" 
-  mulop       =  "*" | "/" | "//" | "%"
+  mulop       =  "*" | "//" | "/" | "%"
   prefixop    =  "-" | "not" | "!"
-  // postfixop   =  "!"
   indent      =  "⇨"
   dedent      =  "⇦"
   newline     =  "\n"+

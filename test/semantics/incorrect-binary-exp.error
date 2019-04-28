@@ -1,0 +1,3 @@
+num x = 3
+if (3 < "s"):
+    print("wow!")

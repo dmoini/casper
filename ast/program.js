@@ -2,9 +2,10 @@ module.exports = class Program {
   constructor(statements) {
     this.statements = statements;
   }
-  analyze() {
-    this.statements.forEach(stmt => {
-      stmt.analyze();
+
+  analyze(context) {
+    this.statements.forEach((stmt) => {
+      stmt.analyze(context);
     });
   }
 };

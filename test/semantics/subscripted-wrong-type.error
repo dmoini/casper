@@ -1,0 +1,2 @@
+string garf = "kart"
+print(garf[0])

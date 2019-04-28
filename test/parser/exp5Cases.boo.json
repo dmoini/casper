@@ -1,24 +1,29 @@
 {
   "statements": [
     {
-      "ids": [{ "id": "b", "type": ["boo"] }],
-      "initializers": [{ "value": true }]
+      "type": { "name": "boo" },
+      "ids": [{ "id": "b" }],
+      "exps": [{ "value": true }]
     },
     {
-      "ids": [{ "id": "n", "type": ["num"] }],
-      "initializers": [{ "value": 0.00000123 }]
+      "type": { "name": "num" },
+      "ids": [{ "id": "n" }],
+      "exps": [{ "value": 0.00000123 }]
     },
     {
-      "ids": [{ "id": "x", "type": ["num"] }],
-      "initializers": [{ "op": "-", "operand": { "value": 5 } }]
+      "type": { "name": "num" },
+      "ids": [{ "id": "x" }],
+      "exps": [{ "op": "-", "operand": { "value": 5 } }]
     },
     {
-      "ids": [{ "id": "s", "type": ["string"] }],
-      "initializers": [{ "value": "\"hello world\"" }]
+      "type": { "name": "string" },
+      "ids": [{ "id": "s" }],
+      "exps": [{ "value": "\"hello world\"" }]
     },
     {
-      "ids": [{ "id": "l", "type": [{ "memberType": "num" }] }],
-      "initializers": [
+      "type": { "memberType": { "name": "num" } },
+      "ids": [{ "id": "l" }],
+      "exps": [
         {
           "members": [
             { "value": 1 },
@@ -30,8 +35,9 @@
       ]
     },
     {
-      "ids": [{ "id": "s", "type": [{ "memberType": "num" }] }],
-      "initializers": [
+      "type": { "memberType": { "name": "num" } },
+      "ids": [{ "id": "z" }],
+      "exps": [
         {
           "members": [
             { "value": 1 },
@@ -41,27 +47,6 @@
           ]
         }
       ]
-    },
-    {
-      "ids": [
-        { "id": "d", "type": [{ "keyType": "num", "valueType": "string" }] }
-      ],
-      "initializers": [
-        {
-          "members": [
-            { "expression": { "value": "\"hello\"" }, "id": { "value": 1 } },
-            { "expression": { "value": "\"bye\"" }, "id": { "value": 2 } },
-            {
-              "expression": { "value": "\"CASPER IS THE BEST\"" },
-              "id": { "value": 3 }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "ids": [{ "id": "i", "type": ["num"] }],
-      "initializers": [{ "op": "not", "operand": { "value": 2 } }]
     }
   ]
 }

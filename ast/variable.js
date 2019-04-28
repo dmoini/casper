@@ -1,6 +1,10 @@
 module.exports = class Variable {
-  constructor(id) {
+  constructor(type, id) {
+    this.type = type;
     this.id = id;
   }
-  analyze() {}
+
+  analyze(context) {
+    context.add(this);
+  }
 };

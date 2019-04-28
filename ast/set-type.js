@@ -2,5 +2,8 @@ module.exports = class SetType {
   constructor(memberType) {
     Object.assign(this, { memberType });
   }
-  analyze() {}
+
+  analyze(context) {
+    this.memberType = context.lookupType(this.memberType);
+  }
 };

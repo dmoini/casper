@@ -8,7 +8,7 @@ Welcome to casper, a friendly scripting language designed to make high level pro
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
-If you like to see more about casper, please check out casper's official website at https://szafiris.github.io/casper-website/.
+If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.
 
 ## Features
 
@@ -19,7 +19,7 @@ If you like to see more about casper, please check out casper's official website
 - Higher order functions
 - Optional parameters
 
-## Type
+## Types
 
 ### Primitive types
 
@@ -30,7 +30,7 @@ If you like to see more about casper, please check out casper's official website
 - set
 - dict (dictionary)
 
-### Variable Declaration and Assignment
+## Variable Declaration and Assignment
 
 #### Declaration
 
@@ -40,19 +40,19 @@ If you like to see more about casper, please check out casper's official website
 
 `boo z = true`
 
-`list<num> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia"]`
+`list<string> teamMembers = ["Donovan", "Ian", "Teddy", "Serena", "Alexia", "Eddie from Playroll"]`
 
 `set<string> awesomeLanguages = set("Casper", "Python", "JavaScript", "Nebula")`
 
 `dict<string, string> professors = {"hustler": "Forney", "wizard": "Toal", "hates tests": "Dondi"}`
 
-`num m, num n = 1, 2`
+`num m, n = 1, 2`
 
 #### Assignment
 
 `x = 6`
 
-`y = "ianlizarda@icloud.com"`
+`y = "ianlizards@icould.com"`
 
 `z = false`
 
@@ -69,7 +69,6 @@ void help(num x):
         print("help")
 ```
 
-
 ## Operators
 
 - add `+`
@@ -79,7 +78,7 @@ void help(num x):
 - integer division `//`
 - modulus `%`
 - strict equality `==` or `!=`
-- reference equality `is` 
+- reference equality `is`
 - less than `<`
 - greater than `>`
 - less than or equal `<=`
@@ -112,7 +111,7 @@ for x from 0 to 10:
     print(x)
 
 for y from 0 to 10 by 2:
-    print(x)
+    print(y)
 ```
 
 ```casper
@@ -120,7 +119,8 @@ while true:
     print("I love casper")
 ```
 
-## Higher Order Functions
+<!-- TODO: implement higher order functions and optional parameters -->
+<!-- ## Higher Order Functions
 
 ```casper
 num doTwice(num f:(num z),num x):
@@ -133,7 +133,7 @@ num doTwice(num f:(num z),num x):
 num multiples(num x, num y = 2):
     for _ from 0 to y:
         x = x * x
-```
+``` -->
 
 ## Comments
 
@@ -146,7 +146,26 @@ multi-line comment
 *~
 ```
 
-## Examples
+## Types of Static Semantic Errors
+
+- Argument and parameter types do not match
+- Break outside of loop
+- Identifier already declared in this scope
+- Incorrect function return type
+- Incorrect number of arguments
+- List mixed types
+- No return statement found
+- Not a boolean
+- Not a list or dictionary
+- Not a number
+- Number of ids does not equal number of exps
+- Return statement not in function
+- Set mixed types
+- Types are not compatible
+- Variable has not been declared
+- Void functions cannot have return statements
+
+## Code Examples
 
 ### Fibonacci Program
 
@@ -263,7 +282,7 @@ function largestNum(x, y, z) {
 }
 ```
 
-### [Two Sum]([https://link](https://leetcode.com/problems/two-sum/))
+### [Two Sum](<[https://link](https://leetcode.com/problems/two-sum/)>)
 
 ```casper
 list<num> twoSum(list<num> nums, num target):
@@ -299,3 +318,4 @@ function twoSum(nums, target) {
     }
 	return ans;
 };
+```

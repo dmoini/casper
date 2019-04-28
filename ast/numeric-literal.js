@@ -1,6 +1,12 @@
+const { NumType } = require("../semantics/builtins");
+
 module.exports = class NumericLiteral {
   constructor(value) {
     this.value = value;
   }
-  analyze() {}
+
+  // eslint-disable-next-line no-unused-vars
+  analyze(context) {
+    this.type = NumType;
+  }
 };

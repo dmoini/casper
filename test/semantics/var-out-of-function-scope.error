@@ -1,0 +1,5 @@
+void help():
+    string message = "pls help"
+    print(message)
+
+message = "did u help me"

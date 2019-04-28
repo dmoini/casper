@@ -1,0 +1,4 @@
+string compilers = "false"
+
+if(!compilers):
+    print("oh no")

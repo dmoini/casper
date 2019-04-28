@@ -1,0 +1,4 @@
+num triple(num x):
+    num t = x * x * x
+
+triple(2)

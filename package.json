@@ -8,10 +8,10 @@
     "ohm-js": "^0.14.0"
   },
   "devDependencies": {
-    "eslint": "^5.13.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "jest": "^24.1.0"
+    "eslint-plugin-import": "^2.17.2",
+    "jest": "^24.7.1"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint **/*.js;exit 0",
@@ -19,6 +19,17 @@
     "test:watch": "jest test/**/*test.js --watch"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/casper.js",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/docs/**",
+      "!**/ast/dict-expression.js",
+      "!**/ast/dict-type.js",
+      "!**/ast/keyvalue-expression.js",
+      "!**/ast/ternary-expression.js"
+    ],
     "testPathIgnorePatterns": [
       "/node_modules/"
     ],

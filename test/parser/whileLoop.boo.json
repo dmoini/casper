@@ -1,60 +1,21 @@
 {
   "statements": [
     {
-      "ids": [
-        {
-          "id": "i",
-          "type": ["num"]
-        }
-      ],
-      "initializers": [
-        {
-          "value": 10
-        }
-      ]
+      "type": { "name": "num" },
+      "ids": [{ "id": "i" }],
+      "exps": [{ "value": 10 }]
     },
     {
-      "test": {
-        "op": ">",
-        "left": {
-          "id": "i"
-        },
-        "right": {
-          "value": 1
-        }
-      },
+      "test": { "op": ">", "left": { "id": "i" }, "right": { "value": 1 } },
       "body": [
         {
-          "call": {
-            "callee": {
-              "id": "print"
-            },
-            "args": [
-              {
-                "expression": {
-                  "id": "i"
-                }
-              }
-            ]
-          }
+          "callee": { "id": "print" },
+          "args": [{ "expression": { "id": "i" } }]
         },
         {
-          "ids": [
-            {
-              "id": "i",
-              "type": []
-            }
-          ],
-          "initializers": [
-            {
-              "op": "-",
-              "left": {
-                "id": "i"
-              },
-              "right": {
-                "value": 1
-              }
-            }
+          "ids": [{ "id": "i" }],
+          "exps": [
+            { "op": "-", "left": { "id": "i" }, "right": { "value": 1 } }
           ]
         }
       ]

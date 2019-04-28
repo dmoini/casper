@@ -2,7 +2,9 @@ module.exports = class DictType {
   constructor(keyType, valueType) {
     Object.assign(this, { keyType, valueType });
   }
-  analyze() {}
-};
 
-// Do we need this?
+  analyze(context) {
+    this.keyType = context.lookupType(this.keyType);
+    this.valueType = context.lookupType(this.valueType);
+  }
+};

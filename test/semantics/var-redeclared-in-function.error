@@ -1,0 +1,4 @@
+void printANum():
+    string anon = "hello"
+    num anon = 5
+    print(lookANum)
