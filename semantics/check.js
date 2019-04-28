@@ -1,7 +1,7 @@
 // const util = require("util");
 const { NumType, StringType, BooleanType } = require("./builtins");
 const ListType = require("../ast/list-type");
-// const SetType = require("../ast/set-type");
+const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
 // const Function = require("../ast/function-object");
 
@@ -41,13 +41,25 @@ module.exports = {
   //     doCheck(expression.type.constructor === SetType, "Not a set");
   //   },
 
-  //   isDict(expression) {
-  //     doCheck(expression.type.constructor === DictType, "Not a dictionary");
-  //   },
+  // isDict(expression) {
+  //   doCheck(expression.type.constructor === DictType, "Not a dictionary");
+  // },
 
   isListOrDict(expression) {
-    doCheck(expression.type.constructor === ListType || expression.type.constructor === DictType, "Not a list or dictionary");
+    doCheck(
+      expression.type.constructor === ListType ||
+        expression.type.constructor === DictType,
+      "Not a list or dictionary"
+    );
     return expression.type.constructor;
+  },
+
+  isListOrSet(expression) {
+    doCheck(
+      expression.type.constructor === ListType ||
+        expression.type.constructor === SetType,
+      "Not list or set"
+    );
   },
 
   isNumber(exp) {
@@ -59,7 +71,10 @@ module.exports = {
   //   },
 
   isNumberOrString(exp) {
-    doCheck(exp.type === NumType || exp.type === StringType, "Not an Number or string");
+    doCheck(
+      exp.type === NumType || exp.type === StringType,
+      "Not an Number or string"
+    );
   },
 
   isBoolean(exp) {
@@ -71,12 +86,17 @@ module.exports = {
   //   },
 
   isAssignableTo(exp, type) {
-    // console.log(`\nt1 ${util.format(exp.type)} not equal to t2 ${util.format(type)}\n`);
-    doCheck(JSON.stringify(exp.type) === JSON.stringify(type), "Types are not compatible");
+    doCheck(
+      JSON.stringify(exp.type) === JSON.stringify(type),
+      "Types are not compatible"
+    );
   },
 
   sameType(t1, t2) {
-    doCheck(JSON.stringify(t1) === JSON.stringify(t2), "Types are not compatible");
+    doCheck(
+      JSON.stringify(t1) === JSON.stringify(t2),
+      "Types are not compatible"
+    );
   },
 
   //   legalArguments(args, params) {

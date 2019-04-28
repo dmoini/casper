@@ -5,7 +5,6 @@ module.exports = class KeyValueExpression {
 
   analyze(context) {
     this.key.analyze(context);
-    // console.log("KEY TYPE:", this.key);
     this.value.analyze(context);
   }
 };

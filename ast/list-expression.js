@@ -10,12 +10,13 @@ module.exports = class ListExpression {
     if (this.members.length) {
       this.type = new ListType(this.members[0].type);
       for (let i = 1; i < this.members.length; i += 1) {
-        if (JSON.stringify(this.members[i].type) !== JSON.stringify(this.type.memberType)) {
+        if (
+          JSON.stringify(this.members[i].type) !==
+          JSON.stringify(this.type.memberType)
+        ) {
           throw new Error("List mixed types");
         }
       }
-    } else {
-      // // TODO: assign type to empty list
     }
   }
 };
