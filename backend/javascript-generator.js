@@ -33,7 +33,7 @@ function makeOp(op) {
 const jsName = (() => {
   let lastId = 0;
   const map = new Map();
-  return v => {
+  return (v) => {
     if (!map.has(v)) {
       map.set(v, ++lastId); // eslint-disable-line no-plusplus
     }
