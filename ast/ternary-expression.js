@@ -1,17 +1,17 @@
 const check = require("../semantics/check");
 
 module.exports = class TernaryStatement {
-  constructor(test, trueTest, falseTest) {
-    Object.assign(this, { test, trueTest, falseTest });
+  constructor(test, consequent, alternate) {
+    Object.assign(this, { test, consequent, alternate });
   }
 
   // TODO: make ternary expressions work for assignment
   analyze(context) {
     this.test.analyze(context);
     check.isBoolean(this.test);
-    this.trueTest.analyze(context);
-    this.trueTestType = this.trueTest.type;
-    this.falseTest.analyze(context);
-    this.falseTestType = this.falseTest.type;
+    this.consequent.analyze(context);
+    this.alternate.analyze(context);
+    check.sameType(this.consequent.type, this.alternate.type);
+    this.type = this.consequent.type;
   }
 };

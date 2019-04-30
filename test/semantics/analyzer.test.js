@@ -30,6 +30,7 @@ const errors = {
   "string-assigned-to-num": "Types are not compatible",
   "subscripted-wrong-type": "Not a list or dictionary",
   "ternary-test-not-boolean": "Not a boolean",
+  "ternary-consequent-alternate-diff-types": "Types are not compatible",
   "unary-wrong-boo-type": "Not a boolean",
   "unary-wrong-num-type": "Not a number",
   "var-incorrect-type-reassignment": "Types are not compatible",
