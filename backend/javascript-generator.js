@@ -26,6 +26,8 @@ const BooleanLiteral = require("../ast/boolean-literal");
 const NumericLiteral = require("../ast/numeric-literal");
 const StringLiteral = require("../ast/string-literal");
 
+const prettyJs = require('pretty-js');
+
 function makeOp(op) {
   return { not: "!", and: "&&", or: "||", "==": "===", "!=": "!==" }[op] || op;
 }
@@ -40,3 +42,20 @@ const jsName = (() => {
     return `${v.id}_${map.get(v)}`;
   };
 })();
+
+function generateLibraryFunctions() {
+  function generateLibraryStub(name, params, body) {
+    const entity = Context.INITIAL.locals.get(name);
+    return `function ${javaScriptId(entity)}(${params}) {${body}}`;
+  }
+  return [
+    generateLibraryStub('print', 's', 'console.log(s);'),
+    generateLibraryStub('ord', 's', 'return s.charCodeAt(0);'),
+    generateLibraryStub('charAt', 'index', 'return String.charAt(index);'),
+    generateLibraryStub('len', 'l', 'return l.length;'),
+    generateLibraryStub('substring', 's, i, j', 'return s.substr(i, n);'),
+    generateLibraryStub('concat', 's, t', 'return s.concat(t);'),
+    generateLibraryStub('not', 's', 'return !s;'),
+    generateLibraryStub('exit', 'code', 'process.exit(code);'),
+  ].join('');
+}
