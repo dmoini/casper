@@ -1,10 +1,4 @@
-num x, y = 3, 2
-boo b = true
-string str = "fudge me"
-
-list<num> c = [1, 2, 3]
-set<string> s = set("apple", "banana")
-dict<num, string> d = {1:"one", 2:"two"}
-
-if( x is y ):
-    print(x)
+num x = 5
+num y = 3
+if (x is 5 and y is 3):
+    print(true)

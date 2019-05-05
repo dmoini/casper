@@ -23,7 +23,7 @@ module.exports = class FunctionObject {
     this.body.forEach(s => s.analyze(context));
 
     const returnStatement = this.body.filter(
-      b => b.constructor === ReturnStatement,
+      b => b.constructor === ReturnStatement
     );
     if (returnStatement.length === 0 && this.type !== "void") {
       throw new Error("No return statement found");
