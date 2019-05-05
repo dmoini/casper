@@ -54,17 +54,17 @@ function generateLibraryFunctions() {
     return `function ${jsName(entity)}(${params}) {${body}}`;
   }
   return [
-    // generateLibraryStub('print', 's', 'console.log(s);'),
-    // generateLibraryStub('exit', 'code', 'process.exit(code);'),
-    // generateLibraryStub('len', 'l', 'return l.length;'),
-    // generateLibraryStub('substring', 's, i, n', 'return s.substr(i, n);'),
-    // generateLibraryStub('charAt', 'index', 'return String.charAt(index);'),
-    // generateLibraryStub('ord', 's', 'return s.charCodeAt(0);'),
-    // generateLibraryStub('abs', 'n', 'return Math.abs(n)'),
-    // generateLibraryStub('sqrt', 'n', 'return Math.sqrt(n)'),
-    // generateLibraryStub('pi', '', 'return Math.PI'),
-    // generateLibraryStub('random', 'start, end', 'return Math.floor(Math.random() * (Math.max(start, end) - Math.min(start, end) + 1) + Math.min(start, end));'),
-    // generateLibraryStub('pow', 'x, y', 'return Math.pow(x, y);'),
+    generateLibraryStub('print', 's', 'console.log(s);'),
+    generateLibraryStub('exit', 'code', 'process.exit(code);'),
+    generateLibraryStub('len', 'l', 'return l.length;'),
+    generateLibraryStub('substring', 's, i, n', 'return s.substr(i, n);'),
+    generateLibraryStub('charAt', 'index', 'return String.charAt(index);'),
+    generateLibraryStub('ord', 's', 'return s.charCodeAt(0);'),
+    generateLibraryStub('abs', 'n', 'return Math.abs(n)'),
+    generateLibraryStub('sqrt', 'n', 'return Math.sqrt(n)'),
+    generateLibraryStub('pi', '', 'return Math.PI'),
+    generateLibraryStub('random', 'start, end', 'return Math.floor(Math.random() * (Math.max(start, end) - Math.min(start, end) + 1) + Math.min(start, end));'),
+    generateLibraryStub('pow', 'x, y', 'return Math.pow(x, y);'),
   ].join('');
 }
 
