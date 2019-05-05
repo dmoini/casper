@@ -1,4 +1,4 @@
-const check = require("../semantics/check");
+// const check = require("../semantics/check");
 
 module.exports = class BreakStatement {
   // eslint-disable-next-line class-methods-use-this

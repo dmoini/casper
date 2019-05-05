@@ -20,9 +20,9 @@ module.exports = class DictExpression {
       for (let i = 1; i < this.exp.length; i += 1) {
         if (
           JSON.stringify(this.exp[i].key.type)
-            !== JSON.stringify(this.keyType)
+            !== JSON.stringify(this.type.keyType)
           || JSON.stringify(this.exp[i].value.type)
-            !== JSON.stringify(this.valueType)
+            !== JSON.stringify(this.type.valueType)
         ) {
           throw new Error("Incompatible types within dictionary");
         }

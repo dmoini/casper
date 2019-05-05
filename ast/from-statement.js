@@ -1,9 +1,6 @@
-// const BooleanLiteral = require("./boolean-literal");
 const check = require("../semantics/check");
-// const VariableDeclaration = require("./variable-declaration");
 const { NumType } = require("../semantics/builtins");
 const Variable = require("./variable");
-// const util = require("util");
 
 module.exports = class FromStatement {
   // change to for statement at some point

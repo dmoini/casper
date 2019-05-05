@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+/* eslint-disable prefer-destructuring */
 const check = require("../semantics/check");
 const ListType = require("../ast/list-type");
 const SetType = require("../ast/set-type");
@@ -19,11 +21,9 @@ module.exports = class AssignmentStatement {
     this.ids.forEach((id, index) => {
       const variable = context.lookupValue(id.id);
       const variableType = variable.type.constructor;
-      const emptyListorSet =
-        (variableType === ListType || variableType === SetType) &&
-        (this.exps[index].members && this.exps[index].members.length === 0);
-      const emptyDict =
-        variableType === DictType && this.exps[index].exp.length === 0;
+      const emptyListorSet = (variableType === ListType || variableType === SetType)
+        && (this.exps[index].members && this.exps[index].members.length === 0);
+      const emptyDict = variableType === DictType && this.exps[index].exp.length === 0;
 
       if (emptyListorSet || emptyDict) {
         switch (variable.type.constructor) {
@@ -33,7 +33,7 @@ module.exports = class AssignmentStatement {
           case SetType:
             this.exps[index].type = new SetType(variable.type.memberType);
             break;
-          case DictType:
+          default: // case DictType
             const keyType = variable.type.keyType;
             const valueType = variable.type.valueType;
             this.exps[index].type = new DictType(keyType, valueType);
