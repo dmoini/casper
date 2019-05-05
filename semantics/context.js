@@ -121,13 +121,13 @@ class Context {
 }
 
 Context.INITIAL = new Context();
-StandardFunctions.forEach(f => {
+StandardFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
-StringFunctions.forEach(f => {
+StringFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
-MathFunctions.forEach(f => {
+MathFunctions.forEach((f) => {
   Context.INITIAL.declarations[f.id] = f;
 });
 Context.INITIAL.typeMap.num = NumType;
