@@ -1,6 +1,6 @@
 num x, y = 3, 2
 boo b = true
-string str = "fuck me"
+string str = "fudge me"
 
 list<num> c = [1, 2, 3]
 set<string> s = set("apple", "banana")
