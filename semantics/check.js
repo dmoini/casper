@@ -33,9 +33,9 @@ module.exports = {
   //     doCheck(type.constructor === DictType, "Not a dictionary type");
   //   },
 
-  //   isList(expression) {
-  //     doCheck(expression.type.constructor === ListType, "Not a list");
-  //   },
+  isList(expression) {
+    doCheck(expression.type.constructor === ListType, "Not a list");
+  },
 
   //   isSet(expression) {
   //     doCheck(expression.type.constructor === SetType, "Not a set");

@@ -1,2 +1,2 @@
-num x = 4
-x = 3
+dict<num, num> x = {1:1}
+x[0] = 1

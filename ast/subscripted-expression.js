@@ -10,10 +10,7 @@ module.exports = class SubscriptedExpression {
   analyze(context) {
     this.subscript.analyze(context);
     this.id.analyze(context);
-    console.log("Subscript Variables", this.id);
-
-    // console.log("SUBSCRIPT VAR", this.variable);
-    const variableType = check.isListOrDict(this.id);
+    const variableType = check.isList(this.id);
     if (variableType === ListType) {
       check.isNumber(this.subscript);
       this.type = this.id.type.memberType;
