@@ -60,6 +60,9 @@ const builtin = {
   len([s]) {
     return `${s}.length`;
   },
+  substring([s, i, n]) {
+    return `${s}.substr(${i}, ${n})`;
+  },
 };
 
 function generateLibraryFunctions() {
