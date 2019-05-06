@@ -18,12 +18,17 @@ module.exports = class AssignmentStatement {
     }
 
     // Make sure that the types of expressions are compatible with the ids
+    console.log("IDS", this.ids);
     this.ids.forEach((id, index) => {
+      console.log("ID", id.id);
       const variable = context.lookupValue(id.id);
+      console.log("V A R I A B L E:", variable);
       const variableType = variable.type.constructor;
-      const emptyListorSet = (variableType === ListType || variableType === SetType)
-        && (this.exps[index].members && this.exps[index].members.length === 0);
-      const emptyDict = variableType === DictType && this.exps[index].exp.length === 0;
+      const emptyListorSet =
+        (variableType === ListType || variableType === SetType) &&
+        (this.exps[index].members && this.exps[index].members.length === 0);
+      const emptyDict =
+        variableType === DictType && this.exps[index].exp.length === 0;
 
       if (emptyListorSet || emptyDict) {
         switch (variable.type.constructor) {
@@ -33,7 +38,8 @@ module.exports = class AssignmentStatement {
           case SetType:
             this.exps[index].type = new SetType(variable.type.memberType);
             break;
-          default: // case DictType
+          default:
+            // case DictType
             const keyType = variable.type.keyType;
             const valueType = variable.type.valueType;
             this.exps[index].type = new DictType(keyType, valueType);
