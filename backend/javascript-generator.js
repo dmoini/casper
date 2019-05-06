@@ -215,7 +215,9 @@ StringLiteral.prototype.gen = function () {
 
 // TODO: check in playground
 SubscriptedExpression.prototype.gen = function () {
-  return this.variable[this.subscript];
+  const base = this.variable.gen();
+  const subscript = this.subscript.gen();
+  return `${base}[${subscript}]`;
 };
 
 // TODO: check in playground
@@ -228,6 +230,7 @@ Variable.prototype.gen = function () {
   return `${this.id.id}`;
 };
 
+// TODO: fix semicolons
 VariableDeclaration.prototype.gen = function () {
   console.log("VARDEC");
   const formattedIds = [];
@@ -235,8 +238,8 @@ VariableDeclaration.prototype.gen = function () {
   for (let i = 0; i < this.ids.length; i += 1) {
     formattedIds.push(`${jsName(this.ids[i])} = ${exps[i]}`);
   }
-  console.log(formattedIds);
-  return `let ${formattedIds.join(", ")};`;
+  // console.log(formattedIds);
+  return `let ${formattedIds.join(", ")}`;
 };
 
 WhileStatement.prototype.gen = function () {

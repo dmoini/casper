@@ -15,9 +15,8 @@ module.exports = class IfStatement {
       block.forEach(statement => statement.analyze(blockContext));
     });
     if (this.alternate) {
-      this.alternate.forEach(s =>
-        s.analyze(context.createChildContextForBlock())
-      );
+      const alternateBlock = context.createChildContextForBlock();
+      this.alternate.forEach(s => s.analyze(alternateBlock));
     }
   }
 };

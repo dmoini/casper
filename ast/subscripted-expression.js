@@ -8,6 +8,8 @@ module.exports = class SubscriptedExpression {
   }
 
   analyze(context) {
+    console.log("VARIABLE", this.variable);
+    
     this.subscript.analyze(context);
     this.variable.analyze(context);
     const variableType = check.isListOrDict(this.variable);
