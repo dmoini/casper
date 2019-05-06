@@ -12,10 +12,10 @@ const generate = require('../../backend/javascript-generator');
 const Context = require("../../semantics/context");
 
 const fixture = {
-  // hello: [
-  //   String.raw`print("Hello, world\n")`,
-  //   String.raw`console.log("Hello, world\n")`,
-  // ],
+  hello: [
+    String.raw`print("Hello, world\n")`,
+    String.raw`console.log("Hello, world\n")`,
+  ],
 
   arithmetic: [
     String.raw`5 * -2 + 8`,
@@ -105,6 +105,62 @@ else:
   //   String.raw`(not(1) ; size(""); exit(3))`,
   //   /\(!\(1\)\);\s*"".length;\s*process\.exit\(3\)/,
   // ],
+
+  // NOTE: builtins below
+
+  print: [
+    String.raw`print("Can we get an extra point back :)")`,
+    String.raw`console.log("Can we get an extra point back :)");`,
+  ],
+
+  exit: [
+    String.raw`exit(0)`,
+    String.raw`process.exit(0);`,
+  ],
+
+  len: [
+    String.raw`string s = "apple"
+num s_len = len(s)`,
+    /let s_(\d+) = "apple";\s*let s_len_\d+ = s_\1.length;/,
+  ],
+
+  substring: [
+    String.raw`string c = "casper"
+string casp = substring(c, 0, 4)`,
+    /let c_(\d+) = "casper";\s*let casp_\d+ = c_\1\.substring\(0, 4\);/,
+  ],
+
+  charAt: [
+    String.raw`string alpha = "abcde"
+string a = charAt(alpha, 0)`,
+    /let alpha_(\d+) = "abcde";\s*let a_\d+ = alpha_\1\.charAt\(0\);/,
+  ],
+
+  ord: [
+    String.raw`num n = ord("z")`,
+    /let n_\d+ = "z"\.charCodeAt\(0\);/,
+  ],
+
+  abs: [
+    String.raw`num ten = abs(-10)`,
+    /let ten_\d+ = Math\.abs\(\(-10\)\);/,
+  ],
+
+  sqrt: [
+    String.raw`num sixteen = sqrt(256)`,
+    /let sixteen_\d+ = Math\.sqrt\(256\);/,
+  ],
+
+  piAndPow: [
+    String.raw`num areaOfCircle(num r):
+  return pi() * pow(r, 2)`,
+    /function areaOfCircle_\d+\(r_(\d+)\) \{\s*return \(Math\.PI \* Math\.pow\(r_\1, 2\)\);\s*\};/,
+  ],
+
+  random: [
+    String.raw`num r = random(0, 100)`,
+    /let r_\d+ = Math\.floor\(Math\.random\(\) \* \(Math\.max\(0, 100\) - Math\.min\(0, 100\) \+ 1\) \+ Math\.min\(0, 100\)\);/,
+  ],
 };
 
 describe('The JavaScript generator', () => {

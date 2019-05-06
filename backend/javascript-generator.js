@@ -35,8 +35,8 @@ const { StringType, NumType, BooleanType } = require("../semantics/builtins");
 
 function makeOp(op) {
   return (
-    { not: "!", and: "&&", or: "||", "==": "===", is: "==", "!=": "!=" }[op] ||
-    op
+    { not: "!", and: "&&", or: "||", "==": "===", is: "==", "!=": "!=" }[op]
+    || op
   );
 }
 
@@ -57,50 +57,73 @@ const builtin = {
   print([s]) {
     return `console.log(${s})`;
   },
+  exit([code]) {
+    return `process.exit(${code})`;
+  },
   len([s]) {
     return `${s}.length`;
   },
-  substring([s, i, n]) {
-    return `${s}.substr(${i}, ${n})`;
+  substring([s, start, end]) {
+    return `${s}.substring(${start}, ${end})`;
+  },
+  charAt([s, i]) {
+    return `${s}.charAt(${i})`;
+  },
+  ord([c]) {
+    return `${c}.charCodeAt(0)`;
+  },
+  abs([n]) {
+    return `Math.abs(${n})`;
+  },
+  sqrt([n]) {
+    return `Math.sqrt(${n})`;
+  },
+  pi() {
+    return `Math.PI`;
+  },
+  random([s, e]) {
+    return `Math.floor(Math.random() * (Math.max(${s}, ${e}) - Math.min(${s}, ${e}) + 1) + Math.min(${s}, ${e}))`;
+  },
+  pow([x, y]) {
+    return `Math.pow(${x}, ${y})`;
   },
 };
 
-function generateLibraryFunctions() {
-  function generateLibraryStub(name, params, body) {
-    const entity = Context.INITIAL.declarations[name];
-    console.log("\nE N T I T Y\n", entity.id);
-    return `function ${jsName(entity)}(${params}) {${body}}`;
-  }
-  // TODO: fix builtin functions
-  return [
-    generateLibraryStub("print", "s", "console.log(s);"),
-    // generateLibraryStub("exit", "code", "process.exit(code);"),
-    // generateLibraryStub("len", "l", "return l.length;"),
-    // generateLibraryStub("substring", "s, i, n", "return s.substr(i, n);"),
-    // generateLibraryStub("charAt", "index", "return String.charAt(index);"),
-    // generateLibraryStub("ord", "s", "return s.charCodeAt(0);"),
-    // generateLibraryStub("abs", "n", "return Math.abs(n)"),
-    // generateLibraryStub("sqrt", "n", "return Math.sqrt(n)"),
-    // generateLibraryStub("pi", "", "return Math.PI"),
-    // generateLibraryStub(
-    //   "random",
-    //   "start, end",
-    //   "return Math.floor(Math.random() * (Math.max(start, end) - Math.min(start, end) + 1) + Math.min(start, end));"
-    // ),
-    // generateLibraryStub("pow", "x, y", "return Math.pow(x, y);"),
-  ].join("");
-}
+// function generateLibraryFunctions() {
+//   function generateLibraryStub(name, params, body) {
+//     const entity = Context.INITIAL.declarations[name];
+//     console.log("\nE N T I T Y\n", entity.id);
+//     return `function ${jsName(entity)}(${params}) {${body}}`;
+//   }
+//   return [
+//     // generateLibraryStub("print", "s", "console.log(s);"),
+//     // generateLibraryStub("exit", "code", "process.exit(code);"),
+//     // generateLibraryStub("len", "l", "return l.length;"),
+//     // generateLibraryStub("substring", "s, i, n", "return s.substr(i, n);"),
+//     // generateLibraryStub("charAt", "index", "return String.charAt(index);"),
+//     // generateLibraryStub("ord", "s", "return s.charCodeAt(0);"),
+//     // generateLibraryStub("abs", "n", "return Math.abs(n)"),
+//     // generateLibraryStub("sqrt", "n", "return Math.sqrt(n)"),
+//     // generateLibraryStub("pi", "", "return Math.PI"),
+//     // generateLibraryStub(
+//     //   "random",
+//     //   "start, end",
+//     //   "return Math.floor(Math.random() * (Math.max(start, end) - Math.min(start, end) + 1) + Math.min(start, end));"
+//     // ),
+//     // generateLibraryStub("pow", "x, y", "return Math.pow(x, y);"),
+//   ].join("");
+// }
 
 function generateBlock(block) {
   // console.log("GB", block.map(s => `${s.gen()};`).join(""));
   return block.map(s => `${s.gen()};`).join("");
 }
 
-module.exports = function(exp) {
+module.exports = function (exp) {
   return prettyJs(generateBlock(exp.statements), { indent: "  " });
 };
 
-Argument.prototype.gen = function() {
+Argument.prototype.gen = function () {
   // console.log("\nA R G U M E N T\n");
   // console.log("THIS", this.expression);
   // console.log(this.expression.gen());
@@ -109,7 +132,7 @@ Argument.prototype.gen = function() {
   return this.expression.gen();
 };
 
-AssignmentStatement.prototype.gen = function() {
+AssignmentStatement.prototype.gen = function () {
   const formattedIds = [];
   const exps = this.exps.map(v => v.gen());
   //   console.log("IDS", this.ids);
@@ -122,28 +145,28 @@ AssignmentStatement.prototype.gen = function() {
   return `${formattedIds.join(", ")}`;
 };
 
-BinaryExpression.prototype.gen = function() {
+BinaryExpression.prototype.gen = function () {
   return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`;
 };
 
-BooleanLiteral.prototype.gen = function() {
+BooleanLiteral.prototype.gen = function () {
   return `${this.value}`;
 };
 
-BreakStatement.prototype.gen = function() {
+BreakStatement.prototype.gen = function () {
   return "break";
 };
 
-Call.prototype.gen = function() {
+Call.prototype.gen = function () {
   const args = this.args.map(a => a.gen());
-  console.log("CALLEE", this.callee);
+  // console.log("CALLEE", this.callee);
   if (this.callee.ref.builtin) {
     return builtin[this.callee.id](args);
   }
   return `${this.callee.gen()}(${args.join(",")})`;
 };
 
-DictExpression.prototype.gen = function() {
+DictExpression.prototype.gen = function () {
   const formattedKeyValues = [];
   const keyValues = this.exp.map(kv => kv.gen());
   for (let i = 0; i < this.exp.length; i += 1) {
@@ -152,7 +175,7 @@ DictExpression.prototype.gen = function() {
   return `{ ${formattedKeyValues.join(", ")} }`;
 };
 
-FromStatement.prototype.gen = function() {
+FromStatement.prototype.gen = function () {
   // console.log(this);
   const id = jsName(this.id);
   const expressions = this.expressions.map(v => v.gen());
@@ -164,7 +187,7 @@ FromStatement.prototype.gen = function() {
   }; ${id} += ${increments}) {${blocks.join("")}}`;
 };
 
-FunctionDeclaration.prototype.gen = function() {
+FunctionDeclaration.prototype.gen = function () {
   return `function ${this.function.gen()}(${this.function.params
     .map(p => p.gen())
     .join(",")}) {
@@ -172,22 +195,22 @@ FunctionDeclaration.prototype.gen = function() {
   }`;
 };
 
-FunctionObject.prototype.gen = function() {
+FunctionObject.prototype.gen = function () {
   return jsName(this);
 };
 
 // TODO: check in playground
-IdentifierExpression.prototype.gen = function() {
+IdentifierExpression.prototype.gen = function () {
   // console.log("id exp called");
   // console.log("REF", this.ref.gen());
   return this.ref.gen();
 };
 
-IfStatement.prototype.gen = function() {
+IfStatement.prototype.gen = function () {
   const cases = this.tests.map((test, index) => {
     const prefix = index === 0 ? "if" : "} else if";
     return `${prefix} (${test.gen()}) {${generateBlock(
-      this.consequents[index]
+      this.consequents[index],
     )}`;
   });
   const alternate = this.alternate
@@ -196,66 +219,66 @@ IfStatement.prototype.gen = function() {
   return `${cases.join("")}${alternate}}`;
 };
 
-KeyValueExpression.prototype.gen = function() {
+KeyValueExpression.prototype.gen = function () {
   return `${this.key.value}: ${this.value.value}`;
 };
 
-ListExpression.prototype.gen = function() {
+ListExpression.prototype.gen = function () {
   const jsMembers = this.members.map(member => member.gen());
   return `[${jsMembers.join(",")}]`;
 };
 
-NumericLiteral.prototype.gen = function() {
+NumericLiteral.prototype.gen = function () {
   return `${this.value}`;
 };
 
-Parameter.prototype.gen = function() {
+Parameter.prototype.gen = function () {
   // console.log("P A R A M E T E R");
   // console.log(this);
   return jsName(this);
 };
 
 // TODO: cannot have sole return in else statement
-ReturnStatement.prototype.gen = function() {
+ReturnStatement.prototype.gen = function () {
   // console.log("R E T U R N");
   // console.log(`return ${this.returnValue ? this.returnValue.gen() : ""}`);
   return `return ${this.returnValue ? this.returnValue.gen() : ""}`;
 };
 
-SetExpression.prototype.gen = function() {
+SetExpression.prototype.gen = function () {
   const jsMembers = this.members.map(member => member.gen());
   return `new Set([${jsMembers}])`;
 };
 
-StringLiteral.prototype.gen = function() {
+StringLiteral.prototype.gen = function () {
   return `${this.value}`;
 };
 
-SubscriptedExpression.prototype.gen = function() {
+SubscriptedExpression.prototype.gen = function () {
   const base = this.id.gen();
   const subscript = this.subscript.gen();
   return `${base}[${subscript}]`;
 };
 
-UnaryExpression.prototype.gen = function() {
+UnaryExpression.prototype.gen = function () {
   return `(${makeOp(this.op)} ${this.operand.gen()})`;
 };
 
-Variable.prototype.gen = function() {
+Variable.prototype.gen = function () {
   return `${jsName(this.id)}`;
 };
 
-VariableDeclaration.prototype.gen = function() {
+VariableDeclaration.prototype.gen = function () {
   const formattedIds = [];
   const exps = this.exps.map(v => v.gen());
-  console.log("IDS", this.ids);
+  // console.log("IDS", this.ids);
   for (let i = 0; i < this.ids.length; i += 1) {
     formattedIds.push(`${jsName(this.ids[i])} = ${exps[i]}`);
   }
   return `let ${formattedIds.join(", ")}`;
 };
 
-WhileStatement.prototype.gen = function() {
+WhileStatement.prototype.gen = function () {
   return `while (${this.test.gen()}) { ${generateBlock(this.body)} }`;
 };
 

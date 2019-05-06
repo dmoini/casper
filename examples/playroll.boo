@@ -1,2 +1,1 @@
-list<num> x = [1, 2, 3]
-len(x)
+num r = random(0, 100)
