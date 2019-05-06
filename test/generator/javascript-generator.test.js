@@ -1,3 +1,4 @@
+
 /*
  * JavaScript Code Generator Tests
  *
@@ -6,19 +7,19 @@
  */
 
 const parse = require('../../syntax/parser');
-const analyze = require('../../ast/index');
+// const analyze = require('../../ast/index');
 const generate = require('../../backend/javascript-generator');
 const Context = require("../../semantics/context");
 
 const fixture = {
-  hello: [
-    String.raw`print("Hello, world\n")`,
-    String.raw`console.log("Hello, world\n")`,
-  ],
+  // hello: [
+  //   String.raw`print("Hello, world\n")`,
+  //   String.raw`console.log("Hello, world\n")`,
+  // ],
 
   arithmetic: [
     String.raw`5 * -2 + 8`,
-    String.raw`((5 * -2)) + 8)`,
+    String.raw`((5 * (-2)) + 8);`,
   ],
 
   letAndAssign: [
@@ -27,31 +28,48 @@ x = 3`,
     /let x_(\d+) = 2;\s*x_\1 = 3;/,
   ],
 
-  // call: [
-  //   String.raw`let function f(x: int, y: string) = () in f(1, "") end`,
-  //   /function f_(\d+)\(x_\d+, y_\d+\) \{\s*};\s*f_\1\(1, ""\)/,
-  // ],
+  call: [
+    String.raw`num f(num x, string y):
+    return x
+f(1, "")`,
+    /function f_(\d+)\(x_(\d+), y_\d+\) \{\s*return x_\2;\s*\};\s*f_\1\(1, ""\);/,
+  ],
 
   whileLoop: [
     String.raw`while(true):
   break`,
-    /while \(true\) \{\s*break\s*\}/,
+    /while \(true\) \{\s*break;\s*\};/,
   ],
 
-  // forLoop: [
-  //   String.raw`for i := 0 to 10 do ()`,
-  //   /let hi_(\d+) = 10;\s*for \(let i_(\d+) = 0; i_\2 <= hi_\1; i_\2\+\+\) \{\s*\}/,
-  // ],
+  forLoop: [
+    String.raw`for i from 0 to 10 by 2:
+  num j = 2`,
+    /for \(let i_(\d+) = 0; i_\1 <= 10; i_\1 \+= 2\) \{\s*let j_\d+ = 2\s*\};/,
+  ],
 
-  // ifThen: [
-  //   String.raw`if 3 then 5`,
-  //   '((3) ? (5) : (null))',
-  // ],
+  ifStatement: [
+    String.raw`if 1 < 2:
+  1`,
+    /if \(\(1 < 2\)\) \{\s*1;\s*\};/,
+  ],
 
-  // ifThenElse: [
-  //   String.raw`if 3 then 5 else 8`,
-  //   '((3) ? (5) : (8))',
-  // ],
+  ifElseIfStatement: [
+    String.raw`if 1 < 2:
+  1
+else if 1 > 2:
+  2`,
+    /if \(\(1 < 2\)\) \{\s*1;\s*\} else if \(\(1 > 2\)\) \{\s*2;\s*\};/,
+  ],
+
+  ifElseIfElseStatement: [
+    String.raw`if 1 < 2:
+  1
+else if 1 > 2:
+  2
+else:
+  3`,
+    /if \(\(1 < 2\)\) \{\s*1;\s*\} else if \(\(1 > 2\)\) \{\s*2;\s*\} else \{\s*3;\s*\};/,
+  ],
 
   // member: [
   //   String.raw`let type r = {x:string} var p := r{x="@"} in print(p.x) end`,
@@ -95,6 +113,8 @@ describe('The JavaScript generator', () => {
       const ast = parse(source);
       // console.log('AST   ', ast);
       ast.analyze(Context.INITIAL);
+      console.log("GENERATE", generate(ast));
+      console.log("EXPECTED", expected);
       // eslint-disable-next-line no-undef
       expect(generate(ast)).toMatch(expected);
       // console.log('GENERATE     ', generate(ast));

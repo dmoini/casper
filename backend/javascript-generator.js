@@ -91,9 +91,8 @@ module.exports = function (exp) {
   return prettyJs(programStatements, { indent: "  " });
 };
 
-// TODO: fix
 Argument.prototype.gen = function () {
-  console.log("\nA R G U M E N T\n");
+  // console.log("\nA R G U M E N T\n");
   // console.log("THIS", this.expression);
   // console.log(this.expression.gen());
   // const j = jsName(this.expression.gen());
@@ -126,9 +125,8 @@ BreakStatement.prototype.gen = function () {
   return "break";
 };
 
-// TODO: check in playground
 Call.prototype.gen = function () {
-  console.log("C A L L");
+  // console.log("C A L L");
   // console.log()
   // return `${this.callee.gen()}(${this.args.map(a => a.gen()).join(",")})`;
   return `${this.callee.gen()}(${this.args.map(a => a.gen()).join(",")})`;
