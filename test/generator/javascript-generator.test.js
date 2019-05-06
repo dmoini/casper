@@ -18,13 +18,14 @@ const fixture = {
 
   arithmetic: [
     String.raw`5 * -2 + 8`,
-    String.raw`((5 * (-(2))) + 8)`,
+    String.raw`((5 * -2)) + 8)`,
   ],
 
-  // letAndAssign: [
-  //   String.raw`let var x := 3 in x := 2 end`,
-  //   /let x_(\d+) = 3;\s+x_\1 = 2/,
-  // ],
+  letAndAssign: [
+    String.raw`num x = 2 
+x = 3`,
+    /let x_(\d+) = 2;\s+x_\1 = 3/,
+  ],
 
   // call: [
   //   String.raw`let function f(x: int, y: string) = () in f(1, "") end`,
@@ -91,32 +92,11 @@ describe('The JavaScript generator', () => {
   Object.entries(fixture).forEach(([name, [source, expected]]) => {
     test(`produces the correct output for ${name}`, (done) => {
       const ast = parse(source);
-      console.log('AST   ', ast);
+      // console.log('AST   ', ast);
       ast.analyze(Context.INITIAL);
       expect(generate(ast)).toMatch(expected);
-      console.log('GENERATE     ', generate(ast));
+      // console.log('GENERATE     ', generate(ast));
+      done();
     });
   });
 });
-
-
-// const assert = require('assert');
-// const { spawn } = require('child_process');
-// const { compile } = require('../../casper');
-
-// describe('The code generator', () => {
-//   fs.readdirSync(__dirname).forEach((name) => {
-//     if (name.endsWith('.boo')) {
-//       test(`produces a behaviorally correct target for ${name}`, (done) => {
-//         fs.readFile(`${__dirname}/${name}`, 'utf-8', (err, input) => {
-//           const target = compile(input, {});
-//               expect(output).toEqual(expected);
-//               // assert.deepEqual(output, expected);
-//               done();
-//             });
-//           });
-//         });
-//       });
-//     }
-//   });
-// });
