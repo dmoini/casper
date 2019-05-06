@@ -94,6 +94,7 @@ describe('The JavaScript generator', () => {
       const ast = parse(source);
       // console.log('AST   ', ast);
       ast.analyze(Context.INITIAL);
+      // eslint-disable-next-line no-undef
       expect(generate(ast)).toMatch(expected);
       // console.log('GENERATE     ', generate(ast));
       done();

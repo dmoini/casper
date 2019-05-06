@@ -4,6 +4,7 @@ const check = require("../semantics/check");
 const ListType = require("../ast/list-type");
 const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
+const SubExp = require("../ast/subscripted-expression");
 
 module.exports = class AssignmentStatement {
   constructor(ids, exps) {
@@ -18,11 +19,13 @@ module.exports = class AssignmentStatement {
     }
 
     // Make sure that the types of expressions are compatible with the ids
-    console.log("IDS", this.ids);
+    // console.log("IDS", this.ids);
     this.ids.forEach((id, index) => {
-      console.log("ID", id.id);
-      const variable = context.lookupValue(id.id);
-      console.log("V A R I A B L E:", variable);
+      // console.log("Assignment statement\n");
+      // console.log("ID", id.id);
+      // console.log(id.constructor === SubExp);
+      const variable = id.constructor === SubExp ? context.lookupValue(id.id.id) : context.lookupValue(id.id);
+      console.log("Assignment", variable.type.memberType);
       const variableType = variable.type.constructor;
       const emptyListorSet =
         (variableType === ListType || variableType === SetType) &&
@@ -45,7 +48,9 @@ module.exports = class AssignmentStatement {
             this.exps[index].type = new DictType(keyType, valueType);
         }
       } else {
-        check.isAssignableTo(this.exps[index], variable.type);
+        // console.log("EXP", this.exps[index].type);
+        // console.log("VARTYPE", variable.type);
+        check.isAssignableTo(this.exps[index], id.constructor === SubExp ? variable.type.memberType : variable.type);
       }
     });
   }
