@@ -1,4 +1,6 @@
-for i from 0 to 10 by 2:
-    string s = "asd"
-    string p = "asd"
-    string d = "asd"
+if (2 < 3):
+    string s = "S"
+else if (false):
+    num x = 2
+else:
+    boo b = true

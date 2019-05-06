@@ -129,24 +129,17 @@ DictExpression.prototype.gen = function () {
   return `{ ${formattedKeyValues.join(", ")} }`;
 };
 
-// TODO: check in playground
-// test, expressions may be off
+// TODO: test, expressions may be off
 FromStatement.prototype.gen = function () {
   console.log(this);
   const id = jsName(this.id);
-  console.log("ID:", id);
   const expressions = this.expressions.map(v => v.gen());
-  console.log("EXPS:", expressions);
-  // const expressions = this.expressions.gen();
-  console.log("INC", this.increments);
   const increments = this.increments.length ? this.increments[0].gen() : 1;
-  console.log("INCREMENTS:", increments);
   console.log(this.blocks);
   const blocks = this.blocks.map(s => s.gen());
-  // const blocks = this.blocks.gen();
   return `for (let ${id} = ${expressions[0]}; ${id} <= ${
     expressions[1]
-  }; ${id} += ${increments}) {${blocks}}`;
+  }; ${id} += ${increments}) {${blocks.join("")}}`;
 };
 
 // TODO: check in playground
@@ -242,6 +235,7 @@ VariableDeclaration.prototype.gen = function () {
   for (let i = 0; i < this.ids.length; i += 1) {
     formattedIds.push(`${jsName(this.ids[i])} = ${exps[i]}`);
   }
+  console.log(formattedIds);
   return `let ${formattedIds.join(", ")};`;
 };
 

@@ -8,7 +8,7 @@
 const parse = require('../../syntax/parser');
 const analyze = require('../../ast/index');
 const generate = require('../../backend/javascript-generator');
-const Context = require('../../semantics/context');
+const Context = require("../../semantics/context");
 
 const fixture = {
   hello: [
@@ -99,7 +99,9 @@ describe('The JavaScript generator', () => {
   });
 });
 
+
 // const assert = require('assert');
+// const { spawn } = require('child_process');
 // const { compile } = require('../../casper');
 
 // describe('The code generator', () => {
@@ -108,12 +110,6 @@ describe('The JavaScript generator', () => {
 //       test(`produces a behaviorally correct target for ${name}`, (done) => {
 //         fs.readFile(`${__dirname}/${name}`, 'utf-8', (err, input) => {
 //           const target = compile(input, {});
-//           const child = spawn('node', ['-e', target]);
-//           let output = '';
-//           child.stdout.on('data', (data) => { output += data; });
-//           child.on('close', () => {
-//             fs.readFile(`${__dirname}/${name}.expected`, 'utf-8', (_err, expected) => {
-//               // eslint-disable-next-line no-undef
 //               expect(output).toEqual(expected);
 //               // assert.deepEqual(output, expected);
 //               done();
