@@ -1,4 +1,4 @@
-num x = 5
-num y = 3
-if (x is 5 and y is 3):
-    print(true)
+for i from 0 to 10 by 2:
+    string s = "asd"
+    string p = "asd"
+    string d = "asd"
