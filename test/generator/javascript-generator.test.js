@@ -11,20 +11,20 @@ const generate = require('../../backend/javascript-generator');
 const Context = require("../../semantics/context");
 
 const fixture = {
-  hello: [
-    String.raw`print("Hello, world\n")`,
-    String.raw`console.log("Hello, world\n")`,
-  ],
+  // hello: [
+  //   String.raw`print("Hello, world\n")`,
+  //   String.raw`console.log("Hello, world\n")`,
+  // ],
 
   // arithmetic: [
   //   String.raw`5 * -2 + 8`,
   //   String.raw`((5 * (-(2))) + 8)`,
   // ],
 
-  // letAndAssign: [
-  //   String.raw`let var x := 3 in x := 2 end`,
-  //   /let x_(\d+) = 3;\s+x_\1 = 2/,
-  // ],
+  letAndAssign: [
+    String.raw`let var x := 3 in x := 2 end`,
+    /let x_(\d+) = 3;\s+x_\1 = 2/,
+  ],
 
   // call: [
   //   String.raw`let function f(x: int, y: string) = () in f(1, "") end`,
