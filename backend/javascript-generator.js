@@ -58,7 +58,7 @@ function generateLibraryFunctions() {
   }
   // TODO: fix builtin functions
   return [
-    generateLibraryStub("print", "s", "console.log(s);"),
+    // generateLibraryStub("print", "s", "console.log(s);"),
     // generateLibraryStub("exit", "code", "process.exit(code);"),
     // generateLibraryStub("len", "l", "return l.length;"),
     // generateLibraryStub("substring", "s, i, n", "return s.substr(i, n);"),
@@ -81,11 +81,11 @@ function generateBlock(block) {
 }
 
 module.exports = function (exp) {
-  const libraryFunctions = generateLibraryFunctions();
+  // const libraryFunctions = generateLibraryFunctions();
   const programStatements = generateBlock(exp.statements);
   // Separate with a semicolon to avoid possible translation as a function call
-  const program = `${libraryFunctions} ; ${programStatements}`;
-  return prettyJs(program, { indent: "  " });
+  // const program = `${programStatements}`;
+  return prettyJs(programStatements, { indent: "  " });
 };
 
 Argument.prototype.gen = function () {

@@ -22,9 +22,9 @@ const fixture = {
   ],
 
   letAndAssign: [
-    String.raw`num x = 2 
+    String.raw`num x = 2
 x = 3`,
-    /let x_(\d+) = 2;\s+x_\1 = 3/,
+    /let x_(\d+) = 2;\s*x_\1 = 3;/,
   ],
 
   // call: [
