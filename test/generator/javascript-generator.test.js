@@ -92,7 +92,7 @@ describe('The JavaScript generator', () => {
     test(`produces the correct output for ${name}`, (done) => {
       const ast = parse(source);
       console.log('AST   ', ast);
-      ast.analyze(Context);
+      ast.analyze(Context.INITIAL);
       expect(generate(ast)).toMatch(expected);
       console.log('GENERATE     ', generate(ast));
     });
