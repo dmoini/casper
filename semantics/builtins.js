@@ -57,6 +57,9 @@ const MathFunctions = [
 //   // TODO: values()
 //   // TODO: items()
 // ]
+StandardFunctions.forEach(f => {
+  f.builtin = true;
+});
 
 module.exports = {
   NumType,
