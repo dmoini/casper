@@ -98,7 +98,7 @@ class Context {
   }
 
   lookupValue(id) {
-    console.log("LOOKUP", id);
+    // console.log("LOOKUP", id);
     for (let context = this; context !== null; context = context.parent) {
       if (id in context.declarations) {
         return context.declarations[id];

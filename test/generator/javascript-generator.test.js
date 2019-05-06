@@ -11,10 +11,10 @@ const generate = require('../../backend/javascript-generator');
 const Context = require("../../semantics/context");
 
 const fixture = {
-  // hello: [
-  //   String.raw`print("Hello, world\n")`,
-  //   String.raw`console.log("Hello, world\n")`,
-  // ],
+  hello: [
+    String.raw`print("Hello, world\n")`,
+    String.raw`console.log("Hello, world\n")`,
+  ],
 
   arithmetic: [
     String.raw`5 * -2 + 8`,
@@ -32,10 +32,11 @@ x = 3`,
   //   /function f_(\d+)\(x_\d+, y_\d+\) \{\s*};\s*f_\1\(1, ""\)/,
   // ],
 
-  // whileLoop: [
-  //   String.raw`while 7 do break`,
-  //   /while \(7\) \{\s*break\s*\}/,
-  // ],
+  whileLoop: [
+    String.raw`while(true):
+  break`,
+    /while \(true\) \{\s*break\s*\}/,
+  ],
 
   // forLoop: [
   //   String.raw`for i := 0 to 10 do ()`,

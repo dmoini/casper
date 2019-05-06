@@ -1,2 +1,2 @@
-dict<num, num> x = {1:1}
-x[0] = 1
+dict<num, num> d = {1:2, 3:6, 5: 10}
+d[2]
