@@ -8,6 +8,7 @@ module.exports = class SubscriptedExpression {
   }
 
   analyze(context) {
+    console.log("Variable", this.variable);
     this.subscript.analyze(context);
     this.variable.analyze(context);
     // console.log("SUBSCRIPT VAR", this.variable);
