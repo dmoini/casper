@@ -194,9 +194,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return [];
   },
   boollit(_) {
-    // eslint-disable-next-line no-nested-ternary
-    const bool = this.sourceString === "true" ? true : this.sourceString === "false" ? false : null;
-    return new BooleanLiteral(bool);
+    return new BooleanLiteral(this.sourceString === "true");
   },
   numlit(_1, _2, _3, _4, _5, _6) {
     return new NumericLiteral(+this.sourceString);
