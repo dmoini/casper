@@ -121,7 +121,7 @@ while true:
     print("I love casper")
 ```
 
-<!-- TODO: implement higher order functions and optional parameters -->
+<!-- TODO(after we survive junior year): implement higher order functions and optional parameters -->
 <!-- ## Higher Order Functions
 
 ```casper
