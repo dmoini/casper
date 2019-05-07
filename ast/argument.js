@@ -4,7 +4,6 @@ module.exports = class Argument {
   }
 
   analyze(context) {
-    // console.log("ARG ANALYZE:", this.expression);
     this.expression.analyze(context);
   }
 };

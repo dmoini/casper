@@ -6,7 +6,6 @@ module.exports = class SetType {
   }
 
   analyze(context) {
-    // this.memberType = context.lookupType(this.memberType);
     // NOTE: intentionally left blank
   }
 };

@@ -1,6 +1,5 @@
 const check = require("../semantics/check");
 const DictType = require("./dict-type");
-// const KeyValueExp = require("./keyvalue-expression");
 
 module.exports = class DictExpression {
   constructor(exp) {
@@ -9,7 +8,6 @@ module.exports = class DictExpression {
 
   // eslint-disable-next-line no-unused-vars
   analyze(context) {
-    // this.values.forEach(value => value.analyze(context));
     this.exp.forEach((e) => {
       e.key.analyze(context);
       e.value.analyze(context);

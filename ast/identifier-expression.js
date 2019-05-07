@@ -1,5 +1,3 @@
-// const Context = require("../semantics/context");
-
 module.exports = class IdentifierExpression {
   constructor(id) {
     this.id = id;

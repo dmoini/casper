@@ -11,6 +11,5 @@ module.exports = class VariableDeclaration {
     this.variables.forEach(variable => context.add(variable, variable.id.id));
     const a = new AssignmentStatement(this.ids, this.exps);
     a.analyze(context);
-    // console.log("VARDEC", a);
   }
 };

@@ -3,7 +3,6 @@ const { NumType } = require("../semantics/builtins");
 const Variable = require("./variable");
 
 module.exports = class FromStatement {
-  // change to for statement at some point
   constructor(id, expressions, increments, blocks) {
     Object.assign(this, { id, expressions, increments, blocks });
   }

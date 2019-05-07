@@ -1,7 +1,4 @@
-// const util = require("util");
-// const Variable = require("./variable");
 const Parameter = require("./parameter");
-// const NumType = require("../semantics/builtins");
 const ReturnStatement = require("./return-statement");
 
 module.exports = class FunctionObject {

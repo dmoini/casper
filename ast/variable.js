@@ -2,11 +2,11 @@
 /* eslint-disable class-methods-use-this */
 module.exports = class Variable {
   constructor(type, id) {
-    this.type = type;
-    this.id = id;
+    Object.assign(this, { type, id });
   }
 
   analyze(context) {
     // NOTE: left intentionally blank
+    // context.add(this);
   }
 };

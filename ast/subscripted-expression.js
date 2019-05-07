@@ -1,6 +1,5 @@
 const check = require("../semantics/check");
 const ListType = require("../ast/list-type");
-// const DictType = require('../ast/dict-type');
 
 module.exports = class SubscriptedExpression {
   constructor(id, subscript) {

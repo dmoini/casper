@@ -6,8 +6,6 @@ module.exports = class DictType {
   }
 
   analyze(context) {
-    // this.keyType = context.lookupType(this.keyType);
-    // this.valueType = context.lookupType(this.valueType);
     // NOTE: intentionally left blank
   }
 };
