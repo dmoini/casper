@@ -6,16 +6,17 @@ module.exports = class IfStatement {
   }
 
   analyze(context) {
-    this.tests.forEach((test) => {
+    this.tests.forEach(test => {
       test.analyze(context);
       check.isBoolean(test);
     });
-    this.consequents.forEach((block) => {
+    this.consequents.forEach(block => {
       const blockContext = context.createChildContextForBlock();
       block.forEach(statement => statement.analyze(blockContext));
     });
     if (this.alternate) {
-      this.alternate.forEach(s => s.analyze(context.createChildContextForBlock()));
+      const alternateBlock = context.createChildContextForBlock();
+      this.alternate.forEach(s => s.analyze(alternateBlock));
     }
   }
 };

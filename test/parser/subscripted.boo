@@ -1,2 +1,2 @@
 list<num> x = [1, 2, 3, 4]
-return x[0]
+x[0]

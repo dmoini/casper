@@ -1,7 +1,4 @@
-// const util = require("util");
-// const Variable = require("./variable");
 const Parameter = require("./parameter");
-// const NumType = require("../semantics/builtins");
 const ReturnStatement = require("./return-statement");
 
 module.exports = class FunctionObject {
@@ -23,7 +20,7 @@ module.exports = class FunctionObject {
     this.body.forEach(s => s.analyze(context));
 
     const returnStatement = this.body.filter(
-      b => b.constructor === ReturnStatement
+      b => b.constructor === ReturnStatement,
     );
     if (returnStatement.length === 0 && this.type !== "void") {
       throw new Error("No return statement found");

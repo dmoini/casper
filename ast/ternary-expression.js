@@ -5,7 +5,6 @@ module.exports = class TernaryStatement {
     Object.assign(this, { test, consequent, alternate });
   }
 
-  // TODO: make ternary expressions work for assignment
   analyze(context) {
     this.test.analyze(context);
     check.isBoolean(this.test);

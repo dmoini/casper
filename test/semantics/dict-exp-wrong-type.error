@@ -1,0 +1,1 @@
+dict<num, num> d = {1:1, 2: "two"}

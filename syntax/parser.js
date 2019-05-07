@@ -16,7 +16,6 @@ const withIndentsAndDedents = require("./preparser.js");
 
 const Program = require("../ast/program");
 const WhileStatement = require("../ast/while-statement");
-// const Case = require("../ast/case");
 const IfStatement = require("../ast/if-statement");
 const FromStatement = require("../ast/from-statement");
 const BreakStatement = require("../ast/break-statement");
@@ -24,7 +23,6 @@ const ReturnStatement = require("../ast/return-statement");
 const FunctionDeclaration = require("../ast/function-declaration");
 const VariableDeclaration = require("../ast/variable-declaration");
 const AssignmentStatement = require("../ast/assignment-statement");
-// const CallStatement = require("../ast/call");
 const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const TernaryExpression = require("../ast/ternary-expression");
@@ -36,7 +34,6 @@ const DictType = require("../ast/dict-type");
 const DictionaryExpression = require("../ast/dict-expression");
 const KeyValueExpression = require("../ast/keyvalue-expression");
 const Call = require("../ast/call");
-// const FunctionType = require("../ast/function-type");
 const SubscriptedExpression = require("../ast/subscripted-expression");
 const IdentifierExpression = require("../ast/identifier-expression");
 const Parameter = require("../ast/parameter");
@@ -68,7 +65,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Stmt_if(_1, firstTest, firstBlock, _2, moreTests, moreBlocks, _3, lastBlock) {
     const tests = [firstTest.ast(), ...moreTests.ast()];
     const consequents = [firstBlock.ast(), ...moreBlocks.ast()];
-    // const cases = tests.map((test, index) => new Case(test, consequents[index]));
     const alternate = arrayToNullable(lastBlock.ast());
     return new IfStatement(tests, consequents, alternate);
   },
@@ -82,8 +78,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     );
   },
   Stmt_ternary(trueTest, _1, test, _2, falseTest) {
-    // const tests = [trueTest.ast(), test.ast(), falseTest.ast()];
-    // return new TernaryExpression(tests);
     return new TernaryExpression(test.ast(), trueTest.ast(), falseTest.ast());
   },
   Stmt_function(type, id, _1, params, _2, block) {
@@ -100,9 +94,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   SimpleStmt_assign(v, _, e) {
     return new AssignmentStatement(v.ast(), e.ast());
   },
-  // SimpleStmt_call(c) {
-  //   return new CallStatement(c.ast());
-  // },
   SimpleStmt_break(_) {
     return new BreakStatement();
   },
@@ -184,9 +175,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   DictType(_1, keyType, _2, valueType, _3) {
     return new DictType(keyType.ast(), valueType.ast());
   },
-  //   FnType(_1, _2, args, _3) {
-  //     return new FunctionType(args.ast());
-  //   },
   NonemptyListOf(first, _, rest) {
     return [first.ast(), ...rest.ast()];
   },
@@ -194,7 +182,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return [];
   },
   boollit(_) {
-    return new BooleanLiteral(!!this.sourceString);
+    return new BooleanLiteral(this.sourceString === "true");
   },
   numlit(_1, _2, _3, _4, _5, _6) {
     return new NumericLiteral(+this.sourceString);

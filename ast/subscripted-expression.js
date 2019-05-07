@@ -1,21 +1,21 @@
 const check = require("../semantics/check");
 const ListType = require("../ast/list-type");
-// const DictType = require('../ast/dict-type');
 
 module.exports = class SubscriptedExpression {
-  constructor(variable, subscript) {
-    Object.assign(this, { variable, subscript });
+  constructor(id, subscript) {
+    Object.assign(this, { id, subscript });
   }
 
   analyze(context) {
     this.subscript.analyze(context);
-    this.variable.analyze(context);
-    const variableType = check.isListOrDict(this.variable);
+    this.id.analyze(context);
+    const variableType = check.isListOrDict(this.id);
     if (variableType === ListType) {
       check.isNumber(this.subscript);
-      this.type = this.variable.type.memberType;
+      this.type = this.id.type.memberType;
     } else {
-      // TODO: Check for dictionaries
+      check.sameType(this.id.type.keyType, this.subscript.type);
+      this.type = this.id.type.memberType;
     }
   }
 };

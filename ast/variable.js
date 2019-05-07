@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
 module.exports = class Variable {
   constructor(type, id) {
-    this.type = type;
-    this.id = id;
+    Object.assign(this, { type, id });
   }
 
   analyze(context) {
-    context.add(this);
+    // NOTE: left intentionally blank
   }
 };

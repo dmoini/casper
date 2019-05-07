@@ -7,7 +7,7 @@
         "callee": { "id": "print" }
       },
       "consequent": {
-        "args": [{ "expression": { "value": true } }],
+        "args": [{ "expression": { "value": false } }],
         "callee": { "id": "print" }
       },
       "test": {

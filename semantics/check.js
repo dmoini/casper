@@ -1,9 +1,7 @@
-// const util = require("util");
 const { NumType, StringType, BooleanType } = require("./builtins");
 const ListType = require("../ast/list-type");
 const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
-// const Function = require("../ast/function-object");
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -33,9 +31,9 @@ module.exports = {
   //     doCheck(type.constructor === DictType, "Not a dictionary type");
   //   },
 
-  //   isList(expression) {
-  //     doCheck(expression.type.constructor === ListType, "Not a list");
-  //   },
+  // isList(expression) {
+  //   doCheck(expression.type.constructor === ListType, "Not a list");
+  // },
 
   //   isSet(expression) {
   //     doCheck(expression.type.constructor === SetType, "Not a set");
@@ -47,20 +45,26 @@ module.exports = {
 
   isListOrDict(expression) {
     doCheck(
-      expression.type.constructor === ListType ||
-        expression.type.constructor === DictType,
-      "Not a list or dictionary"
+      expression.type.constructor === ListType
+        || expression.type.constructor === DictType,
+      "Not a list or dictionary",
     );
     return expression.type.constructor;
   },
 
-  isListOrSet(expression) {
-    doCheck(
-      expression.type.constructor === ListType ||
-        expression.type.constructor === SetType,
-      "Not list or set"
-    );
+  isCollectionType(expression) {
+    return expression.constructor === ListType
+      || expression.constructor === SetType
+      || expression.constructor === DictType;
   },
+
+  // isListOrSet(expression) {
+  //   doCheck(
+  //     expression.type.constructor === ListType
+  //       || expression.type.constructor === SetType,
+  //     "Not list or set",
+  //   );
+  // },
 
   isNumber(exp) {
     doCheck(exp.type === NumType, "Not a number");
@@ -72,7 +76,7 @@ module.exports = {
   isNumberOrString(exp) {
     doCheck(
       exp.type === NumType || exp.type === StringType,
-      "Not an Number or string"
+      "Not an Number or string",
     );
   },
 
@@ -87,14 +91,14 @@ module.exports = {
   isAssignableTo(exp, type) {
     doCheck(
       JSON.stringify(exp.type) === JSON.stringify(type),
-      "Types are not compatible"
+      "Types are not compatible",
     );
   },
 
   sameType(t1, t2) {
     doCheck(
       JSON.stringify(t1) === JSON.stringify(t2),
-      "Types are not compatible"
+      "Types are not compatible",
     );
   },
 

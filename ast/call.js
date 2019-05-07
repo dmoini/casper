@@ -1,3 +1,5 @@
+const check = require("../semantics/check");
+
 module.exports = class CallExpression {
   constructor(callee, args) {
     Object.assign(this, { callee, args });
@@ -13,7 +15,11 @@ module.exports = class CallExpression {
     }
     this.args.forEach((a, i) => {
       const paramType = this.callee.ref.params[i].type;
-      if (a.expression.type !== paramType && paramType !== "void") {
+      if (check.isCollectionType(paramType)) {
+        if (a.expression.type.constructor !== paramType.constructor && paramType !== "void") {
+          throw new Error("Argument and parameter types do not match");
+        }
+      } else if (a.expression.type !== paramType && paramType !== "void") {
         throw new Error("Argument and parameter types do not match");
       }
     });

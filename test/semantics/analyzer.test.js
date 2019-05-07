@@ -13,19 +13,21 @@ const Context = require("../../semantics/context");
 const errors = {
   "argument-parameter-types-mismatch": "Argument and parameter types do not match",
   "break-outside-of-loop": "Break outside of loop",
+  "call-not-function": "Call is not a function",
+  "dict-exp-wrong-type": "Types are not compatible",
   "function-no-return": "No return statement found",
   "incompatible-func-return-types": "Incorrect function return type",
   "incorrect-number-of-arguments": "Incorrect number of arguments",
   "incorrect-binary-exp": "Not a number",
   "list-incorrect-type": "Types are not compatible",
-  "list-mixed-types": "List mixed types",
+  "list-mixed-types": "Types are not compatible",
   "mismatched-assignment-length": "Number of ids does not equal number of exps",
   "num-assigned-to-list": "Types are not compatible",
   "num-assigned-to-string": "Types are not compatible",
   "num-plus-string": "Types are not compatible",
   "return-outside-of-function": "Return statement not in function",
   "reused-var-declaration": "Identifier already declared in this scope",
-  "set-improper": "Set mixed types",
+  "set-improper": "Types are not compatible",
   "string-assigned-to-list": "Types are not compatible",
   "string-assigned-to-num": "Types are not compatible",
   "subscripted-wrong-type": "Not a list or dictionary",
@@ -39,6 +41,7 @@ const errors = {
   "var-redeclared-in-function": "Identifier already declared in this scope",
   "void-function-with-return": "Void functions cannot have return statements",
   "while-loop-break": "Break outside of loop",
+  "wrong-parameter-collection-type": "Argument and parameter types do not match",
 };
 
 

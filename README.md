@@ -8,7 +8,9 @@ Welcome to casper, a friendly scripting language designed to make high level pro
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
-If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.
+If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.  
+  
+Check out our grammar: https://github.com/dmoini/casper/blob/master/syntax/casper.ohm
 
 ## Features
 
@@ -119,7 +121,7 @@ while true:
     print("I love casper")
 ```
 
-<!-- TODO: implement higher order functions and optional parameters -->
+<!-- TODO(after we survive junior year): implement higher order functions and optional parameters -->
 <!-- ## Higher Order Functions
 
 ```casper
@@ -150,10 +152,10 @@ multi-line comment
 
 - Argument and parameter types do not match
 - Break outside of loop
+- Call is not a function
 - Identifier already declared in this scope
 - Incorrect function return type
 - Incorrect number of arguments
-- List mixed types
 - No return statement found
 - Not a boolean
 - Not a list or dictionary

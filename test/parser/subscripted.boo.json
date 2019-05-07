@@ -1,8 +1,6 @@
 {
   "statements": [
     {
-      "type": { "memberType": { "name": "num" } },
-      "ids": [{ "id": "x" }],
       "exps": [
         {
           "members": [
@@ -12,10 +10,10 @@
             { "value": 4 }
           ]
         }
-      ]
+      ],
+      "ids": [{ "id": "x" }],
+      "type": { "memberType": { "name": "num" } }
     },
-    {
-      "returnValue": { "variable": { "id": "x" }, "subscript": { "value": 0 } }
-    }
+    { "id": { "id": "x" }, "subscript": { "value": 0 } }
   ]
 }
