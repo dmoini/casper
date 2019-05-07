@@ -13,6 +13,7 @@ const Context = require("../../semantics/context");
 const errors = {
   "argument-parameter-types-mismatch": "Argument and parameter types do not match",
   "break-outside-of-loop": "Break outside of loop",
+  "dict-exp-wrong-type": "Incompatible types within dictionary",
   "function-no-return": "No return statement found",
   "incompatible-func-return-types": "Incorrect function return type",
   "incorrect-number-of-arguments": "Incorrect number of arguments",

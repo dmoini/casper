@@ -28,11 +28,7 @@
       "!**/casper.js",
       "!**/coverage/**",
       "!**/node_modules/**",
-      "!**/docs/**",
-      "!**/ast/dict-expression.js",
-      "!**/ast/dict-type.js",
-      "!**/ast/keyvalue-expression.js",
-      "!**/ast/ternary-expression.js"
+      "!**/docs/**"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"

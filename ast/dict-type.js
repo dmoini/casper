@@ -1,10 +1,13 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-unused-vars */
 module.exports = class DictType {
   constructor(keyType, valueType) {
     Object.assign(this, { keyType, valueType });
   }
 
   analyze(context) {
-    this.keyType = context.lookupType(this.keyType);
-    this.valueType = context.lookupType(this.valueType);
+    // this.keyType = context.lookupType(this.keyType);
+    // this.valueType = context.lookupType(this.valueType);
+    // NOTE: intentionally left blank
   }
 };
