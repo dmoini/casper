@@ -20,7 +20,7 @@ const errors = {
   "incorrect-number-of-arguments": "Incorrect number of arguments",
   "incorrect-binary-exp": "Not a number",
   "list-incorrect-type": "Types are not compatible",
-  "list-mixed-types": "List mixed types",
+  "list-mixed-types": "Types are not compatible",
   "mismatched-assignment-length": "Number of ids does not equal number of exps",
   "num-assigned-to-list": "Types are not compatible",
   "num-assigned-to-string": "Types are not compatible",
