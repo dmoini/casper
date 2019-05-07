@@ -8,7 +8,9 @@ Welcome to casper, a friendly scripting language designed to make high level pro
 
 casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
-If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.
+If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.  
+  
+Check out our grammar: https://github.com/dmoini/casper/blob/master/syntax/casper.ohm
 
 ## Features
 
