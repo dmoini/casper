@@ -1,9 +1,7 @@
-// const util = require("util");
 const { NumType, StringType, BooleanType } = require("./builtins");
 const ListType = require("../ast/list-type");
-// const SetType = require("../ast/set-type");
+const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
-// const Function = require("../ast/function-object");
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -52,6 +50,12 @@ module.exports = {
       "Not a list or dictionary",
     );
     return expression.type.constructor;
+  },
+
+  isCollectionType(expression) {
+    return expression.constructor === ListType
+      || expression.constructor === SetType
+      || expression.constructor === DictType;
   },
 
   // isListOrSet(expression) {

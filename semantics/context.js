@@ -79,25 +79,6 @@ class Context {
     this.declarations[id || entity.id] = entity;
   }
 
-  // addType(typeDec) {
-  //   if (typeDec.id in this.typeMap) {
-  //     throw new Error(`Type ${typeDec.id} already declared in this scope`);
-  //   }
-  //   this.typeMap[typeDec.id] = typeDec.type;
-  // }
-
-  // Returns the entity bound to the given identifier, starting from this
-  // context and searching "outward" through enclosing contexts if necessary.
-  // lookupType(id) {
-  //   console.log("L O O K U P   T Y P E");
-  //   for (let context = this; context !== null; context = context.parent) {
-  //     if (id in context.typeMap) {
-  //       return context.typeMap[id];
-  //     }
-  //   }
-  //   throw new Error(`Type ${id} has not been declared`);
-  // }
-
   lookupValue(id) {
     for (let context = this; context !== null; context = context.parent) {
       if (id in context.declarations) {
@@ -135,7 +116,5 @@ Context.INITIAL.typeMap.num = NumType;
 Context.INITIAL.typeMap.string = StringType;
 Context.INITIAL.typeMap.boo = BooleanType;
 Context.INITIAL.typeMap.bool = BooleanType;
-
-// Context.INITIAL.typeMap.nil = NilType;
 
 module.exports = Context;
