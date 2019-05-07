@@ -1,6 +1,6 @@
 const check = require("../semantics/check");
 const DictType = require("./dict-type");
-const KeyValueExp = require("./keyvalue-expression");
+// const KeyValueExp = require("./keyvalue-expression");
 
 module.exports = class DictExpression {
   constructor(exp) {
@@ -21,14 +21,6 @@ module.exports = class DictExpression {
       for (let i = 1; i < this.exp.length; i += 1) {
         check.sameType(this.exp[i].key.type, this.type.keyType);
         check.sameType(this.exp[i].value.type, this.type.valueType);
-        // if (
-        //   JSON.stringify(this.exp[i].key.type)
-        //     !== JSON.stringify(this.type.keyType)
-        //   || JSON.stringify(this.exp[i].value.type)
-        //     !== JSON.stringify(this.type.valueType)
-        // ) {
-        //   throw new Error("Incompatible types within dictionary");
-        // }
       }
     }
   }
