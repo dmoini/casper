@@ -251,7 +251,9 @@ StringLiteral.prototype.gen = function () {
 
 SubscriptedExpression.prototype.gen = function () {
   const base = this.id.gen();
+  console.log("SUBEXP", this.subscript);
   const subscript = this.subscript.gen();
+  console.log("SUBEXP GEN", subscript);
   return `${base}[${subscript}]`;
 };
 
@@ -267,6 +269,8 @@ UnaryExpression.prototype.gen = function () {
 };
 
 Variable.prototype.gen = function () {
+  console.log("V A R I A B L E");
+  console.log(this);
   return `${jsName(this.id)}`;
 };
 
