@@ -4,9 +4,7 @@ module.exports = class ReturnStatement {
   }
 
   analyze(context) {
-    if (this.returnValue) {
-      this.returnValue.analyze(context);
-    }
+    this.returnValue.analyze(context);
     context.assertInFunction("Return statement not in function");
   }
 };
