@@ -79,26 +79,26 @@ class Context {
     this.declarations[id || entity.id] = entity;
   }
 
-  addType(typeDec) {
-    if (typeDec.id in this.typeMap) {
-      throw new Error(`Type ${typeDec.id} already declared in this scope`);
-    }
-    this.typeMap[typeDec.id] = typeDec.type;
-  }
+  // addType(typeDec) {
+  //   if (typeDec.id in this.typeMap) {
+  //     throw new Error(`Type ${typeDec.id} already declared in this scope`);
+  //   }
+  //   this.typeMap[typeDec.id] = typeDec.type;
+  // }
 
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
-  lookupType(id) {
-    for (let context = this; context !== null; context = context.parent) {
-      if (id in context.typeMap) {
-        return context.typeMap[id];
-      }
-    }
-    throw new Error(`Type ${id} has not been declared`);
-  }
+  // lookupType(id) {
+  //   console.log("L O O K U P   T Y P E");
+  //   for (let context = this; context !== null; context = context.parent) {
+  //     if (id in context.typeMap) {
+  //       return context.typeMap[id];
+  //     }
+  //   }
+  //   throw new Error(`Type ${id} has not been declared`);
+  // }
 
   lookupValue(id) {
-    // console.log("LOOKUP", id);
     for (let context = this; context !== null; context = context.parent) {
       if (id in context.declarations) {
         return context.declarations[id];
@@ -116,7 +116,7 @@ class Context {
   // eslint-disable-next-line class-methods-use-this
   assertIsFunction(entity) {
     if (entity.constructor !== FunctionObject) {
-      throw new Error(`${entity.id} is not a function`);
+      throw new Error(`Call is not a function`);
     }
   }
 }

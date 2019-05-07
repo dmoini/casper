@@ -7,25 +7,43 @@
  */
 
 const parse = require('../../syntax/parser');
-// const analyze = require('../../ast/index');
 const generate = require('../../backend/javascript-generator');
 const Context = require("../../semantics/context");
 
 const fixture = {
-  hello: [
-    String.raw`print("Hello, world\n")`,
-    String.raw`console.log("Hello, world\n")`,
-  ],
+  argument: [
+    String.raw`string concat(string s, string t):
+  return s + t
 
-  arithmetic: [
-    String.raw`5 * -2 + 8`,
-    String.raw`((5 * (-2)) + 8);`,
+concat("hello", "world")`,
+    /function concat_(\d+)\(s_(\d+), t_(\d+)\) {\s*return \(s_\2 \+ t_\3\);\s*\};\s*concat_\1\("hello", "world"\);/,
   ],
 
   letAndAssign: [
     String.raw`num x = 2
 x = 3`,
     /let x_(\d+) = 2;\s*x_\1 = 3;/,
+  ],
+
+  binary: [
+    String.raw`2 <= 5
+4 != 12
+true and true
+"hello" + "World"
+2 + 10
+(9 / 3) + ((2 * 6) % 4) - 1`,
+    String.raw`(2 <= 5);
+(4 != 12);
+(true && true);
+("hello" + "World");
+(2 + 10);
+(((9 / 3) + ((2 * 6) % 4)) - 1);`,
+  ],
+
+  whileLoopWithBreak: [
+    String.raw`while(true):
+  break`,
+    /while \(true\) \{\s*break;\s*\};/,
   ],
 
   call: [
@@ -35,16 +53,27 @@ f(1, "")`,
     /function f_(\d+)\(x_(\d+), y_\d+\) \{\s*return x_\2;\s*\};\s*f_\1\(1, ""\);/,
   ],
 
-  whileLoop: [
-    String.raw`while(true):
-  break`,
-    /while \(true\) \{\s*break;\s*\};/,
+  dictExpression: [
+    String.raw`dict<string, string> d = {"forney": "hustler", "toal": "wizard"}`,
+    /let d_\d+ = \{\s*forney: "hustler",\s*toal: "wizard"\s*\};/,
   ],
 
   forLoop: [
+    String.raw`for i from 0 to 10:
+  print("Hi Toal :)")`,
+    /for \(let i_(\d+) = 0; i_\1 <= 10; i_\1 \+= 1\) \{\s*console.log\("Hi Toal :\)"\)\s*\};/,
+  ],
+
+  forLoopWithIncrement: [
     String.raw`for i from 0 to 10 by 2:
-  num j = 2`,
-    /for \(let i_(\d+) = 0; i_\1 <= 10; i_\1 \+= 2\) \{\s*let j_\d+ = 2\s*\};/,
+  print("Hi Toal :)")`,
+    /for \(let i_(\d+) = 0; i_\1 <= 10; i_\1 \+= 2\) \{\s*console.log\("Hi Toal :\)"\)\s*\};/,
+  ],
+
+  functionDeclaration: [
+    String.raw`boo isEven(num x):
+  return x % 2 == 0`,
+    /function isEven_\d+\(x_(\d+)\) \{\s*return \(\(x_\1 % 2\) === 0\);\s*\};/,
   ],
 
   ifStatement: [
@@ -71,42 +100,21 @@ else:
     /if \(\(1 < 2\)\) \{\s*1;\s*\} else if \(\(1 > 2\)\) \{\s*2;\s*\} else \{\s*3;\s*\};/,
   ],
 
-  // member: [
-  //   String.raw`let type r = {x:string} var p := r{x="@"} in print(p.x) end`,
-  //   /let p_(\d+) = \{\s*x: "@"\s*\};\s*console.log\(p_\1\.x\)/,
-  // ],
+  listExpression: [
+    String.raw`list<num> sortedGrades = [100, 98, 93, 88, 86]
+num highestGrade = sortedGrades[0]`,
+    /let sortedGrades_(\d+) = \[\s*100,\s*98,\s*93,\s*88,\s*86\s*\];\s*let highestGrade_\d+ = sortedGrades_\1\[0\];/,
+  ],
 
-  // subscript: [
-  //   String.raw`let type r = array of string var a := r[3] of "" in print(a[0]) end`,
-  //   /let a_(\d+) = Array\(3\).fill\(""\);\s*console.log\(a_\1\[0\]\)/,
-  // ],
+  setExpression: [
+    String.raw`set<string> coolProfessors = set("Dondi", "Toal", "BJ")`,
+    /let coolProfessors_\d+ = new Set\(\[\s*"Dondi",\s*"Toal",\s*"BJ"\s*\]\);/,
+  ],
 
-  // letInFunction: [
-  //   String.raw`let function f():int = let var x:= 1 in x end in () end`,
-  //   /function f_(\d+)\(\) \{\s*let x_(\d+) = 1;\s*return x_\2\s*\};/,
-  // ],
-
-  // letAsValue: [
-  //   String.raw`print(let var x := "dog" in concat(x, "s") end)`,
-  //   /console.log\(\(\(\) => \{\s*let x_(\d+) = "dog";\s*return x_\1.concat\("s"\);\s*\}\)\(\)\)/,
-  // ],
-
-  // returnExpressionSequence: [
-  //   String.raw`let function f():int = let var x:= 1 in (1;nil;3) end in () end`,
-  //   /function f_(\d+)\(\) {\s*let x_(\d+) = 1;\s*1;\s*null;\s*return 3\s*\};/,
-  // ],
-
-  // moreBuiltIns: [
-  //   String.raw`(ord("x"); chr(30); substring("abc", 0, 1))`,
-  //   /\("x"\).charCodeAt\(0\);\s*String.fromCharCode\(30\);\s*"abc".substr\(0, 1\)/,
-  // ],
-
-  // evenMoreBuiltIns: [
-  //   String.raw`(not(1) ; size(""); exit(3))`,
-  //   /\(!\(1\)\);\s*"".length;\s*process\.exit\(3\)/,
-  // ],
-
-  // NOTE: builtins below
+  ternaryExpression: [
+    String.raw`print(2) if 2 < 3 else print(3)`,
+    String.raw`(2 < 3) ? console.log(2) : console.log(3);`,
+  ],
 
   print: [
     String.raw`print("Can we get an extra point back :)")`,
@@ -161,6 +169,12 @@ string a = charAt(alpha, 0)`,
     String.raw`num r = random(0, 100)`,
     /let r_\d+ = Math\.floor\(Math\.random\(\) \* \(Math\.max\(0, 100\) - Math\.min\(0, 100\) \+ 1\) \+ Math\.min\(0, 100\)\);/,
   ],
+
+  helloWorld: [
+    String.raw`void helloWorld():
+  print("Hello world!")`,
+    /function helloWorld_\d+\(\) \{\s*console\.log\("Hello world!"\);\s*\};/,
+  ],
 };
 
 describe('The JavaScript generator', () => {
@@ -169,8 +183,8 @@ describe('The JavaScript generator', () => {
       const ast = parse(source);
       // console.log('AST   ', ast);
       ast.analyze(Context.INITIAL);
-      console.log("GENERATE", generate(ast));
-      console.log("EXPECTED", expected);
+      // console.log("GENERATE", generate(ast));
+      // console.log("EXPECTED", expected);
       // eslint-disable-next-line no-undef
       expect(generate(ast)).toMatch(expected);
       // console.log('GENERATE     ', generate(ast));
