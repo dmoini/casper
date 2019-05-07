@@ -22,6 +22,7 @@ const BinaryExpression = require("../ast/binary-expression");
 const UnaryExpression = require("../ast/unary-expression");
 const IdentifierExpression = require("../ast/identifier-expression");
 const SubscriptedExpression = require("../ast/subscripted-expression");
+const TernaryExpression = require("../ast/ternary-expression");
 const Variable = require("../ast/variable");
 const Call = require("../ast/call");
 const Parameter = require("../ast/parameter");
@@ -199,10 +200,7 @@ FunctionObject.prototype.gen = function () {
   return jsName(this);
 };
 
-// TODO: check in playground
 IdentifierExpression.prototype.gen = function () {
-  // console.log("id exp called");
-  // console.log("REF", this.ref.gen());
   return this.ref.gen();
 };
 
@@ -238,11 +236,8 @@ Parameter.prototype.gen = function () {
   return jsName(this);
 };
 
-// TODO: cannot have sole return in else statement
 ReturnStatement.prototype.gen = function () {
-  // console.log("R E T U R N");
-  // console.log(`return ${this.returnValue ? this.returnValue.gen() : ""}`);
-  return `return ${this.returnValue ? this.returnValue.gen() : ""}`;
+  return `return ${this.returnValue.gen()}`;
 };
 
 SetExpression.prototype.gen = function () {
@@ -258,6 +253,13 @@ SubscriptedExpression.prototype.gen = function () {
   const base = this.id.gen();
   const subscript = this.subscript.gen();
   return `${base}[${subscript}]`;
+};
+
+TernaryExpression.prototype.gen = function () {
+  const test = this.test.gen();
+  const consequent = this.consequent.gen();
+  const alternate = this.alternate.gen();
+  return `${test} ? ${consequent} : ${alternate}`;
 };
 
 UnaryExpression.prototype.gen = function () {
@@ -281,6 +283,3 @@ VariableDeclaration.prototype.gen = function () {
 WhileStatement.prototype.gen = function () {
   return `while (${this.test.gen()}) { ${generateBlock(this.body)} }`;
 };
-
-// TODO
-// const FunctionDeclaration = require("../ast/function-declaration");

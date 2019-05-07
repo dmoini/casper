@@ -1,1 +1,1 @@
-num r = random(0, 100)
+boo b = 2 < 3
