@@ -4,7 +4,6 @@
 const prettyJs = require("pretty-js");
 const util = require("util");
 
-// const Program = require("../ast/program");
 const VariableDeclaration = require("../ast/variable-declaration");
 const AssignmentStatement = require("../ast/assignment-statement");
 const BreakStatement = require("../ast/break-statement");
@@ -45,9 +44,7 @@ const jsName = (() => {
   let lastId = 0;
   const map = new Map();
   return v => {
-    // console.log("VEE", v);
     if (!map.has(v)) {
-      // console.log("hello");,,
       map.set(v, ++lastId); // eslint-disable-line no-plusplus
     }
     return `${v.id}_${map.get(v)}`;
@@ -90,33 +87,7 @@ const builtin = {
   },
 };
 
-// function generateLibraryFunctions() {
-//   function generateLibraryStub(name, params, body) {
-//     const entity = Context.INITIAL.declarations[name];
-//     console.log("\nE N T I T Y\n", entity.id);
-//     return `function ${jsName(entity)}(${params}) {${body}}`;
-//   }
-//   return [
-//     // generateLibraryStub("print", "s", "console.log(s);"),
-//     // generateLibraryStub("exit", "code", "process.exit(code);"),
-//     // generateLibraryStub("len", "l", "return l.length;"),
-//     // generateLibraryStub("substring", "s, i, n", "return s.substr(i, n);"),
-//     // generateLibraryStub("charAt", "index", "return String.charAt(index);"),
-//     // generateLibraryStub("ord", "s", "return s.charCodeAt(0);"),
-//     // generateLibraryStub("abs", "n", "return Math.abs(n)"),
-//     // generateLibraryStub("sqrt", "n", "return Math.sqrt(n)"),
-//     // generateLibraryStub("pi", "", "return Math.PI"),
-//     // generateLibraryStub(
-//     //   "random",
-//     //   "start, end",
-//     //   "return Math.floor(Math.random() * (Math.max(start, end) - Math.min(start, end) + 1) + Math.min(start, end));"
-//     // ),
-//     // generateLibraryStub("pow", "x, y", "return Math.pow(x, y);"),
-//   ].join("");
-// }
-
 function generateBlock(block) {
-  // console.log("GB", block.map(s => `${s.gen()};`).join(""));
   return block.map(s => `${s.gen()};`).join("");
 }
 
@@ -125,22 +96,13 @@ module.exports = function (exp) {
 };
 
 Argument.prototype.gen = function () {
-  // console.log("\nA R G U M E N T\n");
-  // console.log("THIS", this.expression);
-  // console.log(this.expression.gen());
-  // const j = jsName(this.expression.gen());
-  // console.log(j);
   return this.expression.gen();
 };
 
 AssignmentStatement.prototype.gen = function () {
   const formattedIds = [];
   const exps = this.exps.map(v => v.gen());
-  //   console.log("IDS", this.ids);
   for (let i = 0; i < this.ids.length; i += 1) {
-    // console.log("Ids", this.ids[i]);
-
-    // console.log("Gen", this.ids[i].gen());
     formattedIds.push(`${this.ids[i].gen()} = ${exps[i]}`);
   }
   return `${formattedIds.join(", ")}`;
@@ -160,7 +122,6 @@ BreakStatement.prototype.gen = function () {
 
 Call.prototype.gen = function () {
   const args = this.args.map(a => a.gen());
-  // console.log("CALLEE", this.callee);
   if (this.callee.ref.builtin) {
     return builtin[this.callee.id](args);
   }
@@ -177,11 +138,9 @@ DictExpression.prototype.gen = function () {
 };
 
 FromStatement.prototype.gen = function () {
-  // console.log(this);
   const id = jsName(this.id);
   const expressions = this.expressions.map(v => v.gen());
   const increments = this.increments.length ? this.increments[0].gen() : 1;
-  //   console.log(this.blocks);
   const blocks = this.blocks.map(s => s.gen());
   return `for (let ${id} = ${expressions[0]}; ${id} <= ${
     expressions[1]
@@ -231,8 +190,6 @@ NumericLiteral.prototype.gen = function () {
 };
 
 Parameter.prototype.gen = function () {
-  // console.log("P A R A M E T E R");
-  // console.log(this);
   return jsName(this);
 };
 
@@ -251,9 +208,7 @@ StringLiteral.prototype.gen = function () {
 
 SubscriptedExpression.prototype.gen = function () {
   const base = this.id.gen();
-  console.log("SUBEXP", this.subscript);
   const subscript = this.subscript.gen();
-  console.log("SUBEXP GEN", subscript);
   return `${base}[${subscript}]`;
 };
 
@@ -269,15 +224,13 @@ UnaryExpression.prototype.gen = function () {
 };
 
 Variable.prototype.gen = function () {
-  console.log("V A R I A B L E");
-  console.log(this);
-  return `${jsName(this.id)}`;
+  const id = this.id.id === undefined ? this : this.id;
+  return `${jsName(id)}`;
 };
 
 VariableDeclaration.prototype.gen = function () {
   const formattedIds = [];
   const exps = this.exps.map(v => v.gen());
-  // console.log("IDS", this.ids);
   for (let i = 0; i < this.ids.length; i += 1) {
     formattedIds.push(`${jsName(this.ids[i])} = ${exps[i]}`);
   }

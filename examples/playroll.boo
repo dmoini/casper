@@ -1,5 +1,4 @@
-num average(list<num> l):
-    num sum = 0
-    for i from 0 to len(l):
-        sum = sum + l[i]
-    return sum / len(l)
+num firstIndex(list<num> l):
+    return l[0]
+dict<num, num> newDict = {1: 2, 3: 4}
+firstIndex(newDict)
