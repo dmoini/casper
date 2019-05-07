@@ -7,6 +7,5 @@ module.exports = class Variable {
 
   analyze(context) {
     // NOTE: left intentionally blank
-    // context.add(this);
   }
 };
