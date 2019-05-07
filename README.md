@@ -152,10 +152,10 @@ multi-line comment
 
 - Argument and parameter types do not match
 - Break outside of loop
+- Call is not a function
 - Identifier already declared in this scope
 - Incorrect function return type
 - Incorrect number of arguments
-- List mixed types
 - No return statement found
 - Not a boolean
 - Not a list or dictionary
