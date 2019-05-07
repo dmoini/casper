@@ -71,7 +71,7 @@ if (require.main === module) {
     .describe("o", "do optimizations")
     .describe(
       "i",
-      "generate and show the decorated abstract syntax tree then stop"
+      "generate and show the decorated abstract syntax tree then stop",
     )
     .demand(1);
   compileFile(argv._[0], {

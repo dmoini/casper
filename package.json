@@ -18,10 +18,14 @@
     "jest": "^24.8.0"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint **/*.js;exit 0",
+    "lint": "eslint .",
     "test": "jest test/**/*test.js",
     "test:watch": "jest test/**/*test.js --watch"
   },
+  "eslintIgnore": [
+    "freelancer.js",
+    "freelancer.min.js"
+  ],
   "jest": {
     "collectCoverageFrom": [
       "**/*.js",
