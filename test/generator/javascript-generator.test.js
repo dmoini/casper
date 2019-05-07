@@ -19,10 +19,18 @@ concat("hello", "world")`,
     /function concat_(\d+)\(s_(\d+), t_(\d+)\) {\s*return \(s_\2 \+ t_\3\);\s*\};\s*concat_\1\("hello", "world"\);/,
   ],
 
-  letAndAssign: [
+  letAndAssignment: [
     String.raw`num x = 2
 x = 3`,
     /let x_(\d+) = 2;\s*x_\1 = 3;/,
+  ],
+
+  assignment: [
+    String.raw`num compilers = 2
+compilers = 3
+list<num> listy = [1, 2, 3]
+listy[0] = 9001`,
+    /let compilers_(\d+) = 2;\s*compilers_\1 = 3;\s*let listy_(\d+) = \[\s*1,\s*2,\s*3\s*\];\s*listy_\2\[0\] = 9001;/,
   ],
 
   binary: [
@@ -175,19 +183,26 @@ string a = charAt(alpha, 0)`,
   print("Hello world!")`,
     /function helloWorld_\d+\(\) \{\s*console\.log\("Hello world!"\);\s*\};/,
   ],
+
+  averageGrade: [
+    String.raw`num average(list<num> l):
+  num sum = 0
+  for i from 0 to len(l):
+    sum = sum + l[i]
+  return sum / len(l)
+list<num> grades = [100, 90, 80, 70, 60]
+num averageGrade = average(grades)`,
+    /function average_(\d+)\(l_(\d+)\) \{\s*let sum_(\d+) = 0;\s*for \(let i_(\d+) = 0; i_\4 <= l_\2\.length; i_\4 \+= 1\) \{\s*sum_\3 = \(sum_\3 \+ l_\2\[i_\4\]\)\s*\};\s*return \(sum_\3 \/ l_\2\.length\);\s*\};\s*let grades_(\d+) = \[\s*100,\s*90,\s*80,\s*70,\s*60\s*\];\s*let averageGrade_\d+ = average_\1\(grades_\5\);/,
+  ],
 };
 
 describe('The JavaScript generator', () => {
   Object.entries(fixture).forEach(([name, [source, expected]]) => {
     test(`produces the correct output for ${name}`, (done) => {
       const ast = parse(source);
-      // console.log('AST   ', ast);
       ast.analyze(Context.INITIAL);
-      // console.log("GENERATE", generate(ast));
-      // console.log("EXPECTED", expected);
       // eslint-disable-next-line no-undef
       expect(generate(ast)).toMatch(expected);
-      // console.log('GENERATE     ', generate(ast));
       done();
     });
   });

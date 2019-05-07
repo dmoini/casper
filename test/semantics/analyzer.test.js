@@ -41,6 +41,7 @@ const errors = {
   "var-redeclared-in-function": "Identifier already declared in this scope",
   "void-function-with-return": "Void functions cannot have return statements",
   "while-loop-break": "Break outside of loop",
+  "wrong-parameter-collection-type": "Argument and parameter types do not match",
 };
 
 
