@@ -9,6 +9,8 @@ module.exports = class BinaryExpression {
   analyze(context) {
     this.left.analyze(context);
     this.right.analyze(context);
+    console.log(check.isZero(this.left));
+    console.log(check.isZero(this.right));
     if (["<=", ">=", "<", ">"].includes(this.op)) {
       // Relational operators
       check.isNumber(this.left);
@@ -33,5 +35,10 @@ module.exports = class BinaryExpression {
       check.sameType(this.left.type, this.right.type);
       this.type = NumType;
     }
+  }
+
+  optimize() {
+    this.left = this.left.optimize();
+    this.right = this.right.optimize();
   }
 };
