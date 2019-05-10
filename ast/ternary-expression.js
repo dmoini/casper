@@ -14,7 +14,7 @@ module.exports = class TernaryStatement {
     this.type = this.consequent.type;
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

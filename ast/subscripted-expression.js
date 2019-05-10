@@ -19,7 +19,7 @@ module.exports = class SubscriptedExpression {
     }
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

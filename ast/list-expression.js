@@ -16,7 +16,7 @@ module.exports = class ListExpression {
     }
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

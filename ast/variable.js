@@ -9,7 +9,7 @@ module.exports = class Variable {
     // NOTE: left intentionally blank
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

@@ -16,7 +16,7 @@ module.exports = class SetExpression {
     }
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

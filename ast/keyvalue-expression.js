@@ -10,7 +10,7 @@ module.exports = class KeyValueExpression {
     // NOTE: Intentionally left blank
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

@@ -7,7 +7,7 @@ module.exports = class Argument {
     this.expression.analyze(context);
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

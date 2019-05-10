@@ -17,7 +17,7 @@ module.exports = class UnaryExpression {
     }
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };

@@ -7,7 +7,7 @@ module.exports = class Parameter {
     context.add(this);
   }
 
-  optimize() {
-    return this;
-  }
+  // optimize() {
+  //   return this;
+  // }
 };
