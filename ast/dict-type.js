@@ -8,4 +8,8 @@ module.exports = class DictType {
   analyze(context) {
     // NOTE: intentionally left blank
   }
+
+  optimize() {
+    return this;
+  }
 };

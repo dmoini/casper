@@ -18,4 +18,8 @@ module.exports = class SubscriptedExpression {
       this.type = this.id.type.memberType;
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

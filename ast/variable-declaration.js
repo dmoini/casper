@@ -12,4 +12,8 @@ module.exports = class VariableDeclaration {
     const a = new AssignmentStatement(this.ids, this.exps);
     a.analyze(context);
   }
+
+  optimize() {
+    return this;
+  }
 };

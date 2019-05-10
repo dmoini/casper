@@ -19,4 +19,8 @@ module.exports = class IfStatement {
       this.alternate.forEach(s => s.analyze(alternateBlock));
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

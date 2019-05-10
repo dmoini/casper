@@ -9,4 +9,8 @@ module.exports = class BooleanLiteral {
   analyze(context) {
     this.type = BooleanType;
   }
+
+  optimize() {
+    return this;
+  }
 };

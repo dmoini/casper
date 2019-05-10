@@ -15,4 +15,8 @@ module.exports = class SetExpression {
       }
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

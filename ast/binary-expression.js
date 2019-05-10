@@ -1,7 +1,9 @@
 const check = require("../semantics/check");
 const { NumType, BooleanType, StringType } = require("../semantics/builtins");
-const { isZero, isOne, bothLiterals } = require('../semantics/optimizer');
+const { isZero, isOne, bothNumericLiterals, bothStringLiterals, bothBooleanLiterals } = require('../semantics/optimizer');
 const NumericLiteral = require('../ast/numeric-literal');
+const StringLiteral = require('../ast/string-literal');
+const BooleanLiteral = require('../ast/boolean-literal');
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
@@ -11,8 +13,6 @@ module.exports = class BinaryExpression {
   analyze(context) {
     this.left.analyze(context);
     this.right.analyze(context);
-    console.log(check.isZero(this.left));
-    console.log(check.isZero(this.right));
     if (["<=", ">=", "<", ">"].includes(this.op)) {
       // Relational operators
       check.isNumber(this.left);
@@ -44,15 +44,28 @@ module.exports = class BinaryExpression {
     this.right = this.right.optimize();
     if (this.op === '+' && isZero(this.right)) return this.left;
     if (this.op === '+' && isZero(this.left)) return this.right;
-    if (this.op === '*' && isZero(this.right)) return new NumericLiteral(0);
-    if (this.op === '*' && isZero(this.left)) return new NumericLiteral(0);
+    if (this.op === '*' && (isZero(this.left) || isZero(this.right))) return new NumericLiteral(0);
     if (this.op === '*' && isOne(this.right)) return this.left;
     if (this.op === '*' && isOne(this.left)) return this.right;
-    if (bothLiterals(this)) {
+    if (bothNumericLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value];
       if (this.op === '+') return new NumericLiteral(x + y);
+      if (this.op === '-') return new NumericLiteral(x - y);
       if (this.op === '*') return new NumericLiteral(x * y);
       if (this.op === '/') return new NumericLiteral(x / y);
+      if (this.op === '//') return new NumericLiteral(Math.floor(x / y));
+      if (this.op === '%') return new NumericLiteral(x % y);
+      if (this.op === '<=') return new BooleanLiteral(x <= y);
+      if (this.op === '<') return new BooleanLiteral(x < y);
+      if (this.op === '>=') return new BooleanLiteral(x >= y);
+      if (this.op === '>') return new BooleanLiteral(x > y);
+    } else if (bothStringLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value];
+      if (this.op === '+') return new StringLiteral(x + y);
+    } else if (bothBooleanLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value];
+      if (this.op === 'and') return new BooleanLiteral(x && y);
+      if (this.op === 'or') return new StringLiteral(x || y);
     }
     return this;
   }

@@ -49,4 +49,8 @@ module.exports = class AssignmentStatement {
       }
     });
   }
+
+  optimize() {
+    return this;
+  }
 };

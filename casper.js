@@ -29,6 +29,7 @@ const yargs = require("yargs");
 const parse = require("./syntax/parser");
 const Context = require("./semantics/context");
 const generate = require("./backend/javascript-generator");
+require('./semantics/optimizer');
 // require('./backend/javascript-generator');
 
 // If compiling from a string, return the AST, IR, or compiled code as a string.

@@ -11,4 +11,8 @@ module.exports = class FunctionDeclaration {
     context.add(this.function);
     this.function.analyze(context.createChildContextForFunctionBody(this));
   }
+
+  optimize() {
+    return this;
+  }
 };

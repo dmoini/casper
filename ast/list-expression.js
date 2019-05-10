@@ -15,4 +15,8 @@ module.exports = class ListExpression {
       }
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -9,4 +9,8 @@ module.exports = class KeyValueExpression {
   analyze(context) {
     // NOTE: Intentionally left blank
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -8,4 +8,10 @@ module.exports = class Program {
       stmt.analyze(context);
     });
   }
+
+  optimize() {
+    console.log(this);
+    this.statements.map(s => s.optimize()).filter(s => s !== null);
+    return this;
+  }
 };

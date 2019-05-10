@@ -24,4 +24,8 @@ module.exports = class CallExpression {
       }
     });
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -15,4 +15,8 @@ module.exports = class FromStatement {
     bodyContext.add(this.id);
     this.blocks.forEach(b => b.analyze(bodyContext));
   }
+
+  optimize() {
+    return this;
+  }
 };

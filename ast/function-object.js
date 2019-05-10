@@ -31,4 +31,8 @@ module.exports = class FunctionObject {
       this.isAssignableTo(returnStatement[0].returnValue.type, this.type);
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -13,4 +13,8 @@ module.exports = class TernaryStatement {
     check.sameType(this.consequent.type, this.alternate.type);
     this.type = this.consequent.type;
   }
+
+  optimize() {
+    return this;
+  }
 };

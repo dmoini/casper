@@ -9,4 +9,8 @@ module.exports = class IdentifierDeclaration {
   analyze(context) {
     // NOTE: intentionally left blank
   }
+
+  optimize() {
+    return this;
+  }
 };

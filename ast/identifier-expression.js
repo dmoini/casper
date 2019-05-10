@@ -7,4 +7,8 @@ module.exports = class IdentifierExpression {
     this.ref = context.lookupValue(this.id);
     this.type = this.ref.type;
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -16,4 +16,8 @@ module.exports = class UnaryExpression {
       this.type = NumType;
     }
   }
+
+  optimize() {
+    return this;
+  }
 };

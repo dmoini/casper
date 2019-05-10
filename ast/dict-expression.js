@@ -22,4 +22,8 @@ module.exports = class DictExpression {
       }
     }
   }
+
+  optimize() {
+    return this;
+  }
 };
