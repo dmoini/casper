@@ -44,7 +44,7 @@ module.exports = class BinaryExpression {
     this.right = this.right.optimize();
     if (this.op === '!=') return new BooleanLiteral(this.left.value !== this.right.value);
     if (this.op === '==') return new BooleanLiteral(this.left.value === this.right.value);
-    // eslint-disable-next-line eqeqeq
+    // eslint-disable-next-line
     if (this.op === 'is') return new BooleanLiteral(this.left.value == this.right.value);
     if ((this.op === '+' || this.op === '-') && isZero(this.right)) return this.left;
     if ((this.op === '+' || this.op === '-') && isZero(this.left)) return this.right;
