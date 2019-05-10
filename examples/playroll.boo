@@ -6,3 +6,5 @@ else if (3 > 4):
     7 + 8
     9 + 10
     11 + 12
+    true and false
+    "apple" + "banana"
