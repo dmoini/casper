@@ -14,6 +14,13 @@ module.exports = class VariableDeclaration {
   }
 
   optimize() {
+    // console.log("THIS.EXPS", this.exps);
+    // this.exps.map(e => e.optimize());
+    this.exps.forEach((e, i) => {
+      this.exps[i] = this.exps[i].optimize();
+    });
+    // this.exps[0] = this.exps[0].optimize();
+    // console.log("THIS.EXPS", this.exps);
     return this;
   }
 };

@@ -10,6 +10,10 @@ module.exports = class WhileStatement {
   }
 
   optimize() {
+    this.test = this.test.optimize();
+    this.body.forEach((b, i) => {
+      this.body[i] = this.body[i].optimize();
+    });
     return this;
   }
 };

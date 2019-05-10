@@ -40,12 +40,14 @@ module.exports = class BinaryExpression {
   }
 
   optimize() {
-    console.log("OPTIMIZE BINARY EXP");
     this.left = this.left.optimize();
     this.right = this.right.optimize();
-    console.log(this.op === '+' && isZero(this.right));
-    if (this.op === '+' && isZero(this.right)) return this.left;
-    if (this.op === '+' && isZero(this.left)) return this.right;
+    if (this.op === '!=') return new BooleanLiteral(this.left.value !== this.right.value);
+    if (this.op === '==') return new BooleanLiteral(this.left.value === this.right.value);
+    // eslint-disable-next-line eqeqeq
+    if (this.op === 'is') return new BooleanLiteral(this.left.value == this.right.value);
+    if ((this.op === '+' || this.op === '-') && isZero(this.right)) return this.left;
+    if ((this.op === '+' || this.op === '-') && isZero(this.left)) return this.right;
     if (this.op === '*' && (isZero(this.left) || isZero(this.right))) return new NumericLiteral(0);
     if (this.op === '*' && isOne(this.right)) return this.left;
     if (this.op === '*' && isOne(this.left)) return this.right;
@@ -63,7 +65,10 @@ module.exports = class BinaryExpression {
       if (this.op === '>') return new BooleanLiteral(x > y);
     } else if (bothStringLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value];
-      if (this.op === '+') return new StringLiteral(x + y);
+      if (this.op === '+') {
+        const xy = (x + y).replace(/["]+/g, '');
+        return new StringLiteral(`"${xy}"`);
+      }
     } else if (bothBooleanLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value];
       if (this.op === 'and') return new BooleanLiteral(x && y);
