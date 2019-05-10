@@ -10,8 +10,9 @@ module.exports = class Program {
   }
 
   optimize() {
-    console.log(this);
+    console.log("OPTIMIZE PROGRAM");
     this.statements.map(s => s.optimize()).filter(s => s !== null);
+    this.statements.map(s => console.log(s));
     return this;
   }
 };

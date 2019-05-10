@@ -40,8 +40,10 @@ module.exports = class BinaryExpression {
   }
 
   optimize() {
+    console.log("OPTIMIZE BINARY EXP");
     this.left = this.left.optimize();
     this.right = this.right.optimize();
+    console.log(this.op === '+' && isZero(this.right));
     if (this.op === '+' && isZero(this.right)) return this.left;
     if (this.op === '+' && isZero(this.left)) return this.right;
     if (this.op === '*' && (isZero(this.left) || isZero(this.right))) return new NumericLiteral(0);
