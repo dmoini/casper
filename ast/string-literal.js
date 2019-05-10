@@ -9,4 +9,8 @@ module.exports = class StringLiteral {
   analyze(context) {
     this.type = StringType;
   }
+
+  optimize() {
+    return this;
+  }
 };

@@ -7,4 +7,9 @@ module.exports = class ReturnStatement {
     this.returnValue.analyze(context);
     context.assertInFunction("Return statement not in function");
   }
+
+  optimize() {
+    this.returnValue = this.returnValue.optimize();
+    return this;
+  }
 };

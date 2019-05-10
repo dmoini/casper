@@ -8,4 +8,8 @@ module.exports = class Variable {
   analyze(context) {
     // NOTE: left intentionally blank
   }
+
+  optimize() {
+    return this;
+  }
 };

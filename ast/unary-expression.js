@@ -1,5 +1,7 @@
 const check = require("../semantics/check");
 const { BooleanType, NumType } = require("../semantics/builtins");
+const BooleanLiteral = require("../ast/boolean-literal");
+const NumericLiteral = require("../ast/numeric-literal");
 
 module.exports = class UnaryExpression {
   constructor(op, operand) {
@@ -15,5 +17,16 @@ module.exports = class UnaryExpression {
       check.isNumber(this.operand);
       this.type = NumType;
     }
+  }
+
+  optimize() {
+    this.operand = this.operand.optimize();
+    if ((this.op === 'not' || this.op === '!') && this.operand instanceof BooleanLiteral) {
+      return new BooleanLiteral(!this.operand.value);
+    }
+    if (this.op === '-' && this.operand instanceof NumericLiteral) {
+      return new NumericLiteral(-this.operand.value);
+    }
+    return this;
   }
 };

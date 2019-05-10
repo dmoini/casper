@@ -9,4 +9,8 @@ module.exports = class NumericLiteral {
   analyze(context) {
     this.type = NumType;
   }
+
+  optimize() {
+    return this;
+  }
 };

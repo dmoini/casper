@@ -15,4 +15,17 @@ module.exports = class FromStatement {
     bodyContext.add(this.id);
     this.blocks.forEach(b => b.analyze(bodyContext));
   }
+
+  optimize() {
+    for (let i = 0; i < this.expressions.length; i += 1) {
+      this.expressions[i] = this.expressions[i].optimize();
+    }
+    for (let i = 0; i < this.expressions.length; i += 1) {
+      this.expressions[i] = this.expressions[i].optimize();
+    }
+    for (let i = 0; i < this.blocks.length; i += 1) {
+      this.blocks[i] = this.blocks[i].optimize();
+    }
+    return this;
+  }
 };

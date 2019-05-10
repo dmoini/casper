@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 module.exports = class IdentifierExpression {
   constructor(id) {
     this.id = id;
@@ -6,5 +7,9 @@ module.exports = class IdentifierExpression {
   analyze(context) {
     this.ref = context.lookupValue(this.id);
     this.type = this.ref.type;
+  }
+
+  optimize() {
+    return this;
   }
 };

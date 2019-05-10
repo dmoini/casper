@@ -144,7 +144,7 @@ FromStatement.prototype.gen = function () {
   const blocks = this.blocks.map(s => s.gen());
   return `for (let ${id} = ${expressions[0]}; ${id} <= ${
     expressions[1]
-  }; ${id} += ${increments}) {${blocks.join("")}}`;
+  }; ${id} += ${increments}) {${blocks.join(";\n")};}`;
 };
 
 FunctionDeclaration.prototype.gen = function () {

@@ -1,5 +1,8 @@
 const check = require("../semantics/check");
 const { NumType, BooleanType, StringType } = require("../semantics/builtins");
+const NumericLiteral = require('../ast/numeric-literal');
+const StringLiteral = require('../ast/string-literal');
+const BooleanLiteral = require('../ast/boolean-literal');
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
@@ -33,5 +36,41 @@ module.exports = class BinaryExpression {
       check.sameType(this.left.type, this.right.type);
       this.type = NumType;
     }
+  }
+
+  optimize() {
+    this.left = this.left.optimize();
+    this.right = this.right.optimize();
+    if (this.op === '!=') return new BooleanLiteral(this.left.value !== this.right.value);
+    if (this.op === '==') return new BooleanLiteral(this.left.value === this.right.value);
+    // eslint-disable-next-line
+    if (this.op === 'is') return new BooleanLiteral(this.left.value == this.right.value);
+    if ((this.op === '+') && check.isZero(this.right)) return this.left;
+    if ((this.op === '+') && check.isZero(this.left)) return this.right;
+    if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return new NumericLiteral(0);
+    if (this.op === '*' && check.isOne(this.right)) return this.left;
+    if (this.op === '*' && check.isOne(this.left)) return this.right;
+    if (check.bothNumericLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value];
+      if (this.op === '+') return new NumericLiteral(x + y);
+      if (this.op === '-') return new NumericLiteral(x - y);
+      if (this.op === '*') return new NumericLiteral(x * y);
+      if (this.op === '/') return new NumericLiteral(x / y);
+      if (this.op === '//') return new NumericLiteral(Math.floor(x / y));
+      if (this.op === '%') return new NumericLiteral(x % y);
+      if (this.op === '<=') return new BooleanLiteral(x <= y);
+      if (this.op === '<') return new BooleanLiteral(x < y);
+      if (this.op === '>=') return new BooleanLiteral(x >= y);
+      if (this.op === '>') return new BooleanLiteral(x > y);
+    } else if (check.bothStringLiterals(this) && this.op === '+') {
+      const [x, y] = [this.left.value, this.right.value];
+      const xy = (x + y).replace(/["]+/g, '');
+      return new StringLiteral(`"${xy}"`);
+    } else if (check.bothBooleanLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value];
+      if (this.op === 'and') return new BooleanLiteral(x && y);
+      if (this.op === 'or') return new StringLiteral(x || y);
+    }
+    return this;
   }
 };

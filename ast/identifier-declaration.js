@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 module.exports = class IdentifierDeclaration {
   constructor(id) {
@@ -8,5 +9,9 @@ module.exports = class IdentifierDeclaration {
   // eslint-disable-next-line class-methods-use-this
   analyze(context) {
     // NOTE: intentionally left blank
+  }
+
+  optimize() {
+    return this;
   }
 };

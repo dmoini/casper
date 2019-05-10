@@ -31,4 +31,11 @@ module.exports = class FunctionObject {
       this.isAssignableTo(returnStatement[0].returnValue.type, this.type);
     }
   }
+
+  optimize() {
+    for (let i = 0; i < this.body.length; i += 1) {
+      this.body[i] = this.body[i].optimize();
+    }
+    return this;
+  }
 };

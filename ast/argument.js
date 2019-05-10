@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 module.exports = class Argument {
   constructor(expression) {
     Object.assign(this, { expression });
@@ -5,5 +6,9 @@ module.exports = class Argument {
 
   analyze(context) {
     this.expression.analyze(context);
+  }
+
+  optimize() {
+    return this;
   }
 };

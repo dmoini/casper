@@ -19,4 +19,16 @@ module.exports = class IfStatement {
       this.alternate.forEach(s => s.analyze(alternateBlock));
     }
   }
+
+  optimize() {
+    for (let i = 0; i < this.tests.length; i += 1) {
+      this.tests[i] = this.tests[i].optimize();
+    }
+    for (let i = 0; i < this.consequents.length; i += 1) {
+      for (let j = 0; j < this.consequents[i].length; j += 1) {
+        this.consequents[i][j] = this.consequents[i][j].optimize();
+      }
+    }
+    return this;
+  }
 };
