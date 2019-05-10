@@ -9,7 +9,7 @@ module.exports = class SetType {
     // NOTE: intentionally left blank
   }
 
-  // optimize() {
-  //   return this;
-  // }
+  optimize() {
+    return this;
+  }
 };

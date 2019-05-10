@@ -26,6 +26,9 @@ module.exports = class CallExpression {
   }
 
   optimize() {
+    for (let i = 0; i < this.args.length; i += 1) {
+      this.args[i].expression = this.args[i].expression.optimize();
+    }
     return this;
   }
 };

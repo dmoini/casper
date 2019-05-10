@@ -16,7 +16,10 @@ module.exports = class ListExpression {
     }
   }
 
-  // optimize() {
-  //   return this;
-  // }
+  optimize() {
+    for (let i = 0; i < this.members.length; i += 1) {
+      this.members[i] = this.members[i].optimize();
+    }
+    return this;
+  }
 };

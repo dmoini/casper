@@ -9,6 +9,7 @@ module.exports = class ReturnStatement {
   }
 
   optimize() {
+    this.returnValue = this.returnValue.optimize();
     return this;
   }
 };

@@ -13,6 +13,7 @@ module.exports = class FunctionDeclaration {
   }
 
   optimize() {
+    this.function = this.function.optimize();
     return this;
   }
 };

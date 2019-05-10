@@ -9,7 +9,7 @@ module.exports = class DictType {
     // NOTE: intentionally left blank
   }
 
-  // optimize() {
-  //   return this;
-  // }
+  optimize() {
+    return this;
+  }
 };

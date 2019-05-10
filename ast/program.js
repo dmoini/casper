@@ -10,7 +10,10 @@ module.exports = class Program {
   }
 
   optimize() {
-    this.statements.map(s => s.optimize()).filter(s => s !== null);
+    for (let i = 0; i < this.statements.length; i += 1) {
+      this.statements[i] = this.statements[i].optimize();
+    }
+    this.statements.filter(s => s !== null);
     return this;
   }
 };

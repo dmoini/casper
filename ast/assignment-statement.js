@@ -51,6 +51,12 @@ module.exports = class AssignmentStatement {
   }
 
   optimize() {
+    this.ids.filter(id => id.constructor === SubExp).forEach((id, i) => {
+      this.ids[i] = this.ids[i].optimize();
+    });
+    for (let i = 0; i < this.exps.length; i += 1) {
+      this.exps[i] = this.exps[i].optimize();
+    }
     return this;
   }
 };
