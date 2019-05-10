@@ -1,5 +1,7 @@
 const check = require("../semantics/check");
 const { NumType, BooleanType, StringType } = require("../semantics/builtins");
+const { isZero, isOne, bothLiterals } = require('../semantics/optimizer');
+const NumericLiteral = require('../ast/numeric-literal');
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
@@ -40,5 +42,18 @@ module.exports = class BinaryExpression {
   optimize() {
     this.left = this.left.optimize();
     this.right = this.right.optimize();
+    if (this.op === '+' && isZero(this.right)) return this.left;
+    if (this.op === '+' && isZero(this.left)) return this.right;
+    if (this.op === '*' && isZero(this.right)) return new NumericLiteral(0);
+    if (this.op === '*' && isZero(this.left)) return new NumericLiteral(0);
+    if (this.op === '*' && isOne(this.right)) return this.left;
+    if (this.op === '*' && isOne(this.left)) return this.right;
+    if (bothLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value];
+      if (this.op === '+') return new NumericLiteral(x + y);
+      if (this.op === '*') return new NumericLiteral(x * y);
+      if (this.op === '/') return new NumericLiteral(x / y);
+    }
+    return this;
   }
 };
