@@ -2,7 +2,9 @@ const { NumType, StringType, BooleanType } = require("./builtins");
 const ListType = require("../ast/list-type");
 const SetType = require("../ast/set-type");
 const DictType = require("../ast/dict-type");
-// const NumericLiteral = require("../ast/numeric-literal");
+const NumericLiteral = require("../ast/numeric-literal");
+const StringLiteral = require("../ast/string-literal");
+const BooleanLiteral = require("../ast/boolean-literal");
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -101,6 +103,26 @@ module.exports = {
       JSON.stringify(t1) === JSON.stringify(t2),
       "Types are not compatible",
     );
+  },
+
+  isZero(e) {
+    return e instanceof NumericLiteral && e.value === 0;
+  },
+
+  isOne(e) {
+    return e instanceof NumericLiteral && e.value === 1;
+  },
+
+  bothNumericLiterals(e) {
+    return e.left instanceof NumericLiteral && e.right instanceof NumericLiteral;
+  },
+
+  bothStringLiterals(e) {
+    return e.left instanceof StringLiteral && e.right instanceof StringLiteral;
+  },
+
+  bothBooleanLiterals(e) {
+    return e.left instanceof BooleanLiteral && e.right instanceof BooleanLiteral;
   },
 
   //   legalArguments(args, params) {
