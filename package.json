@@ -7,14 +7,15 @@
     "child_process": "^1.0.2",
     "expect": "^24.8.0",
     "expect.js": "^0.3.1",
+    "lodash": "^4.17.14",
     "ohm-js": "^0.14.0",
     "pretty-js": "^0.2.0",
-    "yargs": "^12.0.5"
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
     "jest": "^24.8.0"
   },
   "scripts": {
