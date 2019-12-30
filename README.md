@@ -1,14 +1,14 @@
-# casper
+# Casper: The Friendly Programming Language
 
 <p align="center"><img src="images/casper-logo.png" alt="casper logo" width="350"/></p>
 
 ## Introduction
 
-Welcome to casper, a friendly scripting language designed to make high level programming a light and comfortable experience. This language incorporates a speech-like, easy-to-use syntax that eliminates unnecessary verboseness from the programming experience. casper is reminiscent of Python with nuanced features and syntax designed to make its meaning as transparent as possible and make programming an entirely pleasant affair.
+Welcome to Casper, a friendly scripting language designed to make high level programming a light and comfortable experience. This language incorporates a speech-like, easy-to-use syntax that eliminates unnecessary verboseness from the programming experience. Casper is reminiscent of Python with nuanced features and syntax designed to make its meaning as transparent as possible and make programming an entirely pleasant affair.
 
-casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
+Casper is brought to you by Teddy Chu, Alexia Filler, Ian Lizarda, Donovan Moini, and Serena Zafiris.
 
-If you like to see more about casper, please check out casper's official website at https://dmoini.github.io/casper/.  
+If you like to see more about Casper, please check out Casper's official website at https://dmoini.github.io/casper/.  
   
 Check out our grammar: https://github.com/dmoini/casper/blob/master/syntax/casper.ohm
 
