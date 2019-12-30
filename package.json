@@ -10,6 +10,7 @@
     "lodash": "^4.17.14",
     "ohm-js": "^0.14.0",
     "pretty-js": "^0.2.0",
+    "set-value": "^3.0.1",
     "yargs": "^13.2.4"
   },
   "devDependencies": {
