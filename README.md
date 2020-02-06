@@ -292,7 +292,7 @@ list<num> twoSum(list<num> nums, num target):
         return [0, 1]
     list<num> ans = []
     dict<num, num> hashTable = {}
-    for i from 0 to len(hashTable):
+    for i from 0 to len(nums):
         num complement = target - nums[i]
         num find = hashTable[complement]
         if hashTable.getValue(complement) != none:
