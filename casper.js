@@ -61,7 +61,7 @@ function compileFile(filename, options) {
 module.exports = { compile, compileFile };
 
 // If running as a script, we have a lot of command line processing to do. The source
-// program will come from the file who name is given as the command line argument.
+// program will come from the file name that is given as the command line argument.
 if (require.main === module) {
   const { argv } = yargs
     .usage("$0 [-a] [-o] [-i] filename")
