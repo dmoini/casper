@@ -4,10 +4,12 @@
   "description": "casper-lang",
   "main": "index.js",
   "dependencies": {
+    "acorn": "^7.1.1",
     "child_process": "^1.0.2",
     "expect": "^24.8.0",
     "expect.js": "^0.3.1",
     "lodash": "^4.17.14",
+    "minimist": "^1.2.5",
     "ohm-js": "^0.14.0",
     "pretty-js": "^0.2.0",
     "set-value": "^3.0.1",
