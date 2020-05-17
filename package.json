@@ -6,7 +6,7 @@
   "dependencies": {
     "acorn": "^7.1.1",
     "child_process": "^1.0.2",
-    "expect": "^24.8.0",
+    "expect": "^26.0.1",
     "expect.js": "^0.3.1",
     "lodash": "^4.17.14",
     "ohm-js": "^0.14.0",
